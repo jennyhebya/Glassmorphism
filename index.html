@@ -412,8 +412,8 @@
                     </td>
                     <td>
                         <div class="cell-flex">
-                            <span class="txt-user">@${username}</span>
-                            <button class="btn-icon" onclick="copyToClipboard('@${username}')">
+                            <span class="txt-user">${username}</span>
+                            <button class="btn-icon" onclick="copyToClipboard('${username}')">
                                 <i class="fa-regular fa-copy"></i>
                             </button>
                         </div>
@@ -433,7 +433,7 @@
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                showToast(`Teks disalin: ${text.substring(0, 20)}${text.length > 20 ? '...' : ''}`);
+                showToast(`Copy Teks: ${text.substring(0, 20)}${text.length > 20 ? '...' : ''}`);
             });
         }
 
