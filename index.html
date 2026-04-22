@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Identity Generator</title>
+    <title>Identity Generator - Dual Mode</title>
     <!-- Google Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,27 +12,49 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* CSS VARIABLES - DEFAULT LIGHT MODE */
         :root {
+            /* Light Theme Colors */
             --bg-body: #f8fafc;
             --surface: #ffffff;
-            --primary: #4f46e5; /* Indigo 600 */
+            --surface-hover: #f8fafc;
+            --primary: #4f46e5;       /* Indigo */
             --primary-light: #e0e7ff;
+            --primary-glow: rgba(79, 70, 229, 0.2);
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
-            --radius: 16px;
             --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --input-bg: #f1f5f9;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        /* DARK MODE OVERRIDES */
+        body.dark-mode {
+            /* Dark Theme Colors */
+            --bg-body: #020617;
+            --surface: #1e293b;
+            --surface-hover: #334155;
+            --primary: #f59e0b;       /* Amber Gold */
+            --primary-light: rgba(245, 158, 11, 0.15);
+            --primary-glow: rgba(245, 158, 11, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            --input-bg: rgba(0,0,0,0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background 0.3s, color 0.3s, border-color 0.3s; }
 
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
             padding: 40px 20px;
             min-height: 100vh;
+            position: relative;
         }
 
         .container {
@@ -40,10 +62,32 @@
             margin: 0 auto;
         }
 
+        /* THEME TOGGLE BUTTON */
+        .theme-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 1.2rem;
+        }
+        .theme-toggle:hover { transform: rotate(15deg); border-color: var(--primary); color: var(--primary); }
+
         /* HEADER AREA */
         header {
             text-align: center;
             margin-bottom: 50px;
+            padding-top: 20px;
         }
 
         h1 {
@@ -51,9 +95,7 @@
             font-weight: 700;
             letter-spacing: -1px;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--primary) 0%, #818cf8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-main);
         }
 
         .subtitle {
@@ -62,38 +104,34 @@
             font-weight: 300;
         }
 
-        /* FLOATING CONTROLS */
-        .controls-container {
+        /* CONTROLS BAR */
+        .controls-wrapper {
             background: var(--surface);
             padding: 10px;
-            border-radius: 50px; /* Pill shape */
+            border-radius: 50px;
             box-shadow: var(--shadow-md);
             display: inline-flex;
             align-items: center;
             gap: 10px;
             border: 1px solid var(--border);
             margin-bottom: 40px;
-            transition: transform 0.2s;
+            max-width: 100%;
         }
         
-        .controls-container:hover {
-            box-shadow: var(--shadow-lg);
-        }
-
         .input-wrapper {
             position: relative;
         }
 
         .input-wrapper i {
             position: absolute;
-            left: 15px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
         }
 
         input[type="number"] {
-            padding: 12px 15px 12px 40px;
+            padding: 14px 15px 14px 45px;
             border: none;
             outline: none;
             font-size: 1rem;
@@ -103,6 +141,8 @@
             font-weight: 600;
             color: var(--text-main);
         }
+        
+        input[type="number"]::placeholder { color: var(--text-muted); opacity: 0.6; }
 
         .separator {
             width: 1px;
@@ -110,37 +150,54 @@
             background-color: var(--border);
         }
 
-        .btn-generate {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 30px;
+        /* BUTTONS */
+        .btn {
+            padding: 14px 24px;
             border-radius: 40px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
         }
 
-        .btn-generate:hover {
-            background-color: #4338ca;
-            transform: scale(1.05);
+        .btn-generate {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary) 100%);
+            color: white;
+            box-shadow: 0 4px 15px var(--primary-glow);
         }
+        /* Specific fix for Dark mode text color inside gold button */
+        body.dark-mode .btn-generate { color: #0f172a; }
+
+        .btn-generate:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+        .btn-copy-all {
+            background: var(--surface-hover);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-copy-all:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        body.dark-mode .btn-copy-all:hover { color: #0f172a; }
 
         /* STATS TAGS */
         .tags {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
         }
 
         .tag {
             font-size: 0.8rem;
-            padding: 6px 14px;
-            border-radius: 20px;
-            background: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            background: var(--surface-hover);
             color: var(--text-muted);
             border: 1px solid var(--border);
             font-weight: 500;
@@ -148,35 +205,33 @@
             align-items: center;
             gap: 6px;
         }
-        
         .tag i { color: var(--primary); }
 
         /* GRID LAYOUT */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 24px;
         }
 
         /* CARD DESIGN */
         .card {
             background: var(--surface);
-            border-radius: var(--radius);
-            padding: 24px;
+            border-radius: 16px;
+            padding: 28px;
             border: 1px solid var(--border);
             box-shadow: var(--shadow-sm);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 20px;
         }
 
         .card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
-            border-color: #c7d2fe;
+            border-color: var(--primary);
         }
 
         /* Avatar Section */
@@ -184,20 +239,21 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
             border-bottom: 1px solid var(--border);
         }
 
         .avatar {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-light);
+            width: 55px;
+            height: 55px;
+            background: var(--surface-hover);
             color: var(--primary);
+            border: 1px solid var(--border);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: 700;
         }
 
@@ -206,21 +262,22 @@
         }
 
         .name-text {
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 2px;
+            margin-bottom: 4px;
             line-height: 1.2;
         }
 
         .role-badge {
             font-size: 0.75rem;
             color: var(--text-muted);
-            background: #f1f5f9;
-            padding: 2px 8px;
-            border-radius: 4px;
+            background: var(--surface-hover);
+            padding: 4px 10px;
+            border-radius: 6px;
             font-weight: 500;
             display: inline-block;
+            border: 1px solid var(--border);
         }
 
         /* Field Rows */
@@ -228,73 +285,65 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #f8fafc;
-            padding: 10px 12px;
-            border-radius: 10px;
-            border: 1px solid transparent;
-            transition: 0.2s;
+            background: var(--input-bg);
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
         }
 
         .field-row:hover {
-            background: white;
-            border-color: var(--primary-light);
+            background: var(--surface-hover);
+            border-color: var(--text-muted);
         }
-
-        .field-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-            display: block;
-        }
-        
-        /* Hidden in card, used if needed, but we integrated style directly */
 
         .field-content {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             flex: 1;
             overflow: hidden;
         }
 
         .field-icon {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 1rem;
             width: 20px;
             text-align: center;
         }
 
         .field-value {
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            color: var(--text-main);
+            font-size: 0.95rem;
+            color: var(--text-muted);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        .field-value.user { color: var(--primary); font-weight: 600; }
-        .field-value.email { color: var(--text-muted); font-size: 0.85rem; }
+        .field-value.user { 
+            color: var(--primary); 
+            font-weight: 700; 
+            text-shadow: 0 0 5px var(--primary-glow);
+        }
+        .field-value.email { font-size: 0.85rem; }
 
-        .btn-copy {
-            width: 32px;
-            height: 32px;
+        .btn-copy-mini {
+            width: 36px;
+            height: 36px;
             border-radius: 8px;
-            border: none;
-            background: white;
+            border: 1px solid var(--border);
+            background: var(--surface);
             color: var(--text-muted);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            flex-shrink: 0;
         }
 
-        .btn-copy:hover {
+        .btn-copy-mini:hover {
             color: var(--primary);
+            border-color: var(--primary);
             background: var(--primary-light);
         }
 
@@ -304,54 +353,64 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: #1e293b;
-            color: white;
-            padding: 12px 24px;
+            background: var(--surface);
+            color: var(--text-main);
+            padding: 14px 28px;
             border-radius: 50px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            font-size: 0.9rem;
+            border: 1px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            font-size: 0.95rem;
             z-index: 1000;
             opacity: 0;
             transition: 0.4s;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
         /* Responsive */
-        @media (max-width: 640px) {
-            h1 { font-size: 2rem; }
-            .controls-container { width: 100%; border-radius: 16px; flex-direction: column; }
+        @media (max-width: 768px) {
+            .controls-wrapper { width: 100%; border-radius: 20px; flex-direction: column; padding: 20px; }
+            .input-wrapper, .btn { width: 100%; }
             input[type="number"] { width: 100%; text-align: center; padding-left: 15px; }
             .input-wrapper i { display: none; }
             .separator { display: none; }
-            .btn-generate { width: 100%; }
+            h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
-<body>
+<body class="light-mode"> <!-- Default Mode -->
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="Ganti Tema">
+        <i class="fa-solid fa-moon" id="theme-icon"></i>
+    </button>
 
     <div class="container">
         <header>
             <h1>Identity Generator</h1>
-            <p class="subtitle">Create unique digital identities with high precision.</p>
+            <p class="subtitle">Universal Digital Identity Creation Platform.</p>
             
-            <div class="controls-container">
+            <div class="controls-wrapper">
                 <div class="input-wrapper">
                     <i class="fa-solid fa-layer-group"></i>
-                    <input type="number" id="amount" value="12" placeholder="Qty">
+                    <input type="number" id="amount" value="9" placeholder="Jumlah">
                 </div>
                 <div class="separator"></div>
-                <button class="btn-generate" onclick="generateData()">
-                    Generate Data
+                <button class="btn btn-generate" onclick="generateData()">
+                    <i class="fa-solid fa-bolt"></i> Generate
+                </button>
+                <div class="separator"></div>
+                <button class="btn btn-copy-all" onclick="copyAllUsernames()">
+                    <i class="fa-regular fa-copy"></i> Copy All Usernames
                 </button>
             </div>
         </header>
 
         <div class="tags">
-            <div class="tag"><i class="fa-solid fa-database"></i> 500+ Names Database</div>
-            <div class="tag"><i class="fa-solid fa-shield-halved"></i> Unique Algorithm</div>
+            <div class="tag"><i class="fa-solid fa-database"></i> Database 500+ Nama</div>
+            <div class="tag"><i class="fa-solid fa-shield-halved"></i> Anti-Duplicate</div>
             <div class="tag" id="counterDisplay"><i class="fa-solid fa-check"></i> Ready</div>
         </div>
 
@@ -361,64 +420,44 @@
     </div>
 
     <div id="toast" class="toast">
-        <i class="fa-solid fa-circle-check" style="color: #4ade80;"></i>
+        <i class="fa-solid fa-circle-check" style="color: var(--primary);"></i>
         <span id="toastMsg">Copied successfully!</span>
     </div>
 
     <script>
         // DATA DATABASE
-        const firstNames = [
-            "James","John","Robert","Michael","William","David","Richard","Joseph","Thomas","Charles",
-            "Mary","Patricia","Jennifer","Linda","Elizabeth","Barbara","Susan","Jessica","Sarah","Karen",
-            "Christopher","Daniel","Matthew","Anthony","Mark","Donald","Steven","Paul","Andrew","Joshua",
-            "Kenneth","Kevin","Brian","George","Edward","Ronald","Timothy","Jason","Jeffrey","Ryan",
-            "Jacob","Gary","Nicholas","Eric","Jonathan","Stephen","Larry","Justin","Scott","Brandon",
-            "Benjamin","Samuel","Frank","Gregory","Raymond","Alexander","Patrick","Jack","Dennis","Jerry",
-            "Lisa","Nancy","Betty","Margaret","Sandra","Ashley","Kimberly","Emily","Donna","Michelle",
-            "Dorothy","Carol","Amanda","Melissa","Deborah","Stephanie","Rebecca","Sharon","Laura","Cynthia",
-            "Kathleen","Amy","Angela","Shirley","Anna","Brenda","Pamela","Emma","Nicole","Helen",
-            "Samantha","Katherine","Christine","Debra","Rachel","Carolyn","Janet","Catherine","Maria","Heather",
-            "Diane","Julie","Joyce","Victoria","Olivia","Kelly","Christina","Lauren","Joan","Evelyn",
-            "Judith","Megan","Cheryl","Andrea","Hannah","Martha","Jacqueline","Frances","Gloria","Ann",
-            "Teresa","Kathryn","Sara","Janice","Jean","Alice","Doris","Abigail","Julia","Judy",
-            "Grace","Denise","Amber","Marilyn","Beverly","Danielle","Theresa","Sophia","Marie","Diana",
-            "Brittany","Natalie","Isabella","Charlotte","Mia","Alexis","Kayla","Lily","Hailey","Ava",
-            "Camila","Penelope","Lillian","Zoey","Stella","Nora","Leah","Audrey","Bella","Claire",
-            "Skylar","Lucy","Paisley","Savannah","Brooklyn","Addison","Kennedy","Autumn","Brooke","Layla",
-            "Ellie","Aaliyah","Harper","Violet","Chloe","Ella","Emilie","Mila","Scarlett","Evelyn",
-            "Abigail","Madison","Lindsay","Jenna","Tatiana","Clarissa","Eugene","Carlos","Russell","Martin",
-            "Ernest","Phillip","Todd","Jesse","Craig","Alan","Shawn","Clarence","Sean","Philip",
-            "Chris","Johnny","Earl","Jimmy","Antonio","Danny","Bryan","Tony","Luis","Mike",
-            "Jeremy","Aaron","Randy","Howard","Eugene","Carlos","Russell","Martin","Ernest","Phillip"
-        ];
-
-        const lastNames = [
-            "Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez",
-            "Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin",
-            "Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson",
-            "Walker","Young","Allen","King","Wright","Scott","Torres","Nguyen","Hill","Flores",
-            "Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts",
-            "Gomez","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes",
-            "Stewart","Morris","Morales","Murphy","Cook","Rogers","Gutierrez","Ortiz","Morgan","Cooper",
-            "Peterson","Bailey","Reed","Kelly","Howard","Ramos","Kim","Cox","Ward","Richardson",
-            "Watson","Brooks","Chavez","Wood","Bennett","Gray","Mendoza","Ruiz","Hughes","Price",
-            "Alvarez","Castillo","Sanders","Patel","Myers","Long","Ross","Foster","Jimenez","Powell",
-            "Jenkins","Perry","Russell","Sullivan","Bell","Cole","Berry","Washington","West","Thompson",
-            "Richardson","Woods","Cole","Washington","West","Bailey","Reed","Harris","Lewis","Robinson",
-            "Walker","Young","Allen","King","Wright","Scott","Torres","Hill","Flores","Green",
-            "Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts","Gomez",
-            "Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes","Stewart"
-        ];
+        const firstNames = ["James","John","Robert","Michael","William","David","Richard","Joseph","Thomas","Charles","Mary","Patricia","Jennifer","Linda","Elizabeth","Barbara","Susan","Jessica","Sarah","Karen","Christopher","Daniel","Matthew","Anthony","Mark","Donald","Steven","Paul","Andrew","Joshua","Kenneth","Kevin","Brian","George","Edward","Ronald","Timothy","Jason","Jeffrey","Ryan","Jacob","Gary","Nicholas","Eric","Jonathan","Stephen","Larry","Justin","Scott","Brandon","Benjamin","Samuel","Frank","Gregory","Raymond","Alexander","Patrick","Jack","Dennis","Jerry","Lisa","Nancy","Betty","Margaret","Sandra","Ashley","Kimberly","Emily","Donna","Michelle","Dorothy","Carol","Amanda","Melissa","Deborah","Stephanie","Rebecca","Sharon","Laura","Cynthia","Kathleen","Amy","Angela","Shirley","Anna","Brenda","Pamela","Emma","Nicole","Helen","Samantha","Katherine","Christine","Debra","Rachel","Carolyn","Janet","Catherine","Maria","Heather","Diane","Julie","Joyce","Victoria","Olivia","Kelly","Christina","Lauren","Joan","Evelyn","Judith","Megan","Cheryl","Andrea","Hannah","Martha","Jacqueline","Frances","Gloria","Ann","Teresa","Kathryn","Sara","Janice","Jean","Alice","Doris","Abigail","Julia","Judy","Grace","Denise","Amber","Marilyn","Beverly","Danielle","Theresa","Sophia","Marie","Diana","Brittany","Natalie","Isabella","Charlotte","Mia","Alexis","Kayla","Lily","Hailey","Ava","Camila","Penelope","Lillian","Zoey","Stella","Nora","Leah","Audrey","Bella","Claire","Skylar","Lucy","Paisley","Savannah","Brooklyn","Addison","Kennedy","Autumn","Brooke","Layla","Ellie","Aaliyah","Harper","Violet","Chloe","Ella","Emilie","Mila","Scarlett","Evelyn","Abigail","Madison","Lindsay","Jenna","Tatiana","Clarissa","Eugene","Carlos","Russell","Martin","Ernest","Phillip","Todd","Jesse","Craig","Alan","Shawn","Clarence","Sean","Philip","Chris","Johnny","Earl","Jimmy","Antonio","Danny","Bryan","Tony","Luis","Mike","Jeremy","Aaron","Randy","Howard","Eugene","Carlos","Russell","Martin","Ernest","Phillip"];
+        
+        const lastNames = ["Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin","Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Nguyen","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts","Gomez","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes","Stewart","Morris","Morales","Murphy","Cook","Rogers","Gutierrez","Ortiz","Morgan","Cooper","Peterson","Bailey","Reed","Kelly","Howard","Ramos","Kim","Cox","Ward","Richardson","Watson","Brooks","Chavez","Wood","Bennett","Gray","Mendoza","Ruiz","Hughes","Price","Alvarez","Castillo","Sanders","Patel","Myers","Long","Ross","Foster","Jimenez","Powell","Jenkins","Perry","Russell","Sullivan","Bell","Cole","Berry","Washington","West","Thompson","Richardson","Woods","Cole","Washington","West","Bailey","Reed","Harris","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts","Gomez","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes","Stewart"];
 
         let generatedUsernames = new Set();
+        let currentUsernameList = []; // Menyimpan list username saat ini untuk copy all
 
+        // 1. FUNGSI GANTI TEMA
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // 2. FUNGSI GENERATE DATA
         function generateData() {
-            const amount = parseInt(document.getElementById('amount').value) || 12;
+            const amount = parseInt(document.getElementById('amount').value) || 9;
             const grid = document.getElementById('cardGrid');
             const counter = document.getElementById('counterDisplay');
             
             grid.innerHTML = ""; 
             generatedUsernames.clear();
+            currentUsernameList = []; // Reset list
 
             for (let i = 0; i < amount; i++) {
                 const first = firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -450,7 +489,10 @@
 
                 const email = `${username}@mail.n2n.io`;
 
-                // Render Modern Card
+                // Simpan ke array untuk fungsi Copy All
+                currentUsernameList.push(`${username}`);
+
+                // Render Card
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
@@ -458,9 +500,9 @@
                         <div class="avatar">${initials}</div>
                         <div class="name-group">
                             <div class="name-text">${fullName}</div>
-                            <span class="role-badge">User</span>
+                            <span class="role-badge">Identity</span>
                         </div>
-                        <button class="btn-copy" onclick="copyToClipboard('${fullName}')" title="Copy Name">
+                        <button class="btn-copy-mini" onclick="copyToClipboard('${fullName}')" title="Copy Name">
                             <i class="fa-regular fa-copy"></i>
                         </button>
                     </div>
@@ -470,7 +512,7 @@
                             <i class="fa-brands fa-instagram field-icon"></i>
                             <span class="field-value user">@${username}</span>
                         </div>
-                        <button class="btn-copy" onclick="copyToClipboard('${username}')" title="Copy Username">
+                        <button class="btn-copy-mini" onclick="copyToClipboard('${username}')" title="Copy Username">
                             <i class="fa-regular fa-copy"></i>
                         </button>
                     </div>
@@ -480,7 +522,7 @@
                             <i class="fa-regular fa-envelope field-icon"></i>
                             <span class="field-value email">${email}</span>
                         </div>
-                        <button class="btn-copy" onclick="copyToClipboard('${email}')" title="Copy Email">
+                        <button class="btn-copy-mini" onclick="copyToClipboard('${email}')" title="Copy Email">
                             <i class="fa-regular fa-copy"></i>
                         </button>
                     </div>
@@ -490,13 +532,34 @@
             counter.innerHTML = `<i class="fa-solid fa-check"></i> Generated: ${amount}`;
         }
 
+        // 3. FUNGSI COPY SATUAN
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 const t = document.querySelector('#toast span');
-                t.innerText = "Copied: " + text.substring(0, 20) + (text.length>20?"...":"");
+                t.innerText = "Disalin: " + text.substring(0, 20) + (text.length>20?"...":"");
                 document.getElementById('toast').classList.add('show');
                 setTimeout(() => document.getElementById('toast').classList.remove('show'), 2000);
             });
+        }
+
+        // 4. FUNGSI COPY ALL USERNAME
+        function copyAllUsernames() {
+            if (currentUsernameList.length === 0) {
+                showToast("No data to copy!");
+                return;
+            }
+            // Gabungkan semua username dengan baris baru (\n)
+            const allText = currentUsernameList.join('\n');
+            navigator.clipboard.writeText(allText).then(() => {
+                showToast(`${currentUsernameList.length} Usernames copied!`);
+            });
+        }
+
+        function showToast(msg) {
+            const t = document.querySelector('#toast span');
+            t.innerText = msg;
+            document.getElementById('toast').classList.add('show');
+            setTimeout(() => document.getElementById('toast').classList.remove('show'), 3000);
         }
 
         window.onload = generateData;
