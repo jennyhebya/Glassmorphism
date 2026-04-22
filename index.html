@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Identity Generator - Dual Mode</title>
+    <title>Identity Generator - 2026 Edition</title>
     <!-- Google Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -395,7 +395,7 @@
             <div class="controls-wrapper">
                 <div class="input-wrapper">
                     <i class="fa-solid fa-layer-group"></i>
-                    <input type="number" id="amount" value="9" placeholder="Jumlah">
+                    <input type="number" id="amount" value="5" placeholder="Jumlah">
                 </div>
                 <div class="separator"></div>
                 <button class="btn btn-generate" onclick="generateData()">
@@ -421,7 +421,7 @@
 
     <div id="toast" class="toast">
         <i class="fa-solid fa-circle-check" style="color: var(--primary);"></i>
-        <span id="toastMsg">Copied successfully!</span>
+        <span id="toastMsg">successfully copied!</span>
     </div>
 
     <script>
@@ -451,7 +451,7 @@
 
         // 2. FUNGSI GENERATE DATA
         function generateData() {
-            const amount = parseInt(document.getElementById('amount').value) || 9;
+            const amount = parseInt(document.getElementById('amount').value) || 5;
             const grid = document.getElementById('cardGrid');
             const counter = document.getElementById('counterDisplay');
             
@@ -474,8 +474,11 @@
                     const randomNum = Math.floor(Math.random() * 99999);
 
                     switch(style) {
-                        case 0: username = (first + last).toLowerCase(); break;
-                        case 1: username = (first + "." + last).toLowerCase(); break;
+                        // Case 0: Standar + Tambah "2026"
+                        case 0: username = (first + last + "2026").toLowerCase(); break;
+                        
+                        // Case 1-4: Logic Lama (Titik, Angka Random, dll)
+                        case 1: username = (first + "." + last + randomNum).toLowerCase(); break;
                         case 2: username = (first + last + randomNum).toLowerCase(); break;
                         case 3: username = (first + "_" + last + randomNum).toLowerCase(); break;
                         case 4: username = (first + randomNum + last).toLowerCase(); break;
@@ -545,13 +548,13 @@
         // 4. FUNGSI COPY ALL USERNAME
         function copyAllUsernames() {
             if (currentUsernameList.length === 0) {
-                showToast("No data to copy!");
+                showToast("Tidak ada data untuk disalin!");
                 return;
             }
             // Gabungkan semua username dengan baris baru (\n)
             const allText = currentUsernameList.join('\n');
             navigator.clipboard.writeText(allText).then(() => {
-                showToast(`${currentUsernameList.length} Usernames copied!`);
+                showToast(`${currentUsernameList.length} Usernames Copied!`);
             });
         }
 
