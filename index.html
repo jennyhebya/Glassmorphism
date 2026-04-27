@@ -269,6 +269,14 @@
             box-shadow: 0 4px 12px var(--accent-glow);
         }
 
+        /* Specific coloring for URL button hover (PURPLE/PINK gradient) */
+        .btn-action.url-action:hover {
+            background: linear-gradient(135deg, #a855f7, #ec4899); /* Purple to Pink */
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4);
+            color: white;
+        }
+
         /* STATS TAGS */
         .tags {
             display: flex;
@@ -543,12 +551,16 @@
                 <div class="separator"></div>
 
                 <!-- Grouped Copy Buttons -->
-                <div class="btn-group-copy" style="display: flex; gap: 10px;">
+                <div class="btn-group-copy" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
                     <button class="btn btn-action" onclick="copyAllUsernames()">
-                        <i class="fa-brands fa-instagram"></i> Copy Users
+                        <i class="fa-brands fa-instagram"></i> Users
                     </button>
                     <button class="btn btn-action email-action" onclick="copyAllEmails()">
-                        <i class="fa-regular fa-envelope"></i> Copy Emails
+                        <i class="fa-regular fa-envelope"></i> Emails
+                    </button>
+                    <!-- NEW BUTTON: Copy URLs -->
+                    <button class="btn btn-action url-action" onclick="copyAllUrls()" title="Copy URLs">
+                        <i class="fa-solid fa-link"></i> URLs
                     </button>
                 </div>
             </div>
@@ -581,6 +593,7 @@
         let generatedUsernames = new Set();
         let currentUsernameList = [];
         let currentEmailList = [];
+        let currentUrlList = []; // Added for URLs
 
         // 1. FUNGSI GANTI TEMA
         function toggleTheme() {
@@ -614,6 +627,7 @@
             generatedUsernames.clear();
             currentUsernameList = []; 
             currentEmailList = [];
+            currentUrlList = []; // Reset URL list
 
             // Fragment for performance
             const fragment = document.createDocumentFragment();
@@ -647,10 +661,14 @@
                 }
 
                 const email = `${username}@mail.n2n.io`;
+                
+                // Generate URL based on user request
+                const url = `https://mail.n2n.io/m/${email}`;
 
                 // Save to arrays
                 currentUsernameList.push(username);
                 currentEmailList.push(email);
+                currentUrlList.push(url); // Save URL
 
                 // Render Card
                 const card = document.createElement('div');
@@ -725,7 +743,7 @@
             });
         }
 
-        // 5. FUNGSI COPY ALL EMAIL (BARU)
+        // 5. FUNGSI COPY ALL EMAIL
         function copyAllEmails() {
             if (currentEmailList.length === 0) {
                 showToast("Generate data dulu!");
@@ -734,6 +752,18 @@
             const allText = currentEmailList.join('\n');
             navigator.clipboard.writeText(allText).then(() => {
                 showToast(`${currentEmailList.length} Emails Copied!`);
+            });
+        }
+
+        // 6. FUNGSI COPY ALL URL (NEW)
+        function copyAllUrls() {
+            if (currentUrlList.length === 0) {
+                showToast("Generate data dulu!");
+                return;
+            }
+            const allText = currentUrlList.join('\n');
+            navigator.clipboard.writeText(allText).then(() => {
+                showToast(`${currentUrlList.length} URLs Copied!`);
             });
         }
 
