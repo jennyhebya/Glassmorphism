@@ -3,65 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Identity Generator - 2026 Edition</title>
+    <title>Identity Generator - Premium Edition</title>
     <!-- Google Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* CSS VARIABLES - DEFAULT LIGHT MODE */
+        /* CSS VARIABLES - MODERN PALETTE */
         :root {
-            /* Light Theme Colors */
-            --bg-body: #f1f5f9;
-            --surface: rgba(255, 255, 255, 0.85); /* Semi-transparent for glass effect */
-            --surface-hover: #f8fafc;
-            --primary: #4f46e5;       /* Indigo */
-            --primary-dark: #4338ca;
+            /* Light Theme */
+            --bg-body: #f8fafc;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #e0e7ff, #f8fafc);
+            --surface: rgba(255, 255, 255, 0.65);
+            --surface-hover: rgba(255, 255, 255, 0.85);
+            --border: rgba(255, 255, 255, 0.6);
+            --border-glow: rgba(99, 102, 241, 0.4);
+            
+            --primary: #6366f1; /* Indigo */
+            --primary-dark: #4f46e5;
             --primary-light: #e0e7ff;
-            --primary-glow: rgba(79, 70, 229, 0.3);
-            --accent: #06b6d4;       /* Cyan */
-            --accent-glow: rgba(6, 182, 212, 0.3);
+            --accent: #0ea5e9; /* Sky Blue */
+            --accent-glow: rgba(14, 165, 233, 0.3);
             
-            --text-main: #0f172a;
+            --text-main: #1e293b;
             --text-muted: #64748b;
-            --border: rgba(226, 232, 240, 0.6);
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-            --input-bg: #f1f5f9;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+            --input-bg: rgba(255, 255, 255, 0.5);
         }
 
-        /* DARK MODE OVERRIDES */
+        /* DARK MODE */
         body.dark-mode {
-            /* Dark Theme Colors */
             --bg-body: #0f172a;
-            --bg-gradient: radial-gradient(circle at top right, #1e293b, #0f172a);
-            --surface: rgba(30, 41, 59, 0.7); /* Dark Glass */
-            --surface-hover: #334155;
-            --primary: #6366f1;       /* Indigo Lighter */
-            --primary-dark: #818cf8;
-            --primary-light: rgba(99, 102, 241, 0.15);
-            --primary-glow: rgba(99, 102, 241, 0.4);
-            --accent: #22d3ee;       /* Cyan Brighter */
-            --accent-glow: rgba(34, 211, 238, 0.4);
+            --bg-gradient: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+            --surface: rgba(30, 41, 59, 0.6);
+            --surface-hover: rgba(51, 65, 85, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(99, 102, 241, 0.3);
             
-            --text-main: #f8fafc;
+            --primary: #818cf8;
+            --primary-dark: #6366f1;
+            --primary-light: rgba(129, 140, 248, 0.15);
+            --accent: #38bdf8;
+            
+            --text-main: #f1f5f9;
             --text-muted: #94a3b8;
-            --border: rgba(255, 255, 255, 0.1);
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
             --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            --input-bg: rgba(0,0,0,0.3);
+            --input-bg: rgba(0, 0, 0, 0.2);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease; }
 
         body {
             background-color: var(--bg-body);
-            background-image: var(--bg-gradient, none);
+            background-image: var(--bg-gradient);
             color: var(--text-main);
             padding: 40px 20px;
             min-height: 100vh;
@@ -69,84 +70,55 @@
             overflow-x: hidden;
         }
 
-        /* Background blobs for visual flair */
-        body::before {
-            content: '';
+        /* Ambient Background Orbs */
+        .orb {
             position: fixed;
-            top: -100px;
-            right: -100px;
-            width: 400px;
-            height: 400px;
-            background: var(--primary);
-            filter: blur(120px);
-            opacity: 0.15;
-            z-index: -1;
             border-radius: 50%;
-            animation: float 10s infinite ease-in-out;
-        }
-        body::after {
-            content: '';
-            position: fixed;
-            bottom: -100px;
-            left: -100px;
-            width: 300px;
-            height: 300px;
-            background: var(--accent);
-            filter: blur(120px);
-            opacity: 0.15;
+            filter: blur(80px);
             z-index: -1;
-            border-radius: 50%;
-            animation: float 15s infinite ease-in-out reverse;
+            opacity: 0.4;
+            animation: floatOrb 20s infinite alternate;
+        }
+        .orb-1 { top: -10%; right: -10%; width: 500px; height: 500px; background: var(--primary); }
+        .orb-2 { bottom: -10%; left: -10%; width: 400px; height: 400px; background: var(--accent); animation-delay: -5s; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
         }
 
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(20px, 30px); }
-            100% { transform: translate(0, 0); }
-        }
+        .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* THEME TOGGLE BUTTON */
+        /* THEME TOGGLE */
         .theme-toggle {
             position: fixed;
-            top: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            top: 25px;
+            right: 25px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             background: var(--surface);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
             color: var(--text-main);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             z-index: 1000;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-sm);
         }
-        .theme-toggle:hover { transform: rotate(15deg) scale(1.1); border-color: var(--primary); color: var(--primary); }
+        .theme-toggle:hover { transform: translateY(-2px); color: var(--primary); border-color: var(--primary); }
 
-        /* HEADER AREA */
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            padding-top: 20px;
-        }
+        /* HEADER */
+        header { text-align: center; margin-bottom: 60px; padding-top: 10px; }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 800;
-            letter-spacing: -2px;
-            margin-bottom: 10px;
+            letter-spacing: -1.5px;
+            margin-bottom: 12px;
             background: linear-gradient(135deg, var(--text-main) 0%, var(--primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -155,378 +127,370 @@
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 1.125rem;
+            font-size: 1.1rem;
             font-weight: 400;
             opacity: 0.8;
         }
 
-        /* CONTROLS BAR */
+        /* CONTROLS BAR (Pill Shape) */
         .controls-wrapper {
             background: var(--surface);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 12px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 10px 10px 10px 20px;
             border-radius: 100px;
-            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            border: 1px solid var(--border);
+            gap: 12px;
             margin-bottom: 40px;
             max-width: 100%;
             flex-wrap: wrap;
             justify-content: center;
         }
-        
-        .input-wrapper {
-            position: relative;
-        }
+
+        .input-wrapper { position: relative; }
 
         .input-wrapper i {
             position: absolute;
-            left: 20px;
+            left: 18px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
             pointer-events: none;
+            opacity: 0.7;
         }
 
         input[type="number"] {
-            padding: 14px 20px 14px 48px;
-            border: 1px solid var(--border);
-            outline: none;
-            font-size: 1rem;
-            width: 150px;
-            border-radius: 50px;
+            padding: 12px 20px 12px 44px;
+            border: 1px solid transparent;
             background: var(--input-bg);
-            font-weight: 600;
+            border-radius: 50px;
+            font-size: 1rem;
             color: var(--text-main);
+            font-weight: 600;
+            outline: none;
+            width: 140px;
             transition: all 0.3s;
         }
-        
+
         input[type="number"]:focus {
+            background: var(--surface);
             border-color: var(--primary);
             box-shadow: 0 0 0 3px var(--primary-light);
         }
 
         .separator {
             width: 1px;
-            height: 30px;
+            height: 24px;
             background-color: var(--border);
-            margin: 0 5px;
         }
 
         /* BUTTONS */
         .btn {
-            padding: 14px 28px;
+            padding: 12px 24px;
             border-radius: 50px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             border: none;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s;
         }
 
-        /* Generate Button */
         .btn-generate {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: var(--primary);
             color: white;
-            box-shadow: 0 4px 15px var(--primary-glow);
+            box-shadow: 0 4px 15px var(--border-glow);
         }
+        .btn-generate:hover { transform: translateY(-2px); background: var(--primary-dark); box-shadow: 0 8px 20px var(--border-glow); }
 
-        .btn-generate:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px var(--primary-glow);
-        }
-        .btn-generate:active { transform: scale(0.95); }
-
-        /* Action Buttons (Copy) */
         .btn-action {
-            background: var(--surface);
-            color: var(--text-main);
-            border: 1px solid var(--border);
-            font-size: 0.9rem;
-            padding: 14px 20px;
-        }
-
-        .btn-action:hover { 
-            background: var(--primary); 
-            color: white; 
-            border-color: var(--primary);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid transparent;
         }
         
-        /* Specific coloring for Email button hover */
-        .btn-action.email-action:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-            box-shadow: 0 4px 12px var(--accent-glow);
+        .btn-action:hover { 
+            background: var(--surface-hover); 
+            color: var(--primary); 
         }
 
-        /* Specific coloring for URL button hover (PURPLE/PINK gradient) */
-        .btn-action.url-action:hover {
-            background: linear-gradient(135deg, #a855f7, #ec4899); /* Purple to Pink */
-            border-color: transparent;
-            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4);
-            color: white;
-        }
+        .btn-action.url-action:hover { color: var(--accent); }
 
         /* STATS TAGS */
         .tags {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
             margin-bottom: 50px;
             flex-wrap: wrap;
         }
-
         .tag {
-            font-size: 0.85rem;
-            padding: 8px 20px;
-            border-radius: 50px;
+            font-size: 0.8rem;
+            padding: 6px 16px;
+            border-radius: 20px;
             background: var(--surface);
             color: var(--text-muted);
             border: 1px solid var(--border);
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(5px);
+            gap: 6px;
         }
-        .tag i { color: var(--primary); }
+        .tag i { color: var(--primary); font-size: 0.75rem; }
 
-        /* GRID LAYOUT */
+        /* GRID */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
         }
 
-        /* CARD DESIGN */
+        /* CARD PREMIUM DESIGN */
         .card {
             background: var(--surface);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 24px;
-            padding: 30px;
+            padding: 24px;
             border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-glass);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            gap: 24px;
-            opacity: 0; /* Hidden initially for animation */
-            transform: translateY(20px);
-            animation: slideUpFade 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: cardEnter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
-        @keyframes slideUpFade {
+        @keyframes cardEnter {
             to { opacity: 1; transform: translateY(0); }
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-glass);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
             border-color: var(--primary);
+            background: var(--surface-hover);
         }
 
-        /* Card Header Gradient Line */
-        .card::before {
-            content: '';
+        /* Shiny Gradient Border on Hover */
+        .card::after {
+            content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            opacity: 0;
-            transition: opacity 0.3s;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 24px;
+            padding: 1px; 
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0)); 
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); 
+            -webkit-mask-composite: xor; 
+            mask-composite: exclude; 
+            pointer-events: none;
         }
-        .card:hover::before { opacity: 1; }
-
-        /* Avatar Section */
-        .card-top {
-            display: flex;
-            align-items: center;
-            gap: 18px;
+        .card:hover::after {
+            background: linear-gradient(135deg, var(--primary), var(--accent)); 
+            opacity: 0.5;
         }
 
-        .avatar {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--input-bg), var(--surface-hover));
-            color: var(--primary);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            font-weight: 800;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .name-group {
-            flex: 1;
-        }
-
-        .name-text {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 6px;
-            line-height: 1.1;
-        }
-
-        .role-badge {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-muted);
-            background: var(--input-bg);
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            display: inline-block;
-            border: 1px solid var(--border);
-        }
-
-        /* Field Rows */
-        .field-row {
+        /* Card Header */
+        .card-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--input-bg);
-            padding: 12px 16px;
-            border-radius: 14px;
-            border: 1px solid transparent;
-            transition: all 0.2s;
         }
 
-        .field-row:hover {
-            background: var(--surface-hover);
-            border-color: var(--border);
-            transform: translateX(4px);
-        }
-
-        .field-content {
+        .user-info {
             display: flex;
             align-items: center;
-            gap: 12px;
-            flex: 1;
-            overflow: hidden;
+            gap: 16px;
         }
 
-        .field-icon {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            width: 24px;
-            text-align: center;
-            transition: color 0.3s;
-        }
-        
-        .field-row:hover .field-icon { color: var(--primary); }
-
-        .field-value {
-            font-family: 'Outfit', sans-serif; /* Using Outfit for cleaner look than monospace */
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-weight: 500;
-        }
-
-        .field-value.user { 
-            color: var(--primary); 
-            font-weight: 700; 
-            text-shadow: 0 0 15px var(--primary-glow);
+        /* Avatar Style */
+        .avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--input-bg), var(--surface));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            border: 1px solid var(--border);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
         }
         
-        .field-value.email { font-size: 0.85rem; letter-spacing: -0.2px; }
+        .avatar-badge {
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            width: 20px;
+            height: 20px;
+            background: #10b981; /* Online Green */
+            border: 3px solid var(--bg-body);
+            border-radius: 50%;
+        }
 
-        .btn-copy-mini {
-            width: 38px;
-            height: 38px;
+        .text-group h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .text-group span {
+            font-size: 0.75rem;
+            color: var(--primary);
+            background: var(--primary-light);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Copy Button Top */
+        .btn-icon {
+            width: 36px;
+            height: 36px;
             border-radius: 10px;
             border: 1px solid var(--border);
-            background: var(--surface);
+            background: transparent;
             color: var(--text-muted);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .btn-icon:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Fields Layout */
+        .fields {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .field-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: var(--input-bg);
+            border-radius: 12px;
+            border: 1px solid transparent;
             transition: all 0.2s;
         }
 
-        .btn-copy-mini:hover {
-            color: var(--primary);
-            border-color: var(--primary);
-            background: var(--primary-light);
-            transform: scale(1.05);
+        .field-item:hover {
+            background: var(--surface);
+            border-color: var(--border);
+            transform: translateX(4px);
         }
+
+        .f-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            overflow: hidden;
+        }
+
+        .f-icon {
+            width: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .f-text {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .f-text.user { color: var(--primary); font-weight: 600; }
+        .f-text.email { color: var(--text-muted); font-size: 0.85rem; }
+
+        .copy-small {
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.2s;
+        }
+
+        .field-item:hover .copy-small {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .copy-small:hover { color: var(--primary); transform: scale(1.1); }
 
         /* TOAST */
         .toast {
             position: fixed;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--surface);
-            backdrop-filter: blur(10px);
-            color: var(--text-main);
-            padding: 16px 32px;
-            border-radius: 60px;
-            border: 1px solid var(--primary);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            font-size: 0.95rem;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--text-main); /* Inverted for style */
+            color: var(--bg-body);
+            padding: 12px 24px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            font-size: 0.9rem;
+            font-weight: 500;
             z-index: 2000;
             opacity: 0;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
-        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .controls-wrapper { 
-                width: 100%; 
-                border-radius: 24px; 
-                flex-direction: column; 
-                padding: 20px; 
+            .controls-wrapper {
+                flex-direction: column;
+                width: 100%;
+                padding: 20px;
+                border-radius: 24px;
                 gap: 15px;
             }
             .input-wrapper, .btn { width: 100%; justify-content: center; }
-            input[type="number"] { width: 100%; text-align: center; padding-left: 20px; }
-            .input-wrapper i { display: none; }
-            .separator { width: 100%; height: 1px; margin: 5px 0; }
-            
-            /* Stack copy buttons */
-            .btn-group-copy {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                gap: 10px;
-            }
-
+            input[type="number"] { width: 100%; text-align: center; }
+            .separator { display: none; }
             h1 { font-size: 2.2rem; }
-            .card::before { height: 3px; }
+            .copy-small { opacity: 1; transform: translateX(0); } /* Always show on mobile */
         }
     </style>
 </head>
-<body class="light-mode"> <!-- Default Mode -->
+<body class="light-mode">
 
-    <!-- Theme Toggle Button -->
+    <!-- Ambient Background -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
     <button class="theme-toggle" onclick="toggleTheme()" title="Ganti Tema">
         <i class="fa-solid fa-moon" id="theme-icon"></i>
     </button>
@@ -534,74 +498,67 @@
     <div class="container">
         <header>
             <h1>Identity Generator</h1>
-            <p class="subtitle">Universal Digital Identity Creation Platform.</p>
+            <p class="subtitle">Create beautiful digital profiles instantly.</p>
             
             <div class="controls-wrapper">
                 <div class="input-wrapper">
-                    <i class="fa-solid fa-layer-group"></i>
+                    <i class="fa-solid fa-users-viewfinder"></i>
                     <input type="number" id="amount" value="5" min="1" max="50" placeholder="Jumlah">
                 </div>
                 
                 <div class="separator"></div>
                 
                 <button class="btn btn-generate" onclick="generateData()">
-                    <i class="fa-solid fa-bolt"></i> Generate
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
                 </button>
                 
                 <div class="separator"></div>
 
-                <!-- Grouped Copy Buttons -->
-                <div class="btn-group-copy" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-                    <button class="btn btn-action" onclick="copyAllUsernames()">
-                        <i class="fa-brands fa-instagram"></i> Users
-                    </button>
-                    <button class="btn btn-action email-action" onclick="copyAllEmails()">
-                        <i class="fa-regular fa-envelope"></i> Emails
-                    </button>
-                    <!-- NEW BUTTON: Copy URLs -->
-                    <button class="btn btn-action url-action" onclick="copyAllUrls()" title="Copy URLs">
-                        <i class="fa-solid fa-link"></i> URLs
-                    </button>
-                </div>
+                <button class="btn btn-action" onclick="copyAllUsernames()">
+                    <i class="fa-solid fa-at"></i> Usernames
+                </button>
+                <button class="btn btn-action" onclick="copyAllEmails()">
+                    <i class="fa-solid fa-envelope"></i> Emails
+                </button>
+                <button class="btn btn-action url-action" onclick="copyAllUrls()">
+                    <i class="fa-solid fa-link"></i> URLs
+                </button>
             </div>
         </header>
 
         <div class="tags">
-            <div class="tag"><i class="fa-solid fa-database"></i> Database 500+ Nama</div>
+            <div class="tag"><i class="fa-solid fa-database"></i> 500+ Names</div>
+            <div class="tag"><i class="fa-solid fa-fingerprint"></i> Unique</div>
             <div class="tag"><i class="fa-solid fa-shield-halved"></i> Anti-Duplicate</div>
-            <div class="tag" id="counterDisplay"><i class="fa-solid fa-check"></i> Ready</div>
+            <div class="tag" id="counterDisplay"><i class="fa-solid fa-bolt"></i> Ready</div>
         </div>
 
         <main class="grid" id="cardGrid">
-            <!-- Cards will be generated here -->
+            <!-- Cards will be injected here -->
         </main>
     </div>
 
-    <!-- Toast Notification -->
     <div id="toast" class="toast">
-        <i class="fa-solid fa-circle-check" style="color: var(--primary); font-size: 1.2rem;"></i>
-        <span id="toastMsg">successfully copied!</span>
+        <i class="fa-solid fa-check-circle"></i> <span>Copied!</span>
     </div>
 
     <script>
-        // DATA DATABASE
+        // DATABASE
         const firstNames = ["James","John","Robert","Michael","William","David","Richard","Joseph","Thomas","Charles","Mary","Patricia","Jennifer","Linda","Elizabeth","Barbara","Susan","Jessica","Sarah","Karen","Christopher","Daniel","Matthew","Anthony","Mark","Donald","Steven","Paul","Andrew","Joshua","Kenneth","Kevin","Brian","George","Edward","Ronald","Timothy","Jason","Jeffrey","Ryan","Jacob","Gary","Nicholas","Eric","Jonathan","Stephen","Larry","Justin","Scott","Brandon","Benjamin","Samuel","Frank","Gregory","Raymond","Alexander","Patrick","Jack","Dennis","Jerry","Lisa","Nancy","Betty","Margaret","Sandra","Ashley","Kimberly","Emily","Donna","Michelle","Dorothy","Carol","Amanda","Melissa","Deborah","Stephanie","Rebecca","Sharon","Laura","Cynthia","Kathleen","Amy","Angela","Shirley","Anna","Brenda","Pamela","Emma","Nicole","Helen","Samantha","Katherine","Christine","Debra","Rachel","Carolyn","Janet","Catherine","Maria","Heather","Diane","Julie","Joyce","Victoria","Olivia","Kelly","Christina","Lauren","Joan","Evelyn","Judith","Megan","Cheryl","Andrea","Hannah","Martha","Jacqueline","Frances","Gloria","Ann","Teresa","Kathryn","Sara","Janice","Jean","Alice","Doris","Abigail","Julia","Judy","Grace","Denise","Amber","Marilyn","Beverly","Danielle","Theresa","Sophia","Marie","Diana","Brittany","Natalie","Isabella","Charlotte","Mia","Alexis","Kayla","Lily","Hailey","Ava","Camila","Penelope","Lillian","Zoey","Stella","Nora","Leah","Audrey","Bella","Claire","Skylar","Lucy","Paisley","Savannah","Brooklyn","Addison","Kennedy","Autumn","Brooke","Layla","Ellie","Aaliyah","Harper","Violet","Chloe","Ella","Emilie","Mila","Scarlett","Evelyn","Abigail","Madison","Lindsay","Jenna","Tatiana","Clarissa","Eugene","Carlos","Russell","Martin","Ernest","Phillip","Todd","Jesse","Craig","Alan","Shawn","Clarence","Sean","Philip","Chris","Johnny","Earl","Jimmy","Antonio","Danny","Bryan","Tony","Luis","Mike","Jeremy","Aaron","Randy","Howard","Eugene","Carlos","Russell","Martin","Ernest","Phillip"];
-        
         const lastNames = ["Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin","Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Nguyen","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts","Gomez","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes","Stewart","Morris","Morales","Murphy","Cook","Rogers","Gutierrez","Ortiz","Morgan","Cooper","Peterson","Bailey","Reed","Kelly","Howard","Ramos","Kim","Cox","Ward","Richardson","Watson","Brooks","Chavez","Wood","Bennett","Gray","Mendoza","Ruiz","Hughes","Price","Alvarez","Castillo","Sanders","Patel","Myers","Long","Ross","Foster","Jimenez","Powell","Jenkins","Perry","Russell","Sullivan","Bell","Cole","Berry","Washington","West","Thompson","Richardson","Woods","Cole","Washington","West","Bailey","Reed","Harris","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts","Gomez","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes","Stewart"];
+        
+        // Emoji list for dynamic avatars
+        const avatarEmojis = ["🦊", "🦁", "🐯", "🐸", "🦄", "🐙", "🦋", "🐞", "🦀", "🐶", "🐱", "🐼", "🦉", "🦩", "🐲", "👽", "🤖", "👻", "💀", "👾", "🎃", "🎅", "🦸", "🧙", "🧚", "🧛", "🧜", "🧞", "🦸‍♂️", "🦹‍♀️"];
 
-        // State Management
         let generatedUsernames = new Set();
         let currentUsernameList = [];
         let currentEmailList = [];
-        let currentUrlList = []; // Added for URLs
+        let currentUrlList = [];
 
-        // 1. FUNGSI GANTI TEMA
         function toggleTheme() {
             const body = document.body;
             const icon = document.getElementById('theme-icon');
-            
             body.classList.toggle('dark-mode');
-            
             if (body.classList.contains('dark-mode')) {
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
@@ -611,12 +568,9 @@
             }
         }
 
-        // 2. FUNGSI GENERATE DATA
         function generateData() {
             const amountInput = document.getElementById('amount');
             let amount = parseInt(amountInput.value) || 5;
-            
-            // Validation limit to prevent crash
             if(amount > 100) amount = 100;
             if(amount < 1) amount = 1;
 
@@ -627,18 +581,18 @@
             generatedUsernames.clear();
             currentUsernameList = []; 
             currentEmailList = [];
-            currentUrlList = []; // Reset URL list
+            currentUrlList = [];
 
-            // Fragment for performance
             const fragment = document.createDocumentFragment();
 
             for (let i = 0; i < amount; i++) {
                 const first = firstNames[Math.floor(Math.random() * firstNames.length)];
                 const last = lastNames[Math.floor(Math.random() * lastNames.length)];
                 const fullName = `${first} ${last}`;
-                const initials = (first[0] + last[0]).toUpperCase();
                 
-                // Anti-Duplicate Logic
+                // Pick a random emoji
+                const emoji = avatarEmojis[Math.floor(Math.random() * avatarEmojis.length)];
+                
                 let username = "";
                 let isUnique = false;
                 
@@ -661,51 +615,54 @@
                 }
 
                 const email = `${username}@mail.n2n.io`;
-                
-                // Generate URL based on user request
                 const url = `https://mail.n2n.io/m/${email}`;
 
-                // Save to arrays
                 currentUsernameList.push(username);
                 currentEmailList.push(email);
-                currentUrlList.push(url); // Save URL
+                currentUrlList.push(url);
 
                 // Render Card
                 const card = document.createElement('div');
                 card.className = 'card';
-                // Add staggered animation delay
-                card.style.animationDelay = `${i * 0.05}s`;
+                card.style.animationDelay = `${i * 0.06}s`;
 
                 card.innerHTML = `
-                    <div class="card-top">
-                        <div class="avatar">${initials}</div>
-                        <div class="name-group">
-                            <div class="name-text">${fullName}</div>
-                            <span class="role-badge">Identity</span>
+                    <div class="card-header">
+                        <div class="user-info">
+                            <div class="avatar">
+                                ${emoji}
+                                <div class="avatar-badge"></div>
+                            </div>
+                            <div class="text-group">
+                                <h3>${fullName}</h3>
+                                <span>ID Verified</span>
+                            </div>
                         </div>
-                        <button class="btn-copy-mini" onclick="copyToClipboard('${fullName}')" title="Copy Name">
+                        <button class="btn-icon" onclick="copyToClipboard('${fullName}')" title="Copy Name">
                             <i class="fa-regular fa-copy"></i>
                         </button>
                     </div>
 
-                    <div class="field-row">
-                        <div class="field-content">
-                            <i class="fa-brands fa-instagram field-icon"></i>
-                            <span class="field-value user">@${username}</span>
+                    <div class="fields">
+                        <div class="field-item">
+                            <div class="f-content">
+                                <i class="fa-brands fa-instagram f-icon"></i>
+                                <span class="f-text user">@${username}</span>
+                            </div>
+                            <button class="copy-small" onclick="copyToClipboard('${username}')">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
                         </div>
-                        <button class="btn-copy-mini" onclick="copyToClipboard('${username}')" title="Copy Username">
-                            <i class="fa-regular fa-copy"></i>
-                        </button>
-                    </div>
 
-                    <div class="field-row">
-                        <div class="field-content">
-                            <i class="fa-regular fa-envelope field-icon"></i>
-                            <span class="field-value email">${email}</span>
+                        <div class="field-item">
+                            <div class="f-content">
+                                <i class="fa-regular fa-envelope f-icon"></i>
+                                <span class="f-text email">${email}</span>
+                            </div>
+                            <button class="copy-small" onclick="copyToClipboard('${email}')">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
                         </div>
-                        <button class="btn-copy-mini" onclick="copyToClipboard('${email}')" title="Copy Email">
-                            <i class="fa-regular fa-copy"></i>
-                        </button>
                     </div>
                 `;
                 fragment.appendChild(card);
@@ -714,66 +671,48 @@
             grid.appendChild(fragment);
             counter.innerHTML = `<i class="fa-solid fa-check"></i> Generated: ${amount}`;
             
-            // Visual feedback on generate button
+            // Button animation
             const genBtn = document.querySelector('.btn-generate');
-            genBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Done`;
+            genBtn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Done`;
             setTimeout(() => {
-                genBtn.innerHTML = `<i class="fa-solid fa-bolt"></i> Generate`;
-            }, 1000);
+                genBtn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> Generate`;
+            }, 1200);
         }
 
-        // 3. FUNGSI COPY SATUAN
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                showToast("Disalin: " + text.substring(0, 25) + (text.length>25?"...":""));
+                showToast(`Disalin: ${text.substring(0, 18)}...`);
             }).catch(err => {
-                showToast("Gagal menyalin text");
+                showToast("Gagal menyalin");
             });
         }
 
-        // 4. FUNGSI COPY ALL USERNAME
         function copyAllUsernames() {
-            if (currentUsernameList.length === 0) {
-                showToast("Generate data dulu!");
-                return;
-            }
-            const allText = currentUsernameList.join('\n');
-            navigator.clipboard.writeText(allText).then(() => {
+            if (currentUsernameList.length === 0) return showToast("Generate dulu!");
+            navigator.clipboard.writeText(currentUsernameList.join('\n')).then(() => {
                 showToast(`${currentUsernameList.length} Usernames Copied!`);
             });
         }
 
-        // 5. FUNGSI COPY ALL EMAIL
         function copyAllEmails() {
-            if (currentEmailList.length === 0) {
-                showToast("Generate data dulu!");
-                return;
-            }
-            const allText = currentEmailList.join('\n');
-            navigator.clipboard.writeText(allText).then(() => {
+            if (currentEmailList.length === 0) return showToast("Generate dulu!");
+            navigator.clipboard.writeText(currentEmailList.join('\n')).then(() => {
                 showToast(`${currentEmailList.length} Emails Copied!`);
             });
         }
 
-        // 6. FUNGSI COPY ALL URL (NEW)
         function copyAllUrls() {
-            if (currentUrlList.length === 0) {
-                showToast("Generate data dulu!");
-                return;
-            }
-            const allText = currentUrlList.join('\n');
-            navigator.clipboard.writeText(allText).then(() => {
+            if (currentUrlList.length === 0) return showToast("Generate dulu!");
+            navigator.clipboard.writeText(currentUrlList.join('\n')).then(() => {
                 showToast(`${currentUrlList.length} URLs Copied!`);
             });
         }
 
         function showToast(msg) {
             const t = document.querySelector('#toast');
-            const span = document.querySelector('#toast span');
-            span.innerText = msg;
+            t.innerHTML = `<i class="fa-solid fa-check"></i> <span>${msg}</span>`;
             t.classList.add('show');
             
-            // Clear previous timeout if exists to prevent overlapping
             if (t.timeoutId) clearTimeout(t.timeoutId);
             
             t.timeoutId = setTimeout(() => {
@@ -781,7 +720,7 @@
             }, 3000);
         }
 
-        // Init
+        // Initialize
         window.onload = generateData;
     </script>
 </body>
