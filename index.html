@@ -58,7 +58,7 @@
             --input-bg: rgba(0, 0, 0, 0.2);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease, color 0.2s; }
 
         body {
             background-color: var(--bg-body);
@@ -148,6 +148,39 @@
             max-width: 100%;
             flex-wrap: wrap;
             justify-content: center;
+        }
+
+        /* Gender Radio Group Styling */
+        .gender-group {
+            display: flex;
+            background: var(--input-bg);
+            border-radius: 50px;
+            padding: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .gender-radio {
+            display: none;
+        }
+
+        .gender-label {
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .gender-radio:checked + .gender-label {
+            background: var(--surface-hover);
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .gender-label:hover:not(.active) {
+            color: var(--text-main);
         }
 
         .input-wrapper { position: relative; }
@@ -309,6 +342,17 @@
             display: flex;
             align-items: center;
             gap: 16px;
+            cursor: pointer; /* Added cursor pointer to suggest clickability */
+            padding: 4px; /* Slightly larger hit area */
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        
+        .user-info:hover {
+            background: rgba(0,0,0,0.03);
+        }
+        .user-info:active {
+            transform: scale(0.98);
         }
 
         /* Avatar Style */
@@ -324,6 +368,7 @@
             border: 1px solid var(--border);
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
             position: relative;
+            pointer-events: none; /* Click passes through to parent */
         }
         
         .avatar-badge {
@@ -335,6 +380,11 @@
             background: #10b981; /* Online Green */
             border: 3px solid var(--bg-body);
             border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .text-group {
+            pointer-events: none; /* Let the wrapper handle the click event */
         }
 
         .text-group h3 {
@@ -342,6 +392,24 @@
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        /* Visual indicator for copyable text */
+        .text-group h3::after {
+            content: "\f0c5"; /* FontAwesome copy icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 0.7rem;
+            opacity: 0;
+            color: var(--primary);
+            transition: opacity 0.2s;
+        }
+        
+        .user-info:hover .text-group h3::after {
+            opacity: 0.6;
         }
 
         .text-group span {
@@ -451,7 +519,7 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(20px);
-            background: var(--text-main); /* Inverted for style */
+            background: var(--text-main);
             color: var(--bg-body);
             padding: 12px 24px;
             border-radius: 50px;
@@ -477,7 +545,7 @@
                 border-radius: 24px;
                 gap: 15px;
             }
-            .input-wrapper, .btn { width: 100%; justify-content: center; }
+            .input-wrapper, .btn, .gender-group { width: 100%; justify-content: center; }
             input[type="number"] { width: 100%; text-align: center; }
             .separator { display: none; }
             h1 { font-size: 2.2rem; }
@@ -501,6 +569,20 @@
             <p class="subtitle">Create beautiful digital profiles instantly.</p>
             
             <div class="controls-wrapper">
+                <!-- Gender Selector -->
+                <div class="gender-group">
+                    <input type="radio" id="gender-all" name="gender" value="all" class="gender-radio" checked>
+                    <label for="gender-all" class="gender-label">All</label>
+
+                    <input type="radio" id="gender-male" name="gender" value="male" class="gender-radio">
+                    <label for="gender-male" class="gender-label">Male</label>
+
+                    <input type="radio" id="gender-female" name="gender" value="female" class="gender-radio">
+                    <label for="gender-female" class="gender-label">Female</label>
+                </div>
+                
+                <div class="separator"></div>
+
                 <div class="input-wrapper">
                     <i class="fa-solid fa-users-viewfinder"></i>
                     <input type="number" id="amount" value="5" min="1" max="50" placeholder="Jumlah">
@@ -543,8 +625,12 @@
     </div>
 
     <script>
-        // DATABASE
-        const firstNames = ["James","John","Robert","Michael","William","David","Richard","Joseph","Thomas","Charles","Mary","Patricia","Jennifer","Linda","Elizabeth","Barbara","Susan","Jessica","Sarah","Karen","Christopher","Daniel","Matthew","Anthony","Mark","Donald","Steven","Paul","Andrew","Joshua","Kenneth","Kevin","Brian","George","Edward","Ronald","Timothy","Jason","Jeffrey","Ryan","Jacob","Gary","Nicholas","Eric","Jonathan","Stephen","Larry","Justin","Scott","Brandon","Benjamin","Samuel","Frank","Gregory","Raymond","Alexander","Patrick","Jack","Dennis","Jerry","Lisa","Nancy","Betty","Margaret","Sandra","Ashley","Kimberly","Emily","Donna","Michelle","Dorothy","Carol","Amanda","Melissa","Deborah","Stephanie","Rebecca","Sharon","Laura","Cynthia","Kathleen","Amy","Angela","Shirley","Anna","Brenda","Pamela","Emma","Nicole","Helen","Samantha","Katherine","Christine","Debra","Rachel","Carolyn","Janet","Catherine","Maria","Heather","Diane","Julie","Joyce","Victoria","Olivia","Kelly","Christina","Lauren","Joan","Evelyn","Judith","Megan","Cheryl","Andrea","Hannah","Martha","Jacqueline","Frances","Gloria","Ann","Teresa","Kathryn","Sara","Janice","Jean","Alice","Doris","Abigail","Julia","Judy","Grace","Denise","Amber","Marilyn","Beverly","Danielle","Theresa","Sophia","Marie","Diana","Brittany","Natalie","Isabella","Charlotte","Mia","Alexis","Kayla","Lily","Hailey","Ava","Camila","Penelope","Lillian","Zoey","Stella","Nora","Leah","Audrey","Bella","Claire","Skylar","Lucy","Paisley","Savannah","Brooklyn","Addison","Kennedy","Autumn","Brooke","Layla","Ellie","Aaliyah","Harper","Violet","Chloe","Ella","Emilie","Mila","Scarlett","Evelyn","Abigail","Madison","Lindsay","Jenna","Tatiana","Clarissa","Eugene","Carlos","Russell","Martin","Ernest","Phillip","Todd","Jesse","Craig","Alan","Shawn","Clarence","Sean","Philip","Chris","Johnny","Earl","Jimmy","Antonio","Danny","Bryan","Tony","Luis","Mike","Jeremy","Aaron","Randy","Howard","Eugene","Carlos","Russell","Martin","Ernest","Phillip"];
+        // DATABASE MALE NAMES
+        const maleNames = ["James","John","Robert","Michael","William","David","Richard","Joseph","Thomas","Charles","Christopher","Daniel","Matthew","Anthony","Mark","Donald","Steven","Paul","Andrew","Joshua","Kenneth","Kevin","Brian","George","Edward","Ronald","Timothy","Jason","Jeffrey","Ryan","Jacob","Gary","Nicholas","Eric","Jonathan","Stephen","Larry","Justin","Scott","Brandon","Benjamin","Samuel","Frank","Gregory","Raymond","Alexander","Patrick","Jack","Dennis","Jerry","Tyler","Aaron","Jose","Adam","Henry","Nathan","Douglas","Zachary","Peter","Kyle","Walter","Ethan","Jeremy","Harold","Keith","Christian","Roger","Noah","Gerald","Terry","Sean","Austin","Arthur","Lawrence","Jesse","Dylan","Bryan","Joe","Jordan","Billy","Bruce","Albert","Willie","Gabriel","Logan","Alan","Juan","Wayne","Roy","Ralph","Randy","Eugene","Vincent","Russell","Louis","Philip","Bobby","Johnny","Bradley"];
+        
+        // DATABASE FEMALE NAMES
+        const femaleNames = ["Mary","Patricia","Jennifer","Linda","Elizabeth","Barbara","Susan","Jessica","Sarah","Karen","Lisa","Nancy","Betty","Margaret","Sandra","Ashley","Kimberly","Emily","Donna","Michelle","Dorothy","Carol","Amanda","Melissa","Deborah","Stephanie","Rebecca","Sharon","Laura","Cynthia","Kathleen","Amy","Angela","Shirley","Anna","Brenda","Pamela","Emma","Nicole","Helen","Samantha","Katherine","Christine","Debra","Rachel","Carolyn","Janet","Catherine","Maria","Heather","Diane","Julie","Joyce","Victoria","Olivia","Kelly","Christina","Lauren","Joan","Evelyn","Judith","Megan","Cheryl","Andrea","Hannah","Martha","Jacqueline","Frances","Gloria","Ann","Teresa","Kathryn","Sara","Janice","Jean","Alice","Doris","Abigail","Julia","Judy","Grace","Denise","Amber","Marilyn","Beverly","Danielle","Theresa","Sophia","Marie","Diana","Brittany","Natalie","Isabella","Charlotte","Mia","Alexis","Kayla","Lily","Hailey","Ava","Camila","Penelope","Lillian","Zoey","Stella","Nora","Leah","Audrey","Bella","Claire","Skylar","Lucy","Paisley","Savannah","Brooklyn","Addison","Kennedy","Autumn","Brooke","Layla","Ellie","Aaliyah","Harper","Violet","Chloe","Ella","Emilie","Mila","Scarlett"];
+
         const lastNames = ["Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin","Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Nguyen","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts","Gomez","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes","Stewart","Morris","Morales","Murphy","Cook","Rogers","Gutierrez","Ortiz","Morgan","Cooper","Peterson","Bailey","Reed","Kelly","Howard","Ramos","Kim","Cox","Ward","Richardson","Watson","Brooks","Chavez","Wood","Bennett","Gray","Mendoza","Ruiz","Hughes","Price","Alvarez","Castillo","Sanders","Patel","Myers","Long","Ross","Foster","Jimenez","Powell","Jenkins","Perry","Russell","Sullivan","Bell","Cole","Berry","Washington","West","Thompson","Richardson","Woods","Cole","Washington","West","Bailey","Reed","Harris","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts","Gomez","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes","Stewart"];
         
         // Emoji list for dynamic avatars
@@ -574,6 +660,16 @@
             if(amount > 100) amount = 100;
             if(amount < 1) amount = 1;
 
+            // Get selected gender
+            const genderRadios = document.getElementsByName('gender');
+            let selectedGender = 'all';
+            for (const radio of genderRadios) {
+                if (radio.checked) {
+                    selectedGender = radio.value;
+                    break;
+                }
+            }
+
             const grid = document.getElementById('cardGrid');
             const counter = document.getElementById('counterDisplay');
             
@@ -586,7 +682,23 @@
             const fragment = document.createDocumentFragment();
 
             for (let i = 0; i < amount; i++) {
-                const first = firstNames[Math.floor(Math.random() * firstNames.length)];
+                let first = "";
+                
+                // Gender Logic
+                if (selectedGender === 'male') {
+                    first = maleNames[Math.floor(Math.random() * maleNames.length)];
+                } else if (selectedGender === 'female') {
+                    first = femaleNames[Math.floor(Math.random() * femaleNames.length)];
+                } else {
+                    // Randomly choose between male or female list if "All"
+                    const isMale = Math.random() > 0.5;
+                    if (isMale) {
+                        first = maleNames[Math.floor(Math.random() * maleNames.length)];
+                    } else {
+                        first = femaleNames[Math.floor(Math.random() * femaleNames.length)];
+                    }
+                }
+
                 const last = lastNames[Math.floor(Math.random() * lastNames.length)];
                 const fullName = `${first} ${last}`;
                 
@@ -628,15 +740,15 @@
 
                 card.innerHTML = `
                     <div class="card-header">
-                        <div class="user-info">
+                        <div class="user-info" onclick="copyToClipboard('${fullName}')" title="Click to copy name">
                             <div class="avatar">
                                 ${emoji}
                                 <div class="avatar-badge"></div>
                             </div>
-                            <div class="text-group">
+                            <ika class="text-group">
                                 <h3>${fullName}</h3>
                                 <span>ID Verified</span>
-                            </div>
+                            </ika>
                         </div>
                         <button class="btn-icon" onclick="copyToClipboard('${fullName}')" title="Copy Name">
                             <i class="fa-regular fa-copy"></i>
@@ -681,7 +793,7 @@
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                showToast(`Disalin: ${text.substring(0, 18)}...`);
+                showToast(`Disalin: ${text.substring(0, 18)}${text.length > 18 ? '...' : ''}`);
             }).catch(err => {
                 showToast("Gagal menyalin");
             });
