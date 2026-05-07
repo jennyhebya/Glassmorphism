@@ -331,118 +331,6 @@
             opacity: 0.5;
         }
 
-        /* Card Header */
-        .card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            cursor: pointer; /* Added cursor pointer to suggest clickability */
-            padding: 4px; /* Slightly larger hit area */
-            border-radius: 12px;
-            transition: background 0.2s;
-        }
-        
-        .user-info:hover {
-            background: rgba(0,0,0,0.03);
-        }
-        .user-info:active {
-            transform: scale(0.98);
-        }
-
-        /* Avatar Style */
-        .avatar {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, var(--input-bg), var(--surface));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            border: 1px solid var(--border);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-            position: relative;
-            pointer-events: none; /* Click passes through to parent */
-        }
-        
-        .avatar-badge {
-            position: absolute;
-            bottom: -4px;
-            right: -4px;
-            width: 20px;
-            height: 20px;
-            background: #10b981; /* Online Green */
-            border: 3px solid var(--bg-body);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .text-group {
-            pointer-events: none; /* Let the wrapper handle the click event */
-        }
-
-        .text-group h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 2px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        /* Visual indicator for copyable text */
-        .text-group h3::after {
-            content: "\f0c5"; /* FontAwesome copy icon */
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            font-size: 0.7rem;
-            opacity: 0;
-            color: var(--primary);
-            transition: opacity 0.2s;
-        }
-        
-        .user-info:hover .text-group h3::after {
-            opacity: 0.6;
-        }
-
-        .text-group span {
-            font-size: 0.75rem;
-            color: var(--primary);
-            background: var(--primary-light);
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Copy Button Top */
-        .btn-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: transparent;
-            color: var(--text-muted);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-        .btn-icon:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
         /* Fields Layout */
         .fields {
             display: flex;
@@ -473,13 +361,16 @@
             align-items: center;
             gap: 12px;
             overflow: hidden;
+            flex: 1;
+            cursor: pointer; /* Added cursor for clickable content */
         }
 
         .f-icon {
             width: 20px;
             text-align: center;
-            color: var(--text-muted);
+            color: var(--text-muted); /* Changed to match */
             font-size: 0.95rem;
+            flex-shrink: 0;
         }
 
         .f-text {
@@ -491,8 +382,39 @@
             text-overflow: ellipsis;
         }
         
-        .f-text.user { color: var(--primary); font-weight: 600; }
+        /* Specific text styling */
+        .f-text.name { font-weight: 700; }
+        .f-text.user { color: var(--text-main); font-weight: 600; }
         .f-text.email { color: var(--text-muted); font-size: 0.85rem; }
+
+        /* Split Name Styling inside field-item */
+        .name-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+        
+        .name-part {
+            font-weight: 700;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 6px;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+
+        .name-part:hover {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        .separator-name {
+            color: var(--text-muted);
+            font-weight: 400;
+            pointer-events: none;
+        }
 
         .copy-small {
             width: 28px;
@@ -504,6 +426,7 @@
             opacity: 0;
             transform: translateX(10px);
             transition: all 0.2s;
+            flex-shrink: 0;
         }
 
         .field-item:hover .copy-small {
@@ -633,7 +556,7 @@
 
         const lastNames = ["Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin","Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Nguyen","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts","Gomez","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes","Stewart","Morris","Morales","Murphy","Cook","Rogers","Gutierrez","Ortiz","Morgan","Cooper","Peterson","Bailey","Reed","Kelly","Howard","Ramos","Kim","Cox","Ward","Richardson","Watson","Brooks","Chavez","Wood","Bennett","Gray","Mendoza","Ruiz","Hughes","Price","Alvarez","Castillo","Sanders","Patel","Myers","Long","Ross","Foster","Jimenez","Powell","Jenkins","Perry","Russell","Sullivan","Bell","Cole","Berry","Washington","West","Thompson","Richardson","Woods","Cole","Washington","West","Bailey","Reed","Harris","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts","Gomez","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes","Stewart"];
         
-        // Emoji list for dynamic avatars
+        // Emoji list for dynamic avatars (kept for potential future use, though removed from UI)
         const avatarEmojis = ["🦊", "🦁", "🐯", "🐸", "🦄", "🐙", "🦋", "🐞", "🦀", "🐶", "🐱", "🐼", "🦉", "🦩", "🐲", "👽", "🤖", "👻", "💀", "👾", "🎃", "🎅", "🦸", "🧙", "🧚", "🧛", "🧜", "🧞", "🦸‍♂️", "🦹‍♀️"];
 
         let generatedUsernames = new Set();
@@ -702,7 +625,7 @@
                 const last = lastNames[Math.floor(Math.random() * lastNames.length)];
                 const fullName = `${first} ${last}`;
                 
-                // Pick a random emoji
+                // Pick a random emoji (kept for logic consistency, not used in UI)
                 const emoji = avatarEmojis[Math.floor(Math.random() * avatarEmojis.length)];
                 
                 let username = "";
@@ -739,25 +662,25 @@
                 card.style.animationDelay = `${i * 0.06}s`;
 
                 card.innerHTML = `
-                    <div class="card-header">
-                        <div class="user-info" onclick="copyToClipboard('${fullName}')" title="Click to copy name">
-                            <div class="avatar">
-                                ${emoji}
-                                <div class="avatar-badge"></div>
-                            </div>
-                            <ika class="text-group">
-                                <h3>${fullName}</h3>
-                                <span>ID Verified</span>
-                            </ika>
-                        </div>
-                        <button class="btn-icon" onclick="copyToClipboard('${fullName}')" title="Copy Name">
-                            <i class="fa-regular fa-copy"></i>
-                        </button>
-                    </div>
-
                     <div class="fields">
+                        <!-- Full Name Field Item (Moved here as requested) -->
                         <div class="field-item">
-                            <div class="f-content">
+                            <div class="f-content" onclick="copyToClipboard('${fullName}')" title="Click to copy Full Name">
+                                <i class="fa-brands fa-facebook f-icon"></i>
+                                <div class="name-group">
+                                    <span class="name-part" onclick="event.stopPropagation(); copyToClipboard('${first}')" title="Copy First Name">${first}</span>
+                                    <span class="separator-name"> </span>
+                                    <span class="name-part" onclick="event.stopPropagation(); copyToClipboard('${last}')" title="Copy Last Name">${last}</span>
+                                </div>
+                            </div>
+                            <button class="copy-small" onclick="copyToClipboard('${fullName}')" title="Copy Full Name">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+
+                        <!-- Username Field Item -->
+                        <div class="field-item">
+                            <div class="f-content" onclick="copyToClipboard('${username}')" title="Click to copy Username">
                                 <i class="fa-brands fa-instagram f-icon"></i>
                                 <span class="f-text user">@${username}</span>
                             </div>
@@ -766,8 +689,9 @@
                             </button>
                         </div>
 
+                        <!-- Email Field Item -->
                         <div class="field-item">
-                            <div class="f-content">
+                            <div class="f-content" onclick="copyToClipboard('${email}')" title="Click to copy Email">
                                 <i class="fa-regular fa-envelope f-icon"></i>
                                 <span class="f-text email">${email}</span>
                             </div>
