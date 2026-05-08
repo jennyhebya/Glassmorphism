@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Identity Generator - Premium Edition</title>
+    <title>Random Name Generator - Premium Edition</title>
     
     <!-- FAVICON: Linux Icon (SVG Data URI) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 448 512%22><path fill=%22%236366f1%22 d=%22M220.8 123.3c-18.3 2.1-35.7 7.4-51.4 15.2l-12.3-7.1c-5.8-3.3-13.2-1.6-16.9 3.8l-14.7 20.5c-3.7 5.4-2.3 12.8 3.1 16.6l10.7 7.5c-6.6 15.6-10.6 32.8-11.1 50.8H112c-6.6 0-12 5.4-12 12v25.5c0 6.6 5.4 12 12 12h16.3c.6 18.2 4.7 35.7 11.5 51.6l-10.7 7.5c-5.4 3.8-6.8 11.2-3.1 16.6l14.7 20.5c3.7 5.4 11.1 7.1 16.9 3.8l12.3-7.1c15.6 7.8 32.9 13 51.1 15.1l2.9 13.3c1.6 6.5 8.1 10.5 14.6 8.9l24.8-5.5c6.5-1.6 10.5-8.1 8.9-14.6l-2.9-13.3c18.3-2.1 35.7-7.4 51.4-15.2l12.3 7.1c5.8 3.3 13.2 1.6 16.9-3.8l14.7-20.5c3.7-5.4 2.3-12.8-3.1-16.6l-10.7-7.5c6.6-15.6 10.6-32.8 11.1-50.8h16.3c6.6 0 12-5.4 12-12V230.5c0-6.6-5.4-12-12-12h-16.3c-.6-18.2-4.7-35.7-11.5-51.6l10.7-7.5c5.4-3.8 6.8-11.2 3.1-16.6l-14.7-20.5c-3.7-5.4-11.1-7.1-16.9-3.8l-12.3 7.1c-15.6-7.8-32.9-13-51.1-15.1l-2.9-13.3c-1.6-6.5-8.1-10.5-14.6-8.9l-24.8 5.5c-6.5 1.6-10.5 8.1-8.9 14.6l2.9 13.3zM256 332.8c-28.4 0-51.4-23-51.4-51.4s23-51.4 51.4-51.4 51.4 23 51.4 51.4-23 51.4-51.4 51.4z%22/></svg>">
@@ -116,7 +116,7 @@
         .theme-toggle:hover { transform: translateY(-2px); color: var(--primary); border-color: var(--primary); }
 
         /* HEADER */
-        header { text-align: center; margin-bottom: 60px; padding-top: 10px; }
+        header { text-align: center; margin-bottom: 40px; padding-top: 10px; }
 
         h1 {
             font-size: 3rem;
@@ -134,25 +134,37 @@
             font-size: 1.1rem;
             font-weight: 400;
             opacity: 0.8;
+            margin-bottom: 30px;
         }
 
-        /* CONTROLS BAR (Pill Shape) */
+        /* CONTROLS WRAPPER (Extended for Region Tags) */
         .controls-wrapper {
             background: var(--surface);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            padding: 10px 10px 10px 20px;
-            border-radius: 100px;
+            padding: 24px;
+            border-radius: 24px; /* More rounded to accommodate layout */
             border: 1px solid var(--border);
             box-shadow: var(--shadow-lg);
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 40px;
             max-width: 100%;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
         }
+
+        /* Top Row: Gender & Count */
+        .controls-top {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            width: 100%;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+        .controls-top:last-child { border-bottom: none; padding-bottom: 0; }
 
         /* Gender Radio Group Styling */
         .gender-group {
@@ -182,10 +194,7 @@
             color: var(--primary);
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        
-        .gender-label:hover:not(.active) {
-            color: var(--text-main);
-        }
+        .gender-label:hover:not(.active) { color: var(--text-main); }
 
         .input-wrapper { position: relative; }
 
@@ -218,10 +227,77 @@
             box-shadow: 0 0 0 3px var(--primary-light);
         }
 
+        /* Region Tags Section */
+        .region-section {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .region-label {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .region-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .region-tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--input-bg);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .region-tag:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .region-tag.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px var(--border-glow);
+        }
+
+        .region-note {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+
+        /* Action Buttons Row */
+        .controls-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+        }
+
         .separator {
             width: 1px;
             height: 24px;
             background-color: var(--border);
+            display: none; /* Hidden in flex layout */
         }
 
         /* BUTTONS */
@@ -366,13 +442,13 @@
             gap: 12px;
             overflow: hidden;
             flex: 1;
-            cursor: pointer; /* Added cursor for clickable content */
+            cursor: pointer; 
         }
 
         .f-icon {
             width: 20px;
             text-align: center;
-            color: var(--text-muted); /* Changed to match */
+            color: var(--text-muted); 
             font-size: 0.95rem;
             flex-shrink: 0;
         }
@@ -466,17 +542,17 @@
         /* Responsive */
         @media (max-width: 768px) {
             .controls-wrapper {
+                padding: 20px;
+                border-radius: 20px;
+            }
+            .controls-top {
                 flex-direction: column;
                 width: 100%;
-                padding: 20px;
-                border-radius: 24px;
-                gap: 15px;
             }
-            .input-wrapper, .btn, .gender-group { width: 100%; justify-content: center; }
+            .input-wrapper, .gender-group, .btn { width: 100%; justify-content: center; }
             input[type="number"] { width: 100%; text-align: center; }
-            .separator { display: none; }
             h1 { font-size: 2.2rem; }
-            .copy-small { opacity: 1; transform: translateX(0); } /* Always show on mobile */
+            .copy-small { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
@@ -492,51 +568,63 @@
 
     <div class="container">
         <header>
-            <h1>Identity Generator</h1>
+            <h1>Random Name Generator</h1>
             <p class="subtitle">Create beautiful digital profiles instantly.</p>
             
             <div class="controls-wrapper">
-                <!-- Gender Selector -->
-                <div class="gender-group">
-                    <input type="radio" id="gender-all" name="gender" value="all" class="gender-radio" checked>
-                    <label for="gender-all" class="gender-label">All</label>
+                
+                <!-- Top Row: Gender & Count -->
+                <div class="controls-top">
+                    <!-- Gender Selector -->
+                    <div class="gender-group">
+                        <input type="radio" id="gender-all" name="gender" value="all" class="gender-radio" checked>
+                        <label for="gender-all" class="gender-label">All</label>
 
-                    <input type="radio" id="gender-male" name="gender" value="male" class="gender-radio">
-                    <label for="gender-male" class="gender-label">Male</label>
+                        <input type="radio" id="gender-male" name="gender" value="male" class="gender-radio">
+                        <label for="gender-male" class="gender-label">Male</label>
 
-                    <input type="radio" id="gender-female" name="gender" value="female" class="gender-radio">
-                    <label for="gender-female" class="gender-label">Female</label>
+                        <input type="radio" id="gender-female" name="gender" value="female" class="gender-radio">
+                        <label for="gender-female" class="gender-label">Female</label>
+                    </div>
+                
+                    <div class="separator"></div>
+
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                        <input type="number" id="amount" value="5" min="1" max="50" placeholder="Jumlah">
+                    </div>
                 </div>
-                
-                <div class="separator"></div>
 
-                <div class="input-wrapper">
-                    <i class="fa-solid fa-users-viewfinder"></i>
-                    <input type="number" id="amount" value="5" min="1" max="50" placeholder="Jumlah">
+                <!-- Middle Row: Region Tags -->
+                <div class="region-section">
+                    <label class="region-label">Select Nationality / Region</label>
+                    <div class="region-tags" id="regionTags">
+                        <!-- Tags injected by JS -->
+                    </div>
+                    <div class="region-note">Select one or multiple regions.</div>
                 </div>
-                
-                <div class="separator"></div>
-                
-                <button class="btn btn-generate" onclick="generateData()">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
-                </button>
-                
-                <div class="separator"></div>
 
-                <button class="btn btn-action" onclick="copyAllUsernames()">
-                    <i class="fa-solid fa-at"></i> Usernames
-                </button>
-                <button class="btn btn-action" onclick="copyAllEmails()">
-                    <i class="fa-solid fa-envelope"></i> Emails
-                </button>
-                <button class="btn btn-action url-action" onclick="copyAllUrls()">
-                    <i class="fa-solid fa-link"></i> URLs
-                </button>
+                <!-- Bottom Row: Actions -->
+                <div class="controls-actions">
+                    <button class="btn btn-generate" onclick="generateData()">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
+                    </button>
+
+                    <button class="btn btn-action" onclick="copyAllUsernames()">
+                        <i class="fa-solid fa-at"></i> Usernames
+                    </button>
+                    <button class="btn btn-action" onclick="copyAllEmails()">
+                        <i class="fa-solid fa-envelope"></i> Emails
+                    </button>
+                    <button class="btn btn-action url-action" onclick="copyAllUrls()">
+                        <i class="fa-solid fa-link"></i> URLs
+                    </button>
+                </div>
             </div>
         </header>
 
         <div class="tags">
-            <div class="tag"><i class="fa-solid fa-database"></i> 500+ Names</div>
+            <div class="tag"><i class="fa-solid fa-database"></i> 12 Regions</div>
             <div class="tag"><i class="fa-solid fa-fingerprint"></i> Unique</div>
             <div class="tag"><i class="fa-solid fa-shield-halved"></i> Anti-Duplicate</div>
             <div class="tag" id="counterDisplay"><i class="fa-solid fa-bolt"></i> Ready</div>
@@ -552,21 +640,91 @@
     </div>
 
     <script>
-        // DATABASE MALE NAMES
-        const maleNames = ["James","John","Robert","Michael","William","David","Richard","Joseph","Thomas","Charles","Christopher","Daniel","Matthew","Anthony","Mark","Donald","Steven","Paul","Andrew","Joshua","Kenneth","Kevin","Brian","George","Edward","Ronald","Timothy","Jason","Jeffrey","Ryan","Jacob","Gary","Nicholas","Eric","Jonathan","Stephen","Larry","Justin","Scott","Brandon","Benjamin","Samuel","Frank","Gregory","Raymond","Alexander","Patrick","Jack","Dennis","Jerry","Tyler","Aaron","Jose","Adam","Henry","Nathan","Douglas","Zachary","Peter","Kyle","Walter","Ethan","Jeremy","Harold","Keith","Christian","Roger","Noah","Gerald","Terry","Sean","Austin","Arthur","Lawrence","Jesse","Dylan","Bryan","Joe","Jordan","Billy","Bruce","Albert","Willie","Gabriel","Logan","Alan","Juan","Wayne","Roy","Ralph","Randy","Eugene","Vincent","Russell","Louis","Philip","Bobby","Johnny","Bradley"];
-        
-        // DATABASE FEMALE NAMES
-        const femaleNames = ["Mary","Patricia","Jennifer","Linda","Elizabeth","Barbara","Susan","Jessica","Sarah","Karen","Lisa","Nancy","Betty","Margaret","Sandra","Ashley","Kimberly","Emily","Donna","Michelle","Dorothy","Carol","Amanda","Melissa","Deborah","Stephanie","Rebecca","Sharon","Laura","Cynthia","Kathleen","Amy","Angela","Shirley","Anna","Brenda","Pamela","Emma","Nicole","Helen","Samantha","Katherine","Christine","Debra","Rachel","Carolyn","Janet","Catherine","Maria","Heather","Diane","Julie","Joyce","Victoria","Olivia","Kelly","Christina","Lauren","Joan","Evelyn","Judith","Megan","Cheryl","Andrea","Hannah","Martha","Jacqueline","Frances","Gloria","Ann","Teresa","Kathryn","Sara","Janice","Jean","Alice","Doris","Abigail","Julia","Judy","Grace","Denise","Amber","Marilyn","Beverly","Danielle","Theresa","Sophia","Marie","Diana","Brittany","Natalie","Isabella","Charlotte","Mia","Alexis","Kayla","Lily","Hailey","Ava","Camila","Penelope","Lillian","Zoey","Stella","Nora","Leah","Audrey","Bella","Claire","Skylar","Lucy","Paisley","Savannah","Brooklyn","Addison","Kennedy","Autumn","Brooke","Layla","Ellie","Aaliyah","Harper","Violet","Chloe","Ella","Emilie","Mila","Scarlett"];
-
-        const lastNames = ["Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin","Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Nguyen","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts","Gomez","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes","Stewart","Morris","Morales","Murphy","Cook","Rogers","Gutierrez","Ortiz","Morgan","Cooper","Peterson","Bailey","Reed","Kelly","Howard","Ramos","Kim","Cox","Ward","Richardson","Watson","Brooks","Chavez","Wood","Bennett","Gray","Mendoza","Ruiz","Hughes","Price","Alvarez","Castillo","Sanders","Patel","Myers","Long","Ross","Foster","Jimenez","Powell","Jenkins","Perry","Russell","Sullivan","Bell","Cole","Berry","Washington","West","Thompson","Richardson","Woods","Cole","Washington","West","Bailey","Reed","Harris","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts","Gomez","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Reyes","Stewart"];
-        
-        // Emoji list for dynamic avatars (kept for potential future use, though removed from UI)
-        const avatarEmojis = ["🦊", "🦁", "🐯", "🐸", "🦄", "🐙", "🦋", "🐞", "🦀", "🐶", "🐱", "🐼", "🦉", "🦩", "🐲", "👽", "🤖", "👻", "💀", "👾", "🎃", "🎅", "🦸", "🧙", "🧚", "🧛", "🧜", "🧞", "🦸‍♂️", "🦹‍♀️"];
+        // ─── EXTENDED NAME DATABASE BY REGION ───
+        const nameData = {
+            "English": {
+                female: ["Olivia","Amelia","Isla","Kristina","Grace","Emily","Ella","Freya","Chloe","Natasha","Lily","Hannah","Charlotte","Harper","Evelyn","Abigail","Sienna","Poppy","Esme","Willow","Lesley","Roth","Taylor","Smith","Jeannette","Willard","Myrtle","Frey","Phoebe","Charlotte","O'Neal","Sheryl","Rivera","April","Norris","Beverly","Vaughn","Edmund","Haney","Caitlin","Farrell"],
+                male: ["Rose","Calderon","Leticia","Newman","Cecelia","Porter","Laurie","Charles","Benjamin","McCarty","Cory","Johnston","Mildred","Kelley","Melody","Gorman","Ronnie","Curtis","Brooke","Parker","Jeffery","Black","Paul","Lehman","Curt","Randall","Janice","Anthony","Nicole","Pitts","Florence","Vaughn","Dennis","Billie","Alexander"],
+                last: ["Smith","Jones","Taylor","Brown","Williams","Wilson","Johnson","Davies","Evans","Thomas","Roberts","Walker","Wright","Thompson","White","Edwards","Hughes","Green","Hall"]
+            },
+            "Spanish": {
+                female: ["Sofia","Valentina","Lucia","Isabella","Camila","Martina","Elena","Alba","Paula","Carmen","Andrea","Daniela","Sara","Laura","Maria","Ana","Claudia","Zahra","Zabala","Cecilia","Martin","Montse","Sousa","Mayra","Atienza","Malika","Carrasco","Alma","Garzon","Camila","Toribio","Sarah","Chaves","Maialen","Pareja","Serafina","Asensio","Marwa","Orellana","Rita","Canovas","Victoria","Berenguer","Consolacion","Pavon","Laura","Carballo","Naima","Hernando","Sabina","de","Diego","Felipa","Prados","Antia","Rus","Abril","Gil","Delia","Bejarano","Ascension","Cebrian","Jamila","Tortosa","Sofia","Nieto","Janire","Llorente","Sacramento","Nieves","Merce","Gonzalo","Emilia","Lima","Arantxa","Jara","Balbina","Rodrigo","Felisa","Leiva","Amanda","Da","Silva","Itziar","Velez","Luz","Maria","Peris","Rachida","Muriel","Olaya","Escobar","Carmela","Zhu","Azucena","Rodenas","Rosa","Jerez","Alina","Molina","Maria","Soledad","Elvira","Leire","Raya","Eider","Ferrando","Juliana","Gascon","Saida","Rosello","Loreto","Mariscal","Maria","Esperanza","Sole","Amaya","Ferre","Lucia","Martínez","Nazaret","Cardona"],
+                male: ["Mateo","Santiago","Diego","Pablo","Javier","Sergio","Carlos","Andres","Fernando","Rafael","Lucas","Hugo","Alejandro","Daniel","Adrian","Manuel","Joaquim","Toledano","Denis","Fuertes","Basilio","Rodriguez","Alonso","Castañeda","Alan","Tome","Roger","Barbero","Nelson","Valles","Joseba","Chamorro","Eugenio","Viera","Ionut","Vilar","Adil","Oviedo","Yassine","Villaverde","Luis","Espin","Yesus","Acosta","Robert","Bejarano","Anselmo","Amado","María","Morillo","Carlos","Boix","Roman","Recio","Aritz","Garca","Vicent","Barrio","Mark","Leon","Axel","Olivera","Yeray","Bonet","Xabier","Blazquez","Jess","Manzanares","Noe","Villar","Augusto","San","Miguel","Marco","Megias","Rafa","Mora","Dylan","Jaramillo","Ricard","Alemany","Moussa","Figueras","Ramiro","Pinilla","Justo","Pastor","Jacinto","Font","Xavier","Moreira","Monica","Alcala","Raul","Alfonso","Marius","Rus","César","Monteagudo","Patricio","Conesa","Gustavo","Vela","Biel","Vargas","Rachid","Lago","Maximiliano","Bosch","Miguel","Angel","Teruel","Iker","Saura","Anastasio","Carrasco","Juan","Pablo","Revilla"],
+                last: ["Garcia","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Perez","Sanchez","Ramirez","Torres","Diaz","Moreno","Romero","Alvarez","Ruiz","Jimenez","Gutierrez"]
+            },
+            "French": {
+                female: ["Amelie","Camille","Manon","Louise","Lea","Elodie","Maeva","Juliette","Chloe","Emma","Ines","Charlotte","Alice","Margaux","Oceane","Pauline","Annick","Grandjean","Christine","Haillet","Odette","Crevier","Sandrine","Delacroix","Miryam","Asselineau","Natacha","Jacquinot","Sauvanne","Emmanuelli","Claudette","Regnard","Laetitia","Delaunay","Janine","Larousse","Laura","Landry","Geneviève","Derocles","Hélène","Sylvestre","Dany","Auguste","Annick","Suchet","Madeleine","Gribelin","Nina","Marchal","Marielle","Pierlot","Flora","Hérisson","Isabelle","Raoult","Aliénor","Lebas","Marie","Baillairgé","Stéphanie","Rousselle","Laurette","Quint","Amandine","Renaudin","Claudette","Leroux","Sara","Darche","Agathe","Chauve","Ghislaine","Duret","Auriane","Poulin","Haydée","Boudreaux","Romaine","Saint-Yves","Annette","Bozonnet","France","De","la","Croix","Léonie","Chabert","Emmeline","Guillaume","Sabrina","Boisselot","Éléonore","Grosjean","Adrienne","Barnier","Aurore","Piaget","Noémie","Chagnon","Marie-France","Cormier","Ilonna","Subercaseaux","Solène","Duverger","Valentine","Bachelot","Maéva","Vasseur","Sylvaine","Delafosse","Clarisse","Laurens","Virginie","Bousquet","Henriette","Passereau"],
+                male: ["Pierre","Lucas","Maxime","Nicolas","Remi","Louis","Theo","Mathis","Antoine","Hugo","Clement","Quentin","Raphael","Arthur","Jules","Leo","Ange","Allaire","Xavier","Bourbeau","Raymond","Descombes","Frank","Courvoisier","Phil","Didier","Jérémy","Gainsbourg","Marius","Robillard","Maximilien","Adnet","Maurice","Maitre","Anatole","Ange","Edmond","Roatta","Pascal","Duchemin","Lucas","Grosjean","Adrien","Barthélemy","Gabriel","Chaney","Edmond","Courtial","Noé","Beauregard","Sébastien","Grosjean","Rodolphe","Morin","Alain","Alméras","Tobie","Lavaud","Arnaud","Pomeroy","Noé","Chevalier","Dimitri","Crevier","Anatole","Toutain","Henri","Roatta","Abelin","Clérisseau","Gérald","Rigal","Hubert","Barbeau","Hector","Chopin","Mathis","Delon","Joseph","Gribelin","Mickaël","Barnier","Florentin","Reverdin","Abélard","Peltier","Adam","Piaget","Hugo","Soyer","Zacharie","Allemand","Côme","Manaudou","Jonathan","Abadie","","Barthélemy","Manoury","Milo","Moitessier","Timothé","Chuquet","Gaëtan","Dubost","Joël","Cordonnier","Cyril","Anouilh","Hervé","Bittencourt","Julien","Édouard","Baudouin","Bourbeau","Ernest","Baillairgé"],
+                last: ["Dubois","Moreau","Laurent","Simon","Michel","Lambert","Rousseau","Blanc","Guerin","Renard","Martin","Bernard","Thomas","Robert","Richard","Petit"]
+            },
+            "German": {
+                female: ["Marita","Gottwald","Waltraut","Lukas","Jana","Stiller","Hauke","​​Blum","Vanessa","Küster","Marianne","Wächter","Cäcilia","Otten","Kathleen","Hensel","Elke","Hopf","Luzie","Kurz","Anita","Schüller","Karola","Kröger","Margrit","Obermeier","Wilma","Schade","Ulla","Keil","Siegrid","Schwarzer","Carina","Volk","Margarethe","Hinz","Susanna","Tiedemann","Margret","Kiefer","Helene","Prinz","Waltraud","Helbig","Sabine","Hausmann","Gaby","Lang","Reinhilde","Thomas","Brunhilde","Brunner","Joanna","Arndt","Martina","Kühne","Theresa","Karl","Christa","Kruse","Ortrud","Müller","Ewa","Eichler","Conny","Feldmann","Adele","Rieger","Roswita","Stöhr","Kristina","Krämer","Sibylle","Thomsen","Brigitta","Conrad","Ida","Scheffler","Ingeburg","Barthel","Irmhild","Winkelmann","Helma","Burkhardt","Isabella","Frank","Denise","Heimann","Margit","Maier","Kunigunde","Schmitt","Therese","Timm","Sabrina","Sievers","Lina","Brinkmann","Heidi","Janske","Cornelissen","Madelief","Tusveld","Nineke","Kleiman","Pien","Koolhof","Door","Limbeek","Lies","van","'t","Holdhuis","Willemijn","Ellenbroek","Fien","Elkink","Annalies","Kwikkelo","Annemijn","Varenhorst","Madelief","Mensink","Willemijn","Dogger","Lieke","Zwiersen","Joke","Peper","Mariska","Voskus","Thea","Landuweers","Annemarije","Roelofsen","Katrien","van","'t","Veld","Mareike","Belderman","Jacoliene","Hop","Veerle","Ekkerink","Pien","Potgrave","Marlieke","Fiedeldeij","Anneloes","van","Loo","Willemieke","Kelderman","Petra","Bolman","Paulien","Evertman","Lotte","van","'t","Holdhuis","Margriet","Groote","Schaarsberg","Anneloes","van","Straaten","Sofie","Laman","Jet","Arentsen","Rosemarije","Vree","Egberts","Brechtje","Gombert","Janneke","Breman","Willy","Calevelds","Elle","Noodvelds","Greetje","Bults","Veerle","Korf","Annelies","Kraaijenbrink","Anne-Marije","van","der","Zeijden","Marit","van","der","Kleij","Fleurtje","Hulshof","Marijke","Nonkes","Maartje","Piebenga","Sofietje","op","de","Eecte","Saar","Eulen","Madeleine","Hertz","Greetje","Harmsen","Fleurtje","Vredeveld"],
+                male: ["Lukas","Leon","Max","Felix","Paul","Jonas","Finn","Elias","Noah","Ben","Oskar","Henrik","Moritz","Niklas","Tim","Jan","Benjamin","Albers","Achim","Buchholz","Gunter","Maaß","Simon","Knobloch","Angelo","Buchner","Philip","Baur","Dieter","Weiser","Ulrich","Bernhard","Malte","Lahir","Erik","Yilmaz","Juergen","Oppermann","Hans-Gerd","Schlüter","Hans-Martin","Langner","Hubertus","Hofmann","Victor","Thieme","Pascal","Pohlmann","Mehmet","Sprenger","Dominic","Kühn","Arnd","Wolter","Heinz-Jürgen","Jahn","Ludger","Beyer","Mustafa","Kraft","Albert","Rapp","Moritz","Westphal","Gerold","Köhler","Helge","Eisele","Kurt","Frick","Heinz-Hermann","Bartels","Dietmar","Lang","Hans-Willi","Keck","Hasan","Budde","Uwe","Bahr","Gerrit","Heimann","Hans-Günter","Junge","Gerald","Seemann","Jens-Peter","Riemer","Toni","Berndt","Otto","Raab","Antonie","Gerdes","Heinz-Günter","Lüdtke","Adam","Wilke","Hinrich","Hertel","Daniel","Ullrich","Aloys","Hinz","Johann","Büchner","Hans","Otto","Bach","Raimund","Hesse","Waldemar","Grün","Wladimir","Preuß","Felix","Keil"],
+                last: ["Muller","Schmidt","Schneider","Fischer","Weber","Meyer","Wagner","Becker","Hoffmann","Koch","Richter","Wolf","Klein","Schroeder","Neumann","Schwarz"]
+            },
+            "Italian": {
+                female: ["Sofia","Giulia","Aurora","Ginevra","Alice","Beatrice","Emma","Chiara","Valentina","Lucia","Bianca","Elisa","Francesca","Alessia","Anna","Gerarda","Cattaneo","Annunziata","Cossu","Aida","Micheli","Angelica","Porro","Ana","Sechi","Angelina","Migliaccio","Morena","Galati","Ernestina","di","Biase","Iris","Dominici","Nunziata","Cecchini","Emanuela","Mariani","Johanna","Venturelli","Emílio","Olivieri","Albertina","Cozzi","Ermelinda","Carboni","Gianna","Simonelli","Rossella","Gagliano","Vila","Onorina","Cinzia","Ripamonti","Aurora","Re","Pierangela","Guerrieri","Concettina","Bartoli","Rosella","Carbone","Óscar","Stefani","Anastasia","Calo","Deborah","Mandelli","Giada","Perrotta","Catterina","Miccoli","Nunzia","Federici","Fernanda","Moroni","Lucrezia","Manfredi","Teresina","di","Martino","Helga","Berto","Girolama","Montanaro","Martina","Massaro","Christine","Longo","Ivonne","Caselli","Serenella","Bonetti","Ferrari","de","Falco","Livia","Ronchi","Pasqua","Filippini","Agata","Pascale","Jolanda","Mora","Rosy","Ciccarelli","Costanza","Trapani","Carola","Iannone","Flora","Monti","Zotto","Bertocchi","Marinella","Giudice","Vita","Pecoraro"],
+                male: ["Leonardo","Francesco","Alessandro","Lorenzo","Matteo","Andrea","Gabriele","Riccardo","Tommaso","Edoardo","Nicolo","Luca","Marco","Davide","Alfredo","Conte","Diego","Berti","Federico","Corradi","Christian","Canu","Richard","Bongiovanni","Ruggiero","Franceschini","Bianco","Romanelli","Livio","Valle","Bernardo","Cortese","Russo","Saracino","Cláudio","Bergamini","Paolo","Monteleone","Samuele","Foglia","Cav","Liguori","Lucio","Volpato","Glória","Lamberti","Débora","Ambrosio","Alfonso","di","Giacomo","Pellegrino","Cavalli","Fernando","Sala","Valerio","D'anna","Arturo","Franchi","Adelmo","Petrini","Gesuino","Cappello","Tânia","Balsamo","Lúcio","Guarino","Angiolo","Sacchetti","Demetrio","Mele","Carlo","Piras","Renzo","Bernini","Valério","Girardi","Nevio","Montagna","Enio","Persico","Gaetano","Rosi","Silvio","Sironi","Leonardo","Fazio","Biagio","Dessi","Valle","Lai","Edoardo","Rossetto","Eliseo","Radice","Fedele","Sabatini","Stefan","Fantini","Massimiliano","Gioia","Andrea","Boni","Lino","Bertocchi","Leopoldo","Stucchi","Goffredo","Marano","Gianluigi","Ricci","Santino","Ferrara","Ercole","Valentini"],
+                last: ["Russo","Esposito","Ricci","Romano","Gallo","Conti","Mancini","Lombardi","Moretti","Marino","Colombo","Ferrari","Bianchi","Rossi","Bruno"]
+            },
+            "Indonesia": {
+                female: ["Aisha","Priya","Fatima","Sara","Noor","Anaya","Zahra","Mariam","Amira","Leila","Jasmine","Maya","Zara","Layla","Mila","Meera","Eli","Simatupang","Nanik","Utami","Martina","Rizal","Ina","Amir","Rahmawati","Riadi","Rita","Pasaribu","Yulianti","Amelia","Rina","Telaumbanua","Dyah","Aisyah","Warni","Haryanto","Tini","Sirait","Elly","Napitupulu","Desy","Oktavia","Maemunah","Sari","Suryati","Setyowati","Suyati","Murib","Maria","Ginting","Neng","Alamsyah","Yanti","Sihotang","Sutini","Putri","Martha","Kurnia","Asih","Junaidi","Suryati","Rahmah","Nova","Dewi","Salamah","Cahyono","Yuyun","Taufik","Juli","Priyono","Astuti","Winarti","Nurlela","Herlina","Umi","Sopian","Idah","Raharjo","Yuni","Nainggolan","Meri","Gani","Nyoman","Suhendi","Irma","Haryani","Ketut","Rohim","Noor","Spd","Cut","Sumarni","Sundari","Purwanto","Yuyun","Sofyan","Yuliana","Faisal","Ade","Salamah","Mardiana","Wijaya","Anik","Karim","Tati","Silitonga","Rika","Fatimah","Aminah","Taufik","Mei","Nababan","Putri","Rahayu","Kiki","Suryanto"],
+                male: ["Hartono","Ibrahim","Yusuf","Ali","Zain","Imran","Bilal","Karim","Omer","Haris","Rohan","Krish","Dev","Aarav","Ishaan","Slamet","Munawaroh","Bagus","Gultom","Solihin","Rachmawati","Beni","Setiawati","Rudi","Mulyana","Markus","Sinaga","Arief","Sitanggang","Didik","Saepudin","Saiful","Hastuti","Arif","Yanto","Anang","Trisnawati","Erwin","Silitonga","Deni","Surya","Tatang","Astutik","Taufik","Tampubolon","Mad","Arifin","Roni","Permana","Dedy","Julaeha","Eri","Hamid","Umar","Sutisna","Riki","Yanto","Hendro","Waluyo","Achmad","Sianturi","Hidayat","Silaban","Yayan","Rambe","Saleh","Rohim","Sumarno","Wahyudin","Basri","Abdullah","Didi","Hs","Edi","Nurhasanah","Hendri","Wahyudin","Ari","Wicaksono","Dede","Cahyono","Chandra","Santi","Yusuf","Khodijah","Aep","Haryono","Petrus","Purwanti","Faisal","Kurniati","Yunus","Hidayah","Sumarno","Telaumbanua","Hartono","Hamid","Sabar","Sihombing","Amat","Utami","Suroso","Sani","Herman","Supriyanto","Suherman","Rasyid","Hendi","Aminah","Edi","Dewi","Ali","Samosir","Chandra","Priyono"],
+                last: ["Patel","Khan","Shah","Ali","Hussain","Ahmed","Singh","Kaur","Reddy","Nair","Chandra","Das","Rao","Mehta","Kapoor","Malik"]
+            },
+            "Japan": {
+                female: ["Mei","Yuna","Mina","Nari","Sora","Hana","Riko","Sakura","Hikari","Sana","Akiko","Keiko","Minji","Jisoo","Hyejin","Suji","Togoshi","Kii","Wakamatsu","Ichino","Shimizu","Ryoko","Higashi","Natsuko","Chino","Fuyume","Edamura","Oharu","Go","Ane","Nishikawa","Agasa","Kayumi","Harumi","Banno","Inaho","Akagi","Yura","Katayama","Chino","Morikawa","Gemmei","Mashimo","Shina","Morishita","Hiroshi","Yashiro","Yukika","Tamai","Mamiko","Yasutake","En","Kudou","Chimari","Kiya","Uno","Moto","Yumia","Yamada","Isuzu","Utagawa","Ioko","Rai","Makiko","Yoshizawa","Tane","Wanijima","Esumi","Moto","Katsue","Chikae","Teruyo","Kurosawa","Ryu","Nashio","Runa","Murayama","Kozakura","Muramoto","Fumiki","Suzuki","Michie","Ishibashi","Den","Kita","Matsuko","Kitamura","Chimako","Sugawara","Mori","Rikimaru","Wakako","Asaka","Nariko","Rai","Kiwa","Shishido","Hikari","Sumadera","Erena","Kawashima","Sama","Nishikawa","Yukiyo","Yukiyama","Fumi","Hokama","Shizue","Iwayanagi","Aishun","Morishita","Akae","Onaga","Asuka","Senri","Tsugi"],
+                male: ["Kenji","Takumi","Haruto","Satoshi","Daichi","Minho","Joon","Hyun","Seung","Jae","Yuki","Ren","Taro","Akio","Riku","Dokite","Natsuki","Oda","Naomi","Maeda","Kayo","Kotobuki","Asuka","Takeda","Hajime","Masuda","Jun","Wakino","Tomomi","Nakazawa","Yuki","Mayeda","Tomoe","Shintani","Ryuko","Mochizuki","Kaname","Rai","Teru","Mikami","Shinobu","Yoshihara","Riku","Keikain","Rei","Yamanaka","Hiyori","Matsui","Tomoe","Kyoya","Mitsue","Ichihara","Masami","Ichinomiya","Shigeri","Shimamura","Rin","Yuuma","Iori","Yogi","Yuki","Matsubara","Hiromi","Ara","Akemi","Samejima","Mitsuyo","Iwata","Kaname","Ikehata","Hifumi","Baisho","Hikari","Higashi","Yoshimi","Ichihara","Tomomi","Maniwa","Ayumu","Tashiro","Natsuki","Itoh","Akira","Kaneshiro","Haruka","Ienaga","Hiyori","Yamaha","Hiromi","Nobusawa","Misao","Dewa","Akiho","Higa","Natsuki","Horie","Haruichi","Nobira","Akiho","Saionji","Misao","Ouji","Ayumu","Suga","Michi","Otani","Takemi","Kamiya","Tomoe","Fujimoto","Nagisa","Yamagishi","Maki","Katabuchi","Iori"],
+                last: ["Yamada","Tanaka","Suzuki","Sato","Kobayashi","Watanabe","Ito","Nakamura","Kato","Yoshida","Kim","Park","Choi","Jung","Kang","Cho"]
+            },
+            "Eastern European": {
+                female: ["Petra","Klara","Hana","Mira","Dominika","Iga","Irena","Adela","Marta","Sonia","Katarina","Ivana","Mirjana","Jelena","Dragana","Natasa","Vesna"],
+                male: ["Nikolai","Mikhail","Dmitri","Alexei","Viktor","Tomas","Lukas","Marek","Filip","Jan","Oskar","Petr","Jiri","Milan","Karel","Andrei"],
+                last: ["Novak","Svoboda","Novotny","Kucera","Vesely","Horak","Kral","Prochazka","Blaha","Kadlec","Kowalski","Nowak","Wisniewski","Wojcik","Kowalczyk"]
+            },
+            "Portuguese": {
+                female: ["Maria","Ana","Beatriz","Carolina","Diana","Francisca","Ines","Leonor","Margarida","Matilde","Rita","Sofia","Teresa","Clara","Helena","Elsa","Gameiro","Mario","Diniz","Alice","Calado","Domingos","de","Olíveira","Monica","Santiago","Lena","Bernardino","Dora","Simão","Águida","Tavares","Victor","Lobo","Diana","Barradas","Adriano","Machado","Dalila","Gabriel","Helena","Abrantes","Édina","Vilhena","Alexandra","Peixoto","Eugênio","Nelson","Duarte","Mota","Daniela","Moniz","Eugenia","Viana","Gonçalo","Patrício","Fernando","Ricardo","Adelino","Pinheiro","Álvaro","Proença","Agostinho","Baltazar","Natália","Cavaco","Afonso","Diogo","Avelino","Quaresma","José","Conceição","Nuno","Carmo","Valdemar","Guerreiro","Peter","Coelho","Lara","Mendes","Ivão","Câmara","Mariana","Xavier","Andre","França","Rafael","Ferrão","Horácio","Cabrita","Gabriel","Horta","Francisca","Ribeiro","Arlindo","Madeira","Bruno","Madureira","Rute","Quintas","Célia","Figueira","Artur","Veiga","Isabel","Couto","Sílvia","Castelo","Bruna","Jorge","Marcio","Alves","Magda","Meira","Angelo","Morais"],
+                male: ["Afonso","Bernardo","Diogo","Francisco","Guilherme","Henrique","Joao","Leonardo","Martim","Miguel","Pedro","Rafael","Santiago","Tiago","Joel","Sanches","Élia","Madeira","Bernardo","Lopes","Sandro","Serrano","Rafael","Peixoto","Adelino","Rita","Marta","Semedo","Edite","Dantas","Érita","Melo","Sandrêa","Magalhães","Octávio","Baltazar","Cludia","Rosário","Eliana","Gameiro","Dulce","Madureira","Eduarda","Brandão","Gloria","Parente","Teresa","Nascimento","Marisa","Medeiros","Mario","Romão","Madalena","Calado","Manuela","Fraga","Roberto","Coimbra","Daniel","Meira","Eugênio","Simões","Sónia","Joao","Virgílio","Abrantes","Ernesto","Miguel","Lina","Macedo","Simão","Monteiro","Alex","Carlos","Barbara","Ventura","Gustavo","Bernardes","Leandro","Valentim","Adelaide","Pedrosa","Fatima","Grilo","Alexandre","Loureiro","Natália","David","Ana","Teles","Hélio","Menezes","Marcos","Câmara","Paula","Coelho","Zélia","Sá","Válter","Belo","Antonio","Crespo","Andreia","Gouveia","Daniela","Cerqueira","Mária","Marcelino","Cristiano","Esteves","Ivão","Mota","Rui","Mateus"],
+                last: ["Silva","Santos","Oliveira","Pereira","Costa","Ferreira","Rodrigues","Almeida","Lima","Araujo","Sousa","Carvalho","Gomes","Ribeiro","Martins"]
+            },
+            "Vietnamese": {
+                female: ["Anh","Linh","Hanh","Thuy","Mai","Lan","Huong","Trang","Ngoc","Phuong","Khanh","Diem","Vy","Truc","Nhi","Tuyet","Lê","Thục","Khuê","Hồ","Ngọc","Quế","Đỗ","Bạch","Vân","Thái","Thu","Phượng","Bùi","Thanh","Nhàn","Đặng","Ðan","Khanh","Chu","Như","Ý","Doãn","Thục","Ðào","Lý","Bích","Thủy","Tống","Mai","Liên","","Bùi","Diệu","Nga","Nguyễn","Quỳnh","Thanh","Vũ","Huệ","Phương","Vũ","Hạnh","Linh","Quyền","Mai","Phương","Nguyễn","Lan","Hương","Bùi","Trang","Ðài","Tô","Uyên","Vi","Hàn","Hương","Giang","Thạch","Hải","Ðường","","Nguyễn","Phương","Loan","Giang","Ngọc","Dung","Nguyễn","Gia","Khanh","Nguyễn","Yến","Anh","Nguyễn","Hồng","Xuân","Nguyễn","Quế","Linh","Nguyễn","Tường","Vân","Võ","Vy","Lan","Đàm","Mộng","Vân","Hàn","Thu","Nga","","Lục","Hương","Lâm","Dương","Huệ","Thương","Nguyễn","Minh","Ngọc","Phạm","Chi","Mai","Trần","Thảo","Nhi","Mai","Phương","Hoa","Quang","Trúc","Vân","Ngô","Như","Phương","Nguyễn","Diệp","Chi","Ngư","Tú","Quỳnh","","Lý","Ngọc","Uyên","Nguyễn","Ngọc","Uyển","Dương","Tâm","Nguyệt","Phan","Nhã","Sương","Dương","Hương","Nhi","Phạm","Thảo","Hồng","Phạm","Thu","Ngọc","Văn","Yến","Phượng","Nghiêm","Mỹ","Vân","Doãn","Kim","Ánh"],
+                male: ["Minh","Duc","Hung","Tuan","Hieu","Quan","Bao","Khoa","Nam","Long","Phuc","Trung","Huy","Dung","Son","Nguyễn","Minh","Nghĩa","Phạm","Nhật","Quang","Tạ","Nam","Thanh","Nguyễn","Nhật","Hòa","Vũ","Bình","Minh","Chung","Hiếu","Nghĩa","Trang","Ðức","Khang","Bùi","Ðại","Dương","An","Thế","Sơn","Nguyễn","Trường","Kỳ","","Vũ","Anh","Quân","Vưu","Ðình","Phú","Huỳnh","Cao","Minh","Nghiêm","Thanh","Huy","Bạch","Công","Hào","Đàm","Vĩnh","Luân","Mạc","Minh","Huấn","Phan","Huy","Anh","Bùi","Thanh","Phi","Đỗ","Thanh","Hậu","","Mạc","Chí","Giang","Trịnh","Hoàng","Phát","Tôn","Ðức","Tuệ","Ân","Vĩnh","Luân","Hồ","Ðức","Thọ","Đặng","Gia","Huy","Lê","Viễn","Phương","Huỳnh","Ðình","Sang","Phạm","Hữu","Tài","Phùng","Minh","Thông","","Lâm","Hữu","Ðạt","Nguyễn","Triệu","Thái","Thái","Phước","An","Bùi","Trung","Dũng","Đặng","Thế","Hùng","Vĩnh","Tấn","Trương","Hồ","Nhật","Dũng","Trầm","Long","Vịnh","Uất","Hữu","Khanh","Nguyễn","Ðức","Siêu","","Tô","Hiếu","Nghĩa","Phó","Ðình","Phú","Nguyễn","Thế","Trung","Đặng","Anh","Khoa","Nguyễn","Hùng","Cường","Đỗ","Gia","Phúc","Hoàng","Minh","Tân","Vương","Vinh","Diệu","Phạm","Hữu","Lễ","Liễu","Ðông","Dương"],
+                last: ["Nguyen","Tran","Le","Pham","Hoang","Vo","Do","Bui","Dang","Lam","Ngo","Duong","Ly","Ha","Truong","Dinh"]
+            }
+        };
 
         let generatedUsernames = new Set();
         let currentUsernameList = [];
         let currentEmailList = [];
         let currentUrlList = [];
+
+        // Initialize Region Tags
+        const regionKeys = Object.keys(nameData);
+        const activeRegions = new Set(["English"]); // Default
+
+        function initRegionTags() {
+            const container = document.getElementById('regionTags');
+            regionKeys.forEach(region => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'region-tag' + (region === 'English' ? ' active' : '');
+                btn.textContent = region;
+                
+                btn.addEventListener('click', () => {
+                    if (activeRegions.has(region)) {
+                        // Prevent deselecting the last one
+                        if (activeRegions.size === 1) return;
+                        activeRegions.delete(region);
+                        btn.classList.remove('active');
+                    } else {
+                        activeRegions.add(region);
+                        btn.classList.add('active');
+                    }
+                });
+                container.appendChild(btn);
+            });
+        }
 
         function toggleTheme() {
             const body = document.body;
@@ -610,26 +768,32 @@
 
             for (let i = 0; i < amount; i++) {
                 let first = "";
+                let last = "";
                 
-                // Gender Logic
+                // 1. Pick a Random Region from Active Set
+                const regionArray = Array.from(activeRegions);
+                const randomRegion = regionArray[Math.floor(Math.random() * regionArray.length)];
+                const data = nameData[randomRegion];
+
+                // 2. Gender Logic
                 if (selectedGender === 'male') {
-                    first = maleNames[Math.floor(Math.random() * maleNames.length)];
+                    first = data.male[Math.floor(Math.random() * data.male.length)];
                 } else if (selectedGender === 'female') {
-                    first = femaleNames[Math.floor(Math.random() * femaleNames.length)];
+                    first = data.female[Math.floor(Math.random() * data.female.length)];
                 } else {
-                    // Randomly choose between male or female list if "All"
                     const isMale = Math.random() > 0.5;
                     if (isMale) {
-                        first = maleNames[Math.floor(Math.random() * maleNames.length)];
+                        first = data.male[Math.floor(Math.random() * data.male.length)];
                     } else {
-                        first = femaleNames[Math.floor(Math.random() * femaleNames.length)];
+                        first = data.female[Math.floor(Math.random() * data.female.length)];
                     }
                 }
-
-                const last = lastNames[Math.floor(Math.random() * lastNames.length)];
+                
+                last = data.last[Math.floor(Math.random() * data.last.length)];
                 const fullName = `${first} ${last}`;
                 
-                // Pick a random emoji (kept for logic consistency, not used in UI)
+                // Emoji list (not used in UI but kept for logic consistency)
+                const avatarEmojis = ["🦊", "🦁", "🐯", "🐸", "🦄", "🐙", "🦋", "🐞"];
                 const emoji = avatarEmojis[Math.floor(Math.random() * avatarEmojis.length)];
                 
                 let username = "";
@@ -667,7 +831,7 @@
 
                 card.innerHTML = `
                     <div class="fields">
-                        <!-- Full Name Field Item (Moved here as requested) -->
+                        <!-- Full Name Field Item -->
                         <div class="field-item">
                             <div class="f-content" onclick="copyToClipboard('${fullName}')" title="Click to copy Full Name">
                                 <i class="fa-brands fa-facebook f-icon"></i>
@@ -761,7 +925,10 @@
         }
 
         // Initialize
-        window.onload = generateData;
+        window.onload = function() {
+            initRegionTags();
+            generateData();
+        };
     </script>
 </body>
 </html>
