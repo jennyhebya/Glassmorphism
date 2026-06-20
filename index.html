@@ -700,7 +700,7 @@
     <div class="container">
         <header>
             <div class="header-badge">
-                <i class="fa-solid fa-bolt"></i> Premium Edition
+                <i class="fa-duotone fa-regular fa-star"></i> Premium Edition
             </div>
             <h1>Random <span>Name Generator</span></h1>
             <p class="subtitle">Buat profil digital realistis secara instan dengan data dari 12 negara berbeda.</p>
@@ -724,7 +724,7 @@
                     <div class="separator"></div>
 
                     <div class="input-wrapper">
-                        <i class="fa-solid fa-users-viewfinder"></i>
+                        <i class="fa-duotone fa-regular fa-users-viewfinder"></i>
                         <input type="number" id="amount" value="5" min="1" max="50" placeholder="Jumlah">
                     </div>
                 </div>
@@ -741,27 +741,27 @@
                 <!-- Bottom Row: Actions -->
                 <div class="controls-actions">
                     <button class="btn btn-generate" onclick="generateData()">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
+                        <i class="fa-duotone fa-light fa-wand-magic-sparkles"></i> Generate
                     </button>
 
                     <button class="btn btn-action" onclick="copyAllUsernames()">
-                        <i class="fa-solid fa-at"></i> Usernames
+                        <i class="fa-duotone fa-regular fa-user"></i> Usernames
                     </button>
                     <button class="btn btn-action" onclick="copyAllEmails()">
-                        <i class="fa-solid fa-envelope"></i> Emails
+                        <i class="fa-duotone fa-light fa-envelope"></i> Emails
                     </button>
                     <button class="btn btn-action url-action" onclick="copyAllUrls()">
-                        <i class="fa-solid fa-link"></i> URLs
+                        <i class="fa-duotone fa-light fa-link"></i> URLs
                     </button>
                 </div>
             </div>
         </header>
 
         <div class="tags">
-            <div class="tag"><i class="fa-solid fa-database"></i> 12 Regions</div>
-            <div class="tag"><i class="fa-solid fa-fingerprint"></i> Unique</div>
-            <div class="tag"><i class="fa-solid fa-shield-halved"></i> Anti-Duplicate</div>
-            <div class="tag" id="counterDisplay"><i class="fa-solid fa-bolt"></i> Ready</div>
+            <div class="tag"><i class="fa-notdog-duo fa-solid fa-database"></i> 12 Regions</div>
+            <div class="tag"><i class="fa-duotone fa-solid fa-fingerprint"></i> Unique</div>
+            <div class="tag"><i class="fa-regular fa-clone"></i> Anti-Duplicate</div>
+            <div class="tag" id="counterDisplay"><i class="fa-light fa-envelope-circle-check"></i> Ready</div>
         </div>
 
         <main class="grid" id="cardGrid">
@@ -952,8 +952,8 @@
                 }
 
                 const email = `${username}@Greysyaa.io`
-                const profileUrl = `https://n2n.io/u/${username}`;
-                const password = "N2n@" + first + Math.floor(Math.random() * 9000 + 1000) + "!";
+                const profileUrl = `https://mail.n2n.io/m/${username}`;
+                const password = "n2n@" + first + Math.floor(Math.random() * 9000 + 1000) + "!";
 
                 currentUsernameList.push(username);
                 currentEmailList.push(email);
@@ -979,21 +979,21 @@
                         </div>
                         <div class="field-item">
                             <div class="f-content" onclick="copyText('${username}')">
-                                <i class="fa-solid fa-at f-icon"></i>
+                                <i class="fa-regular fa-user"></i>
                                 <span class="f-text user">@${username}</span>
                             </div>
                             <button class="copy-small" onclick="copyText('${username}')"><i class="fa-regular fa-copy"></i></button>
                         </div>
                         <div class="field-item">
                             <div class="f-content" onclick="copyText('${email}')">
-                                <i class="fa-solid fa-envelope f-icon"></i>
+                                <i class="fa-solid fa-envelope"></i>
                                 <span class="f-text email">${email}</span>
                             </div>
                             <button class="copy-small" onclick="copyText('${email}')"><i class="fa-regular fa-copy"></i></button>
                         </div>
                         <div class="field-item">
                             <div class="f-content" onclick="copyText('${password.replace(/'/g, "\\'")}')">
-                                <i class="fa-solid fa-lock f-icon"></i>
+                                <i class="fa-solid fa-key"></i>
                                 <span class="f-text email">${password}</span>
                             </div>
                             <button class="copy-small" onclick="copyText('${password.replace(/'/g, "\\'")}')"><i class="fa-regular fa-copy"></i></button>
