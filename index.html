@@ -354,8 +354,8 @@
 
 <nav class="topbar">
     <div class="logo">
-        <div class="logo-icon">N</div>
-        NameForge <span class="logo-ver">V2</span>
+        <div class="logo-icon">N-G</div>
+        NameForge Greysyaa<span class="logo-ver">V2</span>
     </div>
     <div class="topbar-actions">
         <button class="tb-btn" onclick="toggleTheme()" title="Ganti Tema" id="themeBtn">
@@ -367,19 +367,19 @@
 <div class="wrap">
     <section class="hero">
         <h1>Random <em>Name Generator</em></h1>
-        <p>Generate profil identitas digital realistis dari 12 negara dalam satu klik.</p>
+        <p>Generate realistic digital identity profiles from 12 countries in one click.</p>
     </section>
 
     <div class="cpanel">
         <div class="crow">
-            <span class="crow-label">Gender & Jumlah</span>
+            <span class="crow-label">Gender & Number</span>
             <div class="gpills">
                 <input type="radio" id="g-all" name="gender" value="all" class="gr" checked>
-                <label for="g-all" class="gl">Semua</label>
+                <label for="g-all" class="gl">All</label>
                 <input type="radio" id="g-male" name="gender" value="male" class="gr">
-                <label for="g-male" class="gl">Pria</label>
+                <label for="g-male" class="gl">Male</label>
                 <input type="radio" id="g-female" name="gender" value="female" class="gr">
-                <label for="g-female" class="gl">Wanita</label>
+                <label for="g-female" class="gl">Female</label>
             </div>
             <div class="numwrap">
                 <i class="fa-solid fa-hashtag"></i>
@@ -388,12 +388,12 @@
         </div>
 
         <div class="crow">
-            <span class="crow-label">Region / Negara Asal</span>
+            <span class="crow-label">Region / Country of Origin</span>
             <div class="rtags" id="regionTags"></div>
         </div>
 
         <div class="crow" style="margin-bottom:0">
-            <span class="crow-label">Aksi</span>
+            <span class="crow-label">Action</span>
             <div class="btns">
                 <button class="btn btn-gen" onclick="generateData()">
                     <i class="fa-solid fa-bolt"></i> Generate
@@ -415,14 +415,14 @@
         <div class="stat"><i class="fa-solid fa-globe ic-r"></i> 12 Regions</div>
         <div class="stat"><i class="fa-solid fa-fingerprint ic-g"></i> Unique</div>
         <div class="stat"><i class="fa-solid fa-shield-halved ic-a"></i> Anti-Duplikat</div>
-        <div class="stat" id="counterStat"><i class="fa-solid fa-circle-check ic-b"></i> Siap</div>
+        <div class="stat" id="counterStat"><i class="fa-solid fa-circle-check ic-b"></i> Ready</div>
     </div>
 
     <main class="grid" id="cardGrid">
         <div class="empty" style="grid-column:1/-1">
             <i class="fa-solid fa-users"></i>
-            <p>Belum ada data yang di-generate</p>
-            <span>Klik tombol Generate untuk memulai</span>
+            <p>No data has been generated yet</p>
+            <span>Click the Generate button to start</span>
         </div>
     </main>
 </div>
