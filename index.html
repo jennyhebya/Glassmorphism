@@ -545,7 +545,7 @@ function genUsername(first, last) {
         () => f + l + Math.floor(Math.random() * 999),
         () => f + "." + l + Math.floor(Math.random() * 99),
         () => f + "_" + l + Math.floor(Math.random() * 999),
-        () => f + Math.floor(Math.random() * 9999),
+        () => l + "_" + f + Math.floor(Math.random() * 999),
         () => l + "." + f + Math.floor(Math.random() * 99),
         () => f + l.substring(0, 3) + Math.floor(Math.random() * 999),
     ];
