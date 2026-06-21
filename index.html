@@ -538,22 +538,54 @@ function initRegionTags() {
 
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
+const usedUsernames = new Set(); // pastikan ini ada di luar fungsi
+
+// Helper untuk generate random string (huruf)
+function randomString(length = 3) {
+    const chars = 'abcdefghijklmnopqrstuvwxyz';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return result;
+}
+
+// Fungsi utama
 function genUsername(first, last) {
     const f = first.toLowerCase().replace(/[^a-z]/g, "");
     const l = last.toLowerCase().replace(/[^a-z]/g, "");
+
     const patterns = [
+        // Pattern dengan random number saja (sudah ada)
         () => f + l + Math.floor(Math.random() * 999),
         () => f + "." + l + Math.floor(Math.random() * 99),
         () => f + "_" + l + Math.floor(Math.random() * 999),
         () => l + "_" + f + Math.floor(Math.random() * 999),
         () => l + "." + f + Math.floor(Math.random() * 99),
-        () => f + l.substring(0, 3) + Math.floor(Math.random() * 999),
+        () => f + Math.floor(Math.random() * 999) + "_" + l,
+        () => f + l + randomString(4),
+        () => f + "." + l + randomString(3),
+        () => f + "_" + l + randomString(3),
+        () => l + "_" + f + randomString(3),
+        () => f + randomString(3) + "_" + l,
+        () => f + randomString(4) + Math.floor(Math.random() * 99),
+        () => l + randomString(3) + f,
+        () => f + randomString(3) + l + Math.floor(Math.random() * 99), // kombinasi teks + angka
     ];
+
+    // Coba sampai 20 kali
     for (let i = 0; i < 20; i++) {
-        const u = pick(patterns)();
-        if (!usedUsernames.has(u)) { usedUsernames.add(u); return u; }
+        const generator = patterns[Math.floor(Math.random() * patterns.length)];
+        const u = generator();
+        
+        if (!usedUsernames.has(u)) {
+            usedUsernames.add(u);
+            return u;
+        }
     }
-    const fallback = f + l + Math.floor(Math.random() * 99999);
+
+    // Fallback
+    const fallback = f + l + randomString(3) + Math.floor(Math.random() * 99);
     usedUsernames.add(fallback);
     return fallback;
 }
