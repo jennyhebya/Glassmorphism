@@ -642,7 +642,7 @@ function renderCards() {
                 <div class="avatar" style="background:${color}">${initials}</div>
                 <div class="card-head-text">
                     <div class="card-name" onclick="copyText('${d.first} ${d.last}')" title="Click to copy nama">${d.first} ${d.last}</div>
-                    <div class="card-region"><i class="fa-solid fa-location-dot"></i> ${flag} ${d.region} &middot; ${d.gender === "male" ? "Pria" : "Wanita"}</div>
+                    <div class="card-region"><i class="fa-solid fa-location-dot"></i> ${flag} ${d.region} &middot; ${d.gender === "male" ? "Male" : "Female"}</div>
                 </div>
                 <div class="card-num">#${String(i + 1).padStart(2, "0")}</div>
             </div>
