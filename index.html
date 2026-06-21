@@ -63,7 +63,7 @@
             transition:background .45s,color .3s;
         }
 
-        /* ── Ambient ── */
+        /* Ambient blobs */
         .amb{position:fixed;border-radius:50%;filter:blur(130px);z-index:0;pointer-events:none}
         .amb-a{top:-18%;right:-12%;width:550px;height:550px;background:radial-gradient(circle,rgba(232,85,61,.13),transparent 70%);animation:ad1 22s ease-in-out infinite alternate}
         .amb-b{bottom:-14%;left:-8%;width:480px;height:480px;background:radial-gradient(circle,rgba(240,160,48,.09),transparent 70%);animation:ad2 28s ease-in-out infinite alternate}
@@ -78,7 +78,7 @@
             background-size:40px 40px;
         }
 
-        /* ── Top Bar ── */
+        /* Top Bar */
         .topbar{
             position:sticky;top:0;z-index:100;
             display:flex;align-items:center;justify-content:space-between;
@@ -105,16 +105,16 @@
         }
         .tb-btn:hover{color:var(--t1);border-color:var(--border-h);background:var(--surface-2);transform:translateY(-1px)}
 
-        /* ── Main Container ── */
+        /* Main Container */
         .wrap{max-width:1280px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:1}
 
-        /* ── Hero ── */
+        /* Hero */
         .hero{text-align:center;margin-bottom:36px;padding-top:16px}
         .hero h1{font-size:clamp(2rem,4.5vw,2.8rem);font-weight:700;letter-spacing:-1.2px;line-height:1.12;margin-bottom:10px}
         .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .hero p{color:var(--t3);font-size:.95rem;max-width:440px;margin:0 auto;line-height:1.55}
 
-        /* ── Control Panel ── */
+        /* Control Panel */
         .cpanel{
             background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
             border:1px solid var(--border);border-radius:var(--r-lg);
@@ -191,7 +191,7 @@
         .btn-sec.mail:hover{color:var(--green)}
         .btn-sec.user:hover{color:var(--blue)}
 
-        /* ── Stats Strip ── */
+        /* Stats Strip */
         .stats{display:flex;justify-content:center;gap:20px;margin-bottom:36px;flex-wrap:wrap}
         .stat{
             display:flex;align-items:center;gap:7px;
@@ -203,10 +203,10 @@
         .stat .ic-a{color:var(--accent)}
         .stat .ic-b{color:var(--blue)}
 
-        /* ── Grid ── */
+        /* Grid */
         .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
 
-        /* ── Card V2 ── */
+        /* Card */
         .card{
             background:var(--surface);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
             border:1px solid var(--border);border-radius:var(--r-lg);
@@ -292,7 +292,7 @@
         .cf:hover .cf-copy{opacity:1;transform:translateX(0)}
         .cf-copy:hover{color:var(--primary);background:rgba(232,85,61,.1)}
 
-        /* ── Toast ── */
+        /* Toast */
         .toast{
             position:fixed;bottom:28px;left:50%;
             transform:translateX(-50%) translateY(14px);
@@ -303,17 +303,18 @@
             opacity:0;pointer-events:none;
             transition:all .35s cubic-bezier(.175,.885,.32,1.275);
             display:flex;align-items:center;gap:8px;
+            max-width:90vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
         }
         .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-        .toast i{color:var(--primary)}
+        .toast i{color:var(--primary);flex-shrink:0}
 
-        /* ── Empty State ── */
+        /* Empty State */
         .empty{text-align:center;padding:80px 20px;color:var(--t3)}
         .empty i{font-size:2.5rem;margin-bottom:16px;display:block;color:var(--t4)}
         .empty p{font-size:.95rem;font-weight:500}
         .empty span{font-size:.8rem;color:var(--t4);margin-top:6px;display:block}
 
-        /* ── Responsive ── */
+        /* Responsive */
         @media(max-width:768px){
             .wrap{padding:20px 14px 60px}
             .hero{padding-top:8px}
@@ -432,9 +433,12 @@
 </div>
 
 <script>
+/* ═══════════════════════════════════════════════
+   DATA NAMA PER REGION
+   ═══════════════════════════════════════════════ */
 const nameData = {
     "English": {
-        female: ["Olivia","Amelia","Isla","Kristina","Grace","Emily","Ella","Freya","Chloe","Natasha","Lily","Hannah","Charlotte","Harper","Evelyn","Abigail","Sienna","Poppy","Esme","Willow","Lesley","Taylor","Sheryl","April","Beverly","Caitlin","Florence","Dennis","Billie","Alexander"],
+        female: ["Olivia","Amelia","Isla","Kristina","Grace","Emily","Ella","Freya","Chloe","Natasha","Lily","Hannah","Charlotte","Harper","Evelyn","Abigail","Sienna","Poppy","Esme","Willow","Lesley","Taylor","Sheryl","April","Beverly","Caitlin","Florence","Dennis","Billie","Alexandra"],
         male: ["James","Oliver","William","Henry","Thomas","George","Arthur","Noah","Leo","Oscar","Charlie","Jack","Harry","Freddie","Theodore","Finlay","Lucas","Alfie","Mason","Ethan","Calderon","Newman","Porter","Charles","Benjamin","Cory","Johnston","Jeffery","Paul","Randall"],
         last: ["Smith","Jones","Taylor","Brown","Williams","Wilson","Johnson","Davies","Evans","Thomas","Roberts","Walker","Wright","Thompson","White","Edwards","Hughes","Green","Hall"]
     },
@@ -450,12 +454,12 @@ const nameData = {
     },
     "German": {
         female: ["Marita","Waltraut","Jana","Vanessa","Marianne","Kathleen","Elke","Luzie","Anita","Karola","Margrit","Wilma","Ulla","Siegrid","Carina","Margarethe","Susanna","Margret","Helene","Waltraud","Sabine","Gaby","Reinhilde","Brunhilde","Joanna","Martina","Theresa","Christa","Ortrud","Ewa","Conny","Adele","Roswita","Kristina","Sibylle","Brigitta","Ida","Ingeburg","Irmhild","Helma","Isabella","Denise","Margit","Kunigunde","Therese","Sabrina","Lina","Heidi","Cornelissen"],
-        male: ["Lukas","Leon","Max","Felix","Paul","Jonas","Finn","Elias","Noah","Ben","Oskar","Henrik","Moritz","Niklas","Tim","Jan","Benjamin","Simon","Philip","Dieter","Ulrich","Bernhard","Malte","Erik","Juergen","Hubertus","Victor","Pascal","Dominic","Arnd","Heinz","Gerrit","Gerald","Jens","Toni","Berndt","Otto","Albert","Kurt","Daniel","Johann","Raimund","Waldemar","Vladimir","Felix","Adam","Hinrich","Aloys"],
+        male: ["Lukas","Leon","Max","Felix","Paul","Jonas","Finn","Elias","Noah","Ben","Oskar","Henrik","Moritz","Niklas","Tim","Jan","Benjamin","Simon","Philip","Dieter","Ulrich","Bernhard","Malte","Erik","Juergen","Hubertus","Victor","Pascal","Dominic","Arnd","Heinz","Gerrit","Gerald","Jens","Toni","Berndt","Otto","Albert","Kurt","Daniel","Johann","Raimund","Waldemar","Vladimir","Adam","Hinrich","Aloys"],
         last: ["Muller","Schmidt","Schneider","Fischer","Weber","Meyer","Wagner","Becker","Hoffmann","Koch","Richter","Wolf","Klein","Schroeder","Neumann","Schwarz"]
     },
     "Italian": {
         female: ["Sofia","Giulia","Aurora","Ginevra","Alice","Beatrice","Emma","Chiara","Valentina","Lucia","Bianca","Elisa","Francesca","Alessia","Anna","Angelica","Morena","Ernestina","Iris","Angelina","Aida","Emanuela","Gianna","Rossella","Onorina","Cinzia","Aurora","Pierangela","Concettina","Rosella","Anastasia","Deborah","Giada","Nunzia","Federici","Fernanda","Lucrezia","Teresina","Helga","Girolama"],
-        male: ["Leonardo","Francesco","Alessandro","Lorenzo","Matteo","Andrea","Gabriele","Riccardo","Tommaso","Edoardo","Nicolo","Luca","Marco","Davide","Alfredo","Diego","Federico","Christian","Richard","Bernardo","Paolo","Samuele","Lucio","Alfonso","Valerio","Arturo","Adelmo","Gesuino","Carlo","Renzo","Gaetano","Silvio","Stefan","Massimiliano","Andrea","Lino","Leopoldo","Goffredo","Gianluigi","Santino"],
+        male: ["Leonardo","Francesco","Alessandro","Lorenzo","Matteo","Andrea","Gabriele","Riccardo","Tommaso","Edoardo","Nicolo","Luca","Marco","Davide","Alfredo","Diego","Federico","Christian","Richard","Bernardo","Paolo","Samuele","Lucio","Alfonso","Valerio","Arturo","Adelmo","Gesuino","Carlo","Renzo","Gaetano","Silvio","Stefan","Massimiliano","Lino","Leopoldo","Goffredo","Gianluigi","Santino"],
         last: ["Russo","Esposito","Ricci","Romano","Gallo","Conti","Mancini","Lombardi","Moretti","Marino","Colombo","Ferrari","Bianchi","Rossi","Bruno"]
     },
     "Indonesia": {
@@ -465,7 +469,7 @@ const nameData = {
     },
     "Japan": {
         female: ["Mei","Yuna","Mina","Nari","Sora","Hana","Riko","Sakura","Hikari","Sana","Akiko","Keiko","Minji","Jisoo","Hyejin","Suji","Ryoko","Natsuko","Chino","Fuyume","Harumi","Inaho","Akagi","Yura","Katayama","Morikawa","Yukika","Tamai","Mamiko","Yasutake","Kudou","Kiya","Uno","Yumia","Yamada","Isuzu","Utagawa","Rai","Makiko","Yoshizawa","Wakako","Asaka","Nariko","Kiwa","Erena","Kawashima","Yukiyo","Fumi","Hokama","Shizue","Aishun","Onaga","Asuka","Senri","Tsugi"],
-        male: ["Kenji","Takumi","Haruto","Satoshi","Daichi","Minho","Joon","Hyun","Seung","Jae","Yuki","Ren","Taro","Akio","Riku","Natsuki","Naomi","Hajime","Jun","Tomomi","Ryuko","Kaname","Teru","Mikami","Shinobu","Riku","Keikain","Rei","Hiyori","Matsui","Kyoya","Ichihara","Masami","Shigeri","Rin","Yuuma","Iori","Yogi","Matsubara","Hiromi","Akemi","Misao","Akiho","Higa","Horie","Haruichi","Saionji","Ouji","Ayumu","Suga","Michi","Otani","Takemi","Kamiya","Fujimoto","Nagisa","Maki","Iori"],
+        male: ["Kenji","Takumi","Haruto","Satoshi","Daichi","Minho","Joon","Hyun","Seung","Jae","Yuki","Ren","Taro","Akio","Riku","Natsuki","Naomi","Hajime","Jun","Tomomi","Ryuko","Kaname","Teru","Mikami","Shinobu","Keikain","Rei","Hiyori","Matsui","Kyoya","Ichihara","Masami","Shigeri","Rin","Yuuma","Iori","Yogi","Matsubara","Hiromi","Akemi","Misao","Akiho","Higa","Horie","Haruichi","Saionji","Ouji","Ayumu","Suga","Michi","Otani","Takemi","Kamiya","Fujimoto","Nagisa","Maki"],
         last: ["Yamada","Tanaka","Suzuki","Sato","Kobayashi","Watanabe","Ito","Nakamura","Kato","Yoshida","Kim","Park","Choi","Jung","Kang","Cho"]
     },
     "Eastern European": {
@@ -474,28 +478,30 @@ const nameData = {
         last: ["Novak","Svoboda","Novotny","Kucera","Vesely","Horak","Kral","Prochazka","Blaha","Kadlec","Kowalski","Nowak","Wisniewski","Wojcik","Kowalczyk"]
     },
     "Portuguese": {
-        female: ["Maria","Ana","Beatriz","Carolina","Diana","Francisca","Ines","Leonor","Margarida","Matilde","Rita","Sofia","Teresa","Clara","Helena","Elsa","Alice","Monica","Lena","Dora","Dalila","Helena","Alexandra","Daniela","Eugenia","Natália","Célia","Isabel","Sílvia","Bruna","Magda","Angela","Rute","Artur","Adelaide","Fatima","Zélia","Andreia","Mária","Cristiana"],
-        male: ["Afonso","Bernardo","Diogo","Francisco","Guilherme","Henrique","Joao","Leonardo","Martim","Miguel","Pedro","Rafael","Santiago","Tiago","Joel","Sandro","Rafael","Adelino","Marta","Edite","Octávio","Baltazar","Nelson","Mario","Roberto","Daniel","Eugenio","Virgílio","Ernesto","Alex","Carlos","Gustavo","Leandro","Valentim","Alexandre","David","Hélio","Marcos","Paulo","Rui","Mateus"],
+        female: ["Maria","Ana","Beatriz","Carolina","Diana","Francisca","Ines","Leonor","Margarida","Matilde","Rita","Sofia","Teresa","Clara","Helena","Elsa","Alice","Monica","Lena","Dora","Dalila","Alexandra","Daniela","Eugenia","Natália","Célia","Isabel","Sílvia","Bruna","Magda","Angela","Rute","Adelaide","Fatima","Zélia","Andreia","Mária","Cristiana"],
+        male: ["Afonso","Bernardo","Diogo","Francisco","Guilherme","Henrique","Joao","Leonardo","Martim","Miguel","Pedro","Rafael","Santiago","Tiago","Joel","Sandro","Adelino","Edite","Octávio","Baltazar","Nelson","Mario","Roberto","Daniel","Eugenio","Virgílio","Ernesto","Alex","Carlos","Gustavo","Leandro","Valentim","Alexandre","David","Hélio","Marcos","Paulo","Rui","Mateus"],
         last: ["Silva","Santos","Oliveira","Pereira","Costa","Ferreira","Rodrigues","Almeida","Lima","Araujo","Sousa","Carvalho","Gomes","Ribeiro","Martins"]
     },
     "Vietnamese": {
-        female: ["Anh","Linh","Hanh","Thuy","Mai","Lan","Huong","Trang","Ngoc","Phuong","Khanh","Diem","Vy","Truc","Nhi","Tuyet","Khuê","Quế","Vân","Thu","Phượng","Thanh","Nhàn","Như","Thục","Bích","Thủy","Liên","Diệu","Nga","Quỳnh","Huệ","Loan","Giang","Dung","Yến","Hồng","Xuân","Tường","Uyên","Sương","Hương","Nhã","Mỹ","Kim","Ánh"],
-        male: ["Minh","Duc","Hung","Tuan","Hieu","Quan","Bao","Khoa","Nam","Long","Phuc","Trung","Huy","Son","Nghĩa","Nhật","Thanh","Hòa","Bình","Hiếu","Đức","Khang","Đại","Dương","An","Thế","Sơn","Trường","Kỳ","Quân","Phú","Cao","Công","Hào","Vĩnh","Luân","Huấn","Phi","Hậu","Giang","Thái","Phước","Dũng","Hùng","Tấn","Dũng","Long","Khanh","Siêu"],
+        female: ["Anh","Linh","Hanh","Thuy","Mai","Lan","Huong","Trang","Ngoc","Phuong","Khanh","Diem","Vy","Truc","Nhi","Tuyet","Khuê","Quế","Vân","Thu","Phượng","Thanh","Nhàn","Như","Thục","Bích","Thủy","Liên","Diệu","Nga","Quỳnh","Huệ","Loan","Giang","Dung","Yến","Hồng","Xuân","Tường","Uyên","Sương","Nhã","Mỹ","Kim","Ánh"],
+        male: ["Minh","Duc","Hung","Tuan","Hieu","Quan","Bao","Khoa","Nam","Long","Phuc","Trung","Huy","Son","Nghĩa","Nhật","Thanh","Hòa","Bình","Hiếu","Đức","Khang","Đại","Dương","An","Thế","Sơn","Trường","Kỳ","Quân","Phú","Cao","Công","Hào","Vĩnh","Luân","Huấn","Phi","Hậu","Giang","Thái","Phước","Dũng","Hùng","Tấn","Khanh","Siêu"],
         last: ["Nguyen","Tran","Le","Pham","Hoang","Huynh","Phan","Vu","Vo","Dang","Bui","Do","Ho","Ngo","Ly"]
     },
     "Korean": {
-        female: ["Jisoo","Rose","Jennie","Lisa","Minji","Hanni","Haerin","Hyein","Danielle","Yuna","Sana","Momo","Mina","Chaeyoung","Tzuyu","Nayeon","Jeongyeon","Jihyo","Dahyun","Chaeyoung","IU","Suzy","Seolhyun","Hani","Solar","Moonbyul","Wheein","Hwasa","Yeri","Joy","Seulgi","Irene","Wendy","Eunha","Yuju","SinB","Umji","Sowon","Miju","Yeji","Ryujin","Yuna","Chaeryeong","Lia","Yeji","Karina","Winter","Giselle","Ningning","Sakura","Kazuha","Yunjin","Chaewon","Eunchae","Minju","Wonyoung","Yujin","Leeseo","Hyewon","Nako","Hitomi","Yuri","Yena","Eunbi"],
-        male: ["Jungkook","Taehyung","Jimin","Suga","J-Hope","RM","Jin","Namjoon","Yoongi","Hoseok","Baekhyun","Chanyeol","D.O.","Kai","Sehun","Suho","Xiumin","Chen","Lay","Minho","Jisung","Chan","Changbin","Hyunjin","Felix","Seungmin","Jeongin","Han","Lee Know","Taeyong","Jaehyun","Mark","Haechan","Jeno","Jaemin","Yangyang","Xiaojun","Hendery","Ten","Johnny","Yuta","Doyoung","Taeil","Jungwoo","Shotaro","Sungchan","Eunseok","Sion","Wonbin","Sohee","Anton","Sungho","Riwoo","Jaehyun","Taesan","Leehan","Woonhak","Kyungmin","Matthew","Gunwook","Jiwoong","Ricky","Gyuvin","Yujin","Hanbin","Gaeul","Rei","Liz","Leeseo"],
+        female: ["Jisoo","Rose","Jennie","Lisa","Minji","Hanni","Haerin","Hyein","Danielle","Yuna","Sana","Momo","Mina","Chaeyoung","Tzuyu","Nayeon","Jeongyeon","Jihyo","Dahyun","IU","Suzy","Seolhyun","Hani","Solar","Moonbyul","Wheein","Hwasa","Yeri","Joy","Seulgi","Irene","Wendy","Eunha","Yuju","SinB","Umji","Sowon","Miju","Yeji","Ryujin","Chaeryeong","Lia","Karina","Winter","Giselle","Ningning","Sakura","Kazuha","Yunjin","Chaewon","Eunchae","Minju","Wonyoung","Yujin","Leeseo","Hyewon","Nako","Hitomi","Yuri","Yena","Eunbi"],
+        male: ["Jungkook","Taehyung","Jimin","Suga","J-Hope","RM","Jin","Namjoon","Yoongi","Hoseok","Baekhyun","Chanyeol","D.O.","Kai","Sehun","Suho","Xiumin","Chen","Lay","Minho","Jisung","Chan","Changbin","Hyunjin","Felix","Seungmin","Jeongin","Han","Lee Know","Taeyong","Jaehyun","Mark","Haechan","Jeno","Jaemin","Yangyang","Xiaojun","Hendery","Ten","Johnny","Yuta","Doyoung","Taeil","Jungwoo","Shotaro","Sungchan","Eunseok","Sion","Wonbin","Sohee","Anton","Sungho","Riwoo","Taesan","Leehan","Woonhak","Kyungmin","Matthew","Gunwook","Jiwoong","Ricky","Gyuvin","Hanbin","Gaeul","Rei","Liz"],
         last: ["Kim","Lee","Park","Choi","Jung","Kang","Cho","Yoon","Jang","Lim","Han","Oh","Seo","Shin","Ko","Ryu"]
     }
 };
 
+/* Flag emoji per region */
 const regionFlags = {
     "English":"🇬🇧","Spanish":"🇪🇸","French":"🇫🇷","German":"🇩🇪",
     "Italian":"🇮🇹","Indonesia":"🇮🇩","Japan":"🇯🇵","Eastern European":"🇵🇱",
     "Portuguese":"🇵🇹","Vietnamese":"🇻🇳","Korean":"🇰🇷"
 };
 
+/* Warna gradien avatar */
 const avatarColors = [
     "linear-gradient(135deg,#e8553d,#c74430)",
     "linear-gradient(135deg,#f0a030,#d48a18)",
@@ -509,11 +515,17 @@ const avatarColors = [
     "linear-gradient(135deg,#e879f9,#a21caf)",
 ];
 
+/* ═══════════════════════════════════════════════
+   STATE — hanya sekali deklarasi
+   ═══════════════════════════════════════════════ */
 let selectedRegions = new Set(["English"]);
 let generatedData = [];
 let usedUsernames = new Set();
 let usedEmails = new Set();
 
+/* ═══════════════════════════════════════════════
+   REGION TAGS INIT
+   ═══════════════════════════════════════════════ */
 function initRegionTags() {
     const container = document.getElementById("regionTags");
     container.innerHTML = "";
@@ -536,53 +548,68 @@ function initRegionTags() {
     });
 }
 
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+/* ═══════════════════════════════════════════════
+   HELPER FUNCTIONS
+   ═══════════════════════════════════════════════ */
+function pick(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
 
-const usedUsernames = new Set(); // pastikan ini ada di luar fungsi
-
-// Helper untuk random teks
-function randomString(length = 3) {
-    const chars = 'abcdefghijklmnopqrstuvwxyz';
-    let result = '';
+function randomString(length) {
+    length = length || 3;
+    const chars = "abcdefghijklmnopqrstuvwxyz";
+    let result = "";
     for (let i = 0; i < length; i++) {
         result += chars[Math.floor(Math.random() * chars.length)];
     }
     return result;
 }
 
-// Fungsi genUsername yang sudah diperbaiki
+/* Escape karakter berbahaya untuk atribut HTML */
+function escAttr(str) {
+    return str.replace(/&/g, "&amp;")
+              .replace(/"/g, "&quot;")
+              .replace(/'/g, "&#39;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;");
+}
+
+/* ═══════════════════════════════════════════════
+   GENERATOR FUNCTIONS
+   ═══════════════════════════════════════════════ */
 function genUsername(first, last) {
     const f = first.toLowerCase().replace(/[^a-z]/g, "");
     const l = last.toLowerCase().replace(/[^a-z]/g, "");
 
     const patterns = [
-        () => f + l + Math.floor(Math.random() * 999),
-        () => f + "." + l + Math.floor(Math.random() * 99),
-        () => f + "_" + l + Math.floor(Math.random() * 999),
-        () => l + "_" + f + Math.floor(Math.random() * 999),
-        () => l + "." + f + Math.floor(Math.random() * 99),
-        () => f + Math.floor(Math.random() * 999) + "_" + l,
-        () => f + l + randomString(4),
-        () => f + "." + l + randomString(3),
-        () => f + "_" + l + randomString(3),
-        () => l + "_" + f + randomString(3),
-        () => f + randomString(3) + "_" + l,
-        () => f + randomString(4) + Math.floor(Math.random() * 99),
-        () => l + randomString(3) + f,
-        () => f + randomString(3) + l + Math.floor(Math.random() * 99),
+        function() { return f + l + Math.floor(Math.random() * 999); },
+        function() { return f + "." + l + Math.floor(Math.random() * 99); },
+        function() { return f + "_" + l + Math.floor(Math.random() * 999); },
+        function() { return l + "_" + f + Math.floor(Math.random() * 999); },
+        function() { return l + "." + f + Math.floor(Math.random() * 99); },
+        function() { return f + Math.floor(Math.random() * 999) + "_" + l; },
+        function() { return f + l + randomString(4); },
+        function() { return f + "." + l + randomString(3); },
+        function() { return f + "_" + l + randomString(3); },
+        function() { return l + "_" + f + randomString(3); },
+        function() { return f + randomString(3) + "_" + l; },
+        function() { return f + randomString(4) + Math.floor(Math.random() * 99); },
+        function() { return l + randomString(3) + f; },
+        function() { return f + randomString(3) + l + Math.floor(Math.random() * 99); }
     ];
 
+    /* Coba hingga 30 kali agar tidak duplikat */
     for (let i = 0; i < 30; i++) {
         const generator = patterns[Math.floor(Math.random() * patterns.length)];
         const u = generator();
-       
         if (!usedUsernames.has(u)) {
             usedUsernames.add(u);
             return u;
         }
     }
 
-    const fallback = f + l + randomString(3) + Math.floor(Math.random() * 999);
+    /* Fallback: tambahkan random string panjang */
+    const fallback = f + l + randomString(6) + Math.floor(Math.random() * 9999);
     usedUsernames.add(fallback);
     return fallback;
 }
@@ -591,11 +618,12 @@ function genEmail(username) {
     const domains = ["gmail.com","yahoo.com","outlook.com","mail.n2n.io","icloud.com","hotmail.com"];
     const d = pick(domains);
     let e = username + "@" + d;
-    if (!usedEmails.has(e)) { 
-        usedEmails.add(e); 
-        return e; 
+    if (!usedEmails.has(e)) {
+        usedEmails.add(e);
+        return e;
     }
-    const e2 = username + Math.floor(Math.random()*99) + "@" + d;
+    /* Jika email sudah dipakai, tambahkan angka acak */
+    const e2 = username + Math.floor(Math.random() * 99) + "@" + d;
     usedEmails.add(e2);
     return e2;
 }
@@ -607,19 +635,28 @@ function genPassword() {
     const sym = "!@#$%&*?";
     const all = lower + upper + num + sym;
     let pw = "";
-    pw += lower[Math.floor(Math.random()*lower.length)];
-    pw += upper[Math.floor(Math.random()*upper.length)];
-    pw += num[Math.floor(Math.random()*num.length)];
-    pw += sym[Math.floor(Math.random()*sym.length)];
-    for (let i = 4; i < 14; i++) pw += all[Math.floor(Math.random()*all.length)];
-    return pw.split("").sort(() => Math.random() - 0.5).join("");
+    /* Pastikan minimal 1 dari setiap kategori */
+    pw += lower[Math.floor(Math.random() * lower.length)];
+    pw += upper[Math.floor(Math.random() * upper.length)];
+    pw += num[Math.floor(Math.random() * num.length)];
+    pw += sym[Math.floor(Math.random() * sym.length)];
+    /* Isi sisa hingga 14 karakter */
+    for (let i = 4; i < 14; i++) {
+        pw += all[Math.floor(Math.random() * all.length)];
+    }
+    /* Acak urutan karakter */
+    return pw.split("").sort(function() { return Math.random() - 0.5; }).join("");
 }
 
+/* ═══════════════════════════════════════════════
+   GENERATE DATA UTAMA
+   ═══════════════════════════════════════════════ */
 function generateData() {
     const genderVal = document.querySelector('input[name="gender"]:checked').value;
     let count = parseInt(document.getElementById("amount").value) || 5;
     count = Math.max(1, Math.min(5000, count));
 
+    /* Reset set duplikat setiap kali generate baru */
     usedUsernames.clear();
     usedEmails.clear();
     generatedData = [];
@@ -644,103 +681,180 @@ function generateData() {
         const password = genPassword();
         const url = "https://mail.n2n.io/m/" + username + ".mail.n2n.io";
 
-        generatedData.push({ first, last, gender, region, username, email, password, url });
+        generatedData.push({
+            first: first,
+            last: last,
+            gender: gender,
+            region: region,
+            username: username,
+            email: email,
+            password: password,
+            url: url
+        });
     }
 
     renderCards();
     updateCounter();
 }
 
+/* ═══════════════════════════════════════════════
+   RENDER CARDS — pakai data-index, bukan inline string
+   ═══════════════════════════════════════════════ */
 function renderCards() {
     const grid = document.getElementById("cardGrid");
+
     if (generatedData.length === 0) {
-        grid.innerHTML = `<div class="empty" style="grid-column:1/-1">
-            <i class="fa-solid fa-users"></i>
-            <p>No data has been generated yet</p>
-            <span>Click the Generate button to start</span>
-        </div>`;
+        grid.innerHTML = '<div class="empty" style="grid-column:1/-1">' +
+            '<i class="fa-solid fa-users"></i>' +
+            '<p>No data has been generated yet</p>' +
+            '<span>Click the Generate button to start</span>' +
+            '</div>';
         return;
     }
 
-    grid.innerHTML = generatedData.map((d, i) => {
+    let html = "";
+    for (let i = 0; i < generatedData.length; i++) {
+        const d = generatedData[i];
         const initials = (d.first[0] + d.last[0]).toUpperCase();
         const color = avatarColors[i % avatarColors.length];
         const flag = regionFlags[d.region] || "";
-        const delay = i * 0.06;
+        const delay = Math.min(i * 0.06, 2); /* Batas maks 2 detik delay agar tidak terlalu lama */
+        const genderLabel = d.gender === "male" ? "Male" : "Female";
 
-        return `
-        <article class="card" style="animation-delay:${delay}s" aria-label="Kartu identitas ${d.first} ${d.last}">
-            <div class="card-head">
-                <div class="avatar" style="background:${color}">${initials}</div>
-                <div class="card-head-text">
-                    <div class="card-name" onclick="copyText('${d.first} ${d.last}')" title="Click to copy nama">${d.first} ${d.last}</div>
-                    <div class="card-region"><i class="fa-solid fa-location-dot"></i> ${flag} ${d.region} &middot; ${d.gender === "male" ? "Male" : "Female"}</div>
-                </div>
-                <div class="card-num">#${String(i + 1).padStart(2, "0")}</div>
-            </div>
-            <div class="card-fields">
-                <div class="cf">
-                    <div class="cf-icon ic-user"><i class="fa-solid fa-at"></i></div>
-                    <div class="cf-text" onclick="copyText('${d.username}')" title="Click to copy">${d.username}</div>
-                    <button class="cf-copy" onclick="copyText('${d.username}')" aria-label="Salin username"><i class="fa-regular fa-copy"></i></button>
-                </div>
-                <div class="cf">
-                    <div class="cf-icon ic-mail"><i class="fa-solid fa-envelope"></i></div>
-                    <div class="cf-text" onclick="copyText('${d.email}')" title="Click to copy">${d.email}</div>
-                    <button class="cf-copy" onclick="copyText('${d.email}')" aria-label="Salin email"><i class="fa-regular fa-copy"></i></button>
-                </div>
-                <div class="cf">
-                    <div class="cf-icon ic-link"><i class="fa-solid fa-link"></i></div>
-                    <div class="cf-text" onclick="copyText('${d.url}')" title="Click to copy">${d.url}</div>
-                    <button class="cf-copy" onclick="copyText('${d.url}')" aria-label="Salin URL"><i class="fa-regular fa-copy"></i></button>
-                </div>
-                <div class="cf">
-                    <div class="cf-icon ic-lock"><i class="fa-solid fa-lock"></i></div>
-                    <div class="cf-text" onclick="copyText('${d.password}')" title="Click to copy">${d.password}</div>
-                    <button class="cf-copy" onclick="copyText('${d.password}')" aria-label="Salin password"><i class="fa-regular fa-copy"></i></button>
-                </div>
-            </div>
-        </article>`;
-    }).join("");
+        html += '<article class="card" style="animation-delay:' + delay + 's" aria-label="Kartu identitas ' + escAttr(d.first) + ' ' + escAttr(d.last) + '">' +
+            '<div class="card-head">' +
+                '<div class="avatar" style="background:' + color + '">' + escAttr(initials) + '</div>' +
+                '<div class="card-head-text">' +
+                    '<div class="card-name" data-copy="' + i + '" data-field="name" title="Click to copy nama">' + escAttr(d.first) + ' ' + escAttr(d.last) + '</div>' +
+                    '<div class="card-region"><i class="fa-solid fa-location-dot"></i> ' + flag + ' ' + escAttr(d.region) + ' &middot; ' + genderLabel + '</div>' +
+                '</div>' +
+                '<div class="card-num">#' + String(i + 1).padStart(2, "0") + '</div>' +
+            '</div>' +
+            '<div class="card-fields">' +
+                '<div class="cf">' +
+                    '<div class="cf-icon ic-user"><i class="fa-solid fa-at"></i></div>' +
+                    '<div class="cf-text" data-copy="' + i + '" data-field="username" title="Click to copy">' + escAttr(d.username) + '</div>' +
+                    '<button class="cf-copy" data-copy="' + i + '" data-field="username" aria-label="Salin username"><i class="fa-regular fa-copy"></i></button>' +
+                '</div>' +
+                '<div class="cf">' +
+                    '<div class="cf-icon ic-mail"><i class="fa-solid fa-envelope"></i></div>' +
+                    '<div class="cf-text" data-copy="' + i + '" data-field="email" title="Click to copy">' + escAttr(d.email) + '</div>' +
+                    '<button class="cf-copy" data-copy="' + i + '" data-field="email" aria-label="Salin email"><i class="fa-regular fa-copy"></i></button>' +
+                '</div>' +
+                '<div class="cf">' +
+                    '<div class="cf-icon ic-link"><i class="fa-solid fa-link"></i></div>' +
+                    '<div class="cf-text" data-copy="' + i + '" data-field="url" title="Click to copy">' + escAttr(d.url) + '</div>' +
+                    '<button class="cf-copy" data-copy="' + i + '" data-field="url" aria-label="Salin URL"><i class="fa-regular fa-copy"></i></button>' +
+                '</div>' +
+                '<div class="cf">' +
+                    '<div class="cf-icon ic-lock"><i class="fa-solid fa-lock"></i></div>' +
+                    '<div class="cf-text" data-copy="' + i + '" data-field="password" title="Click to copy">' + escAttr(d.password) + '</div>' +
+                    '<button class="cf-copy" data-copy="' + i + '" data-field="password" aria-label="Salin password"><i class="fa-regular fa-copy"></i></button>' +
+                '</div>' +
+            '</div>' +
+        '</article>';
+    }
+
+    grid.innerHTML = html;
 }
 
+/* ═══════════════════════════════════════════════
+   EVENT DELEGATION — menangani klik copy dari card
+   ═══════════════════════════════════════════════ */
+document.getElementById("cardGrid").addEventListener("click", function(e) {
+    const target = e.target.closest("[data-copy]");
+    if (!target) return;
+
+    const idx = parseInt(target.getAttribute("data-copy"));
+    const field = target.getAttribute("data-field");
+    const d = generatedData[idx];
+    if (!d) return;
+
+    let text = "";
+    if (field === "name") {
+        text = d.first + " " + d.last;
+    } else if (field === "username") {
+        text = d.username;
+    } else if (field === "email") {
+        text = d.email;
+    } else if (field === "url") {
+        text = d.url;
+    } else if (field === "password") {
+        text = d.password;
+    }
+
+    if (text) copyText(text);
+});
+
+/* ═══════════════════════════════════════════════
+   COUNTER & COPY FUNCTIONS
+   ═══════════════════════════════════════════════ */
 function updateCounter() {
     const el = document.getElementById("counterStat");
     const n = generatedData.length;
-    el.innerHTML = `<i class="fa-solid fa-circle-check ic-b"></i> ${n} Profile generated`;
+    el.innerHTML = '<i class="fa-solid fa-circle-check ic-b"></i> ' + n + ' Profile generated';
 }
 
 function copyText(text) {
-    navigator.clipboard.writeText(text).then(() => showToast("copied: " + text.substring(0, 40) + (text.length > 40 ? "..." : "")));
+    navigator.clipboard.writeText(text).then(function() {
+        var display = text.length > 45 ? text.substring(0, 45) + "..." : text;
+        showToast("copied: " + display);
+    }).catch(function() {
+        /* Fallback untuk browser yang tidak mendukung clipboard API */
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        var display = text.length > 45 ? text.substring(0, 45) + "..." : text;
+        showToast("copied: " + display);
+    });
 }
 
 function copyAllUsernames() {
     if (!generatedData.length) return showToast("No data yet!");
-    const all = generatedData.map(d => d.username).join("\n");
-    navigator.clipboard.writeText(all).then(() => showToast(generatedData.length + " Username copied!"));
+    var all = generatedData.map(function(d) { return d.username; }).join("\n");
+    navigator.clipboard.writeText(all).then(function() {
+        showToast(generatedData.length + " Username copied!");
+    });
 }
 
 function copyAllEmails() {
     if (!generatedData.length) return showToast("No data yet!");
-    const all = generatedData.map(d => d.email).join("\n");
-    navigator.clipboard.writeText(all).then(() => showToast(generatedData.length + " Email copied!"));
+    var all = generatedData.map(function(d) { return d.email; }).join("\n");
+    navigator.clipboard.writeText(all).then(function() {
+        showToast(generatedData.length + " Email copied!");
+    });
 }
 
 function copyAllUrls() {
     if (!generatedData.length) return showToast("No data yet!");
-    const all = generatedData.map(d => d.url).join("\n");
-    navigator.clipboard.writeText(all).then(() => showToast(generatedData.length + " URLs copied!"));
+    var all = generatedData.map(function(d) { return d.url; }).join("\n");
+    navigator.clipboard.writeText(all).then(function() {
+        showToast(generatedData.length + " URLs copied!");
+    });
 }
 
-let toastTimer;
+/* ═══════════════════════════════════════════════
+   TOAST NOTIFICATION
+   ═══════════════════════════════════════════════ */
+let toastTimer = null;
 function showToast(msg) {
-    const t = document.getElementById("toast");
+    var t = document.getElementById("toast");
     t.querySelector("span").textContent = msg;
     t.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() {
+        t.classList.remove("show");
+    }, 2200);
 }
 
+/* ═══════════════════════════════════════════════
+   THEME TOGGLE
+   ═══════════════════════════════════════════════ */
 function toggleTheme() {
     const body = document.body;
     const icon = document.getElementById("themeIcon");
