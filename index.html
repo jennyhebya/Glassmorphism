@@ -540,7 +540,7 @@ function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
 const usedUsernames = new Set(); // pastikan ini ada di luar fungsi
 
-// Helper untuk generate random string (huruf)
+// Helper untuk random teks
 function randomString(length = 3) {
     const chars = 'abcdefghijklmnopqrstuvwxyz';
     let result = '';
@@ -550,13 +550,12 @@ function randomString(length = 3) {
     return result;
 }
 
-// Fungsi utama
+// Fungsi genUsername yang sudah diperbaiki
 function genUsername(first, last) {
     const f = first.toLowerCase().replace(/[^a-z]/g, "");
     const l = last.toLowerCase().replace(/[^a-z]/g, "");
 
     const patterns = [
-        // Pattern dengan random number saja (sudah ada)
         () => f + l + Math.floor(Math.random() * 999),
         () => f + "." + l + Math.floor(Math.random() * 99),
         () => f + "_" + l + Math.floor(Math.random() * 999),
@@ -570,22 +569,20 @@ function genUsername(first, last) {
         () => f + randomString(3) + "_" + l,
         () => f + randomString(4) + Math.floor(Math.random() * 99),
         () => l + randomString(3) + f,
-        () => f + randomString(3) + l + Math.floor(Math.random() * 99), // kombinasi teks + angka
+        () => f + randomString(3) + l + Math.floor(Math.random() * 99),
     ];
 
-    // Coba sampai 20 kali
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 30; i++) {
         const generator = patterns[Math.floor(Math.random() * patterns.length)];
         const u = generator();
-        
+       
         if (!usedUsernames.has(u)) {
             usedUsernames.add(u);
             return u;
         }
     }
 
-    // Fallback
-    const fallback = f + l + randomString(3) + Math.floor(Math.random() * 99);
+    const fallback = f + l + randomString(3) + Math.floor(Math.random() * 999);
     usedUsernames.add(fallback);
     return fallback;
 }
@@ -593,8 +590,11 @@ function genUsername(first, last) {
 function genEmail(username) {
     const domains = ["gmail.com","yahoo.com","outlook.com","mail.n2n.io","icloud.com","hotmail.com"];
     const d = pick(domains);
-    const e = username + "@" + d;
-    if (!usedEmails.has(e)) { usedEmails.add(e); return e; }
+    let e = username + "@" + d;
+    if (!usedEmails.has(e)) { 
+        usedEmails.add(e); 
+        return e; 
+    }
     const e2 = username + Math.floor(Math.random()*99) + "@" + d;
     usedEmails.add(e2);
     return e2;
