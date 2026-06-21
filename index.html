@@ -559,7 +559,7 @@ function genUsername(first, last) {
 }
 
 function genEmail(username) {
-    const domains = ["gmail.com","yahoo.com","outlook.com","proton.me","mail.n2n.io","icloud.com","hotmail.com","fastmail.com"];
+    const domains = ["gmail.com","yahoo.com","outlook.com","mail.n2n.io","icloud.com","hotmail.com"];
     const d = pick(domains);
     const e = username + "@" + d;
     if (!usedEmails.has(e)) { usedEmails.add(e); return e; }
@@ -586,7 +586,7 @@ function genPassword() {
 function generateData() {
     const genderVal = document.querySelector('input[name="gender"]:checked').value;
     let count = parseInt(document.getElementById("amount").value) || 5;
-    count = Math.max(1, Math.min(50, count));
+    count = Math.max(1, Math.min(5000, count));
 
     usedUsernames.clear();
     usedEmails.clear();
@@ -624,8 +624,8 @@ function renderCards() {
     if (generatedData.length === 0) {
         grid.innerHTML = `<div class="empty" style="grid-column:1/-1">
             <i class="fa-solid fa-users"></i>
-            <p>Belum ada data yang di-generate</p>
-            <span>Klik tombol Generate untuk memulai</span>
+            <p>No data has been generated yet</p>
+            <span>Click the Generate button to start</span>
         </div>`;
         return;
     }
@@ -641,7 +641,7 @@ function renderCards() {
             <div class="card-head">
                 <div class="avatar" style="background:${color}">${initials}</div>
                 <div class="card-head-text">
-                    <div class="card-name" onclick="copyText('${d.first} ${d.last}')" title="Klik untuk salin nama">${d.first} ${d.last}</div>
+                    <div class="card-name" onclick="copyText('${d.first} ${d.last}')" title="Click to copy nama">${d.first} ${d.last}</div>
                     <div class="card-region"><i class="fa-solid fa-location-dot"></i> ${flag} ${d.region} &middot; ${d.gender === "male" ? "Pria" : "Wanita"}</div>
                 </div>
                 <div class="card-num">#${String(i + 1).padStart(2, "0")}</div>
@@ -649,22 +649,22 @@ function renderCards() {
             <div class="card-fields">
                 <div class="cf">
                     <div class="cf-icon ic-user"><i class="fa-solid fa-at"></i></div>
-                    <div class="cf-text" onclick="copyText('${d.username}')" title="Klik untuk salin">${d.username}</div>
+                    <div class="cf-text" onclick="copyText('${d.username}')" title="Click to copy">${d.username}</div>
                     <button class="cf-copy" onclick="copyText('${d.username}')" aria-label="Salin username"><i class="fa-regular fa-copy"></i></button>
                 </div>
                 <div class="cf">
                     <div class="cf-icon ic-mail"><i class="fa-solid fa-envelope"></i></div>
-                    <div class="cf-text" onclick="copyText('${d.email}')" title="Klik untuk salin">${d.email}</div>
+                    <div class="cf-text" onclick="copyText('${d.email}')" title="Click to copy">${d.email}</div>
                     <button class="cf-copy" onclick="copyText('${d.email}')" aria-label="Salin email"><i class="fa-regular fa-copy"></i></button>
                 </div>
                 <div class="cf">
                     <div class="cf-icon ic-link"><i class="fa-solid fa-link"></i></div>
-                    <div class="cf-text" onclick="copyText('${d.url}')" title="Klik untuk salin">${d.url}</div>
+                    <div class="cf-text" onclick="copyText('${d.url}')" title="Click to copy">${d.url}</div>
                     <button class="cf-copy" onclick="copyText('${d.url}')" aria-label="Salin URL"><i class="fa-regular fa-copy"></i></button>
                 </div>
                 <div class="cf">
                     <div class="cf-icon ic-lock"><i class="fa-solid fa-lock"></i></div>
-                    <div class="cf-text" onclick="copyText('${d.password}')" title="Klik untuk salin">${d.password}</div>
+                    <div class="cf-text" onclick="copyText('${d.password}')" title="Click to copy">${d.password}</div>
                     <button class="cf-copy" onclick="copyText('${d.password}')" aria-label="Salin password"><i class="fa-regular fa-copy"></i></button>
                 </div>
             </div>
@@ -675,29 +675,29 @@ function renderCards() {
 function updateCounter() {
     const el = document.getElementById("counterStat");
     const n = generatedData.length;
-    el.innerHTML = `<i class="fa-solid fa-circle-check ic-b"></i> ${n} profil di-generate`;
+    el.innerHTML = `<i class="fa-solid fa-circle-check ic-b"></i> ${n} Profile generated`;
 }
 
 function copyText(text) {
-    navigator.clipboard.writeText(text).then(() => showToast("Tersalin: " + text.substring(0, 40) + (text.length > 40 ? "..." : "")));
+    navigator.clipboard.writeText(text).then(() => showToast("copied: " + text.substring(0, 40) + (text.length > 40 ? "..." : "")));
 }
 
 function copyAllUsernames() {
-    if (!generatedData.length) return showToast("Belum ada data!");
+    if (!generatedData.length) return showToast("No data yet!");
     const all = generatedData.map(d => d.username).join("\n");
-    navigator.clipboard.writeText(all).then(() => showToast(generatedData.length + " username tersalin!"));
+    navigator.clipboard.writeText(all).then(() => showToast(generatedData.length + " Username copied!"));
 }
 
 function copyAllEmails() {
-    if (!generatedData.length) return showToast("Belum ada data!");
+    if (!generatedData.length) return showToast("No data yet!");
     const all = generatedData.map(d => d.email).join("\n");
-    navigator.clipboard.writeText(all).then(() => showToast(generatedData.length + " email tersalin!"));
+    navigator.clipboard.writeText(all).then(() => showToast(generatedData.length + " Email copied!"));
 }
 
 function copyAllUrls() {
-    if (!generatedData.length) return showToast("Belum ada data!");
+    if (!generatedData.length) return showToast("No data yet!");
     const all = generatedData.map(d => d.url).join("\n");
-    navigator.clipboard.writeText(all).then(() => showToast(generatedData.length + " URL tersalin!"));
+    navigator.clipboard.writeText(all).then(() => showToast(generatedData.length + " URLs copied!"));
 }
 
 let toastTimer;
