@@ -245,7 +245,7 @@
             <span class="cr-l">Jumlah Generate</span>
             <div class="nw">
                 <i class="fa-solid fa-hashtag"></i>
-                <input type="number" id="amount" value="20" min="1" max="5000">
+                <input type="number" id="amount" value="10" min="1" max="5000">
             </div>
         </div>
         <div class="cr" style="margin-bottom:0">
@@ -261,7 +261,7 @@
     </div>
 
     <div class="tfa-row">
-        <span class="tfa-label" id="tfaLabel">Mode 2FA / Auth</span>
+        <span class="tfa-label" id="tfaLabel"> 2FA / Auth</span>
         <label class="tfa-switch">
             <input type="checkbox" id="tfaToggle" onchange="toggle2FA()">
             <span class="tfa-track"></span>
@@ -340,7 +340,7 @@
                     <span class="tfa-hd-t">Key Auth</span>
                 </div>
                 <div class="tfa-input-area">
-                    <textarea class="tfa-textarea" id="tfaInput" placeholder="Paste secret key di sini...&#10;&#10;Satu key per baris. Contoh:&#10;JBSWY3DPEHPK3PXP&#10;GEZDGNBVGY3TQOJQ&#10;HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ" oninput="onTFAInput()"></textarea>
+                    <textarea class="tfa-textarea" id="tfaInput" placeholder="Paste secret key di sini..." oninput="onTFAInput()"></textarea>
                     <div class="tfa-hint"><i class="fa-solid fa-circle-info"></i> Satu Base32 secret per baris. Bisa dari Google Authenticator, Authy, dll.</div>
                 </div>
                 <div class="tfa-ft"><button class="tfa-ca ky" onclick="clearTFA()"><i class="fa-solid fa-eraser"></i> Bersihkan</button></div>
@@ -509,7 +509,7 @@ function genUsername(f, l) {
 }
 
 function genEmail(u) {
-    var d = pick(["gmail.com", "yahoo.com", "outlook.com", "mail.n2n.io", "icloud.com", "hotmail.com"]);
+    var d = pick(["mail.n2n.io"]);
     var e = u + "@" + d;
     if (!usedEmails.has(e)) { usedEmails.add(e); return e; }
     var e2 = u + Math.floor(Math.random() * 99) + "@" + d;
@@ -521,7 +521,7 @@ function genEmail(u) {
    GENERATE
    ═══════════════════════════════════════ */
 function generateData() {
-    var count = Math.max(1, Math.min(5000, parseInt(document.getElementById("amount").value) || 20));
+    var count = Math.max(1, Math.min(5000, parseInt(document.getElementById("amount").value) || 10));
     usedUsernames.clear();
     usedEmails.clear();
     generatedData = [];
