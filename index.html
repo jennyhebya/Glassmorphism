@@ -22,6 +22,7 @@
             --pu:#c084fc;--pug:rgba(192,132,252,.12);
             --or:#fb923c;--org:rgba(251,146,60,.12);
             --t1:#f0f0ec;--t2:#b8b4ae;--t3:#6e6a65;--t4:#3a3735;
+            --no-col:#9a9590;
             --mn:'JetBrains Mono',monospace;--sn:'Space Grotesk',sans-serif;
             --r:12px;--rl:16px;--rf:999px;
         }
@@ -32,6 +33,7 @@
             --pr:#d04a34;--prd:#b83d2a;--prg:rgba(208,74,52,.18);
             --acg:rgba(200,140,20,.1);--gng:rgba(16,160,100,.1);--ppg:rgba(220,80,140,.08);--pug:rgba(140,80,220,.08);--org:rgba(230,120,20,.08);
             --t1:#111110;--t2:#555250;--t3:#8a8580;--t4:#bbb5ae;
+            --no-col:#7a756f;
         }
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
@@ -73,7 +75,7 @@
         .btn-s:hover{background:var(--sf2);color:var(--t2);border-color:var(--bd)}
         .btn-s.nm:hover{color:var(--pp)}.btn-s.us:hover{color:var(--bl)}.btn-s.ml:hover{color:var(--gn)}.btn-s.ul:hover{color:var(--ac)}
 
-        .tfa-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px}
+        .tfa-toggle-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px}
         .tfa-label{font-size:.82rem;font-weight:600;color:var(--t3);transition:color .25s;user-select:none}
         .tfa-label.on{color:var(--pu)}
         .tfa-switch{position:relative;width:48px;height:26px;cursor:pointer;display:inline-block}
@@ -120,6 +122,12 @@
         .cols{display:grid;grid-template-columns:34px 1fr 28px;padding:6px 10px;border-bottom:1px solid var(--bd);flex-shrink:0;background:var(--sf)}
         .col{font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--t4);font-weight:700}
         .col:nth-child(3){text-align:right}
+        /* === NO column — lebih terang menyala === */
+        .no-col{
+            color:var(--no-col)!important;
+            text-shadow:0 0 6px rgba(192,132,252,.2);
+            font-weight:800!important;
+        }
         .bd{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--t4) transparent}
         .bd::-webkit-scrollbar{width:3px}
         .bd::-webkit-scrollbar-track{background:transparent}
@@ -128,7 +136,7 @@
         @keyframes ri{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
         .row:last-child{border-bottom:none}
         .row:hover{background:var(--sf2)}
-        .row-i{font-size:.62rem;color:var(--t4);font-weight:600;font-family:var(--mn);text-align:center;user-select:none}
+        .row-i{font-size:.62rem;color:var(--no-col);font-weight:800;font-family:var(--mn);text-align:center;user-select:none;text-shadow:0 0 6px rgba(192,132,252,.15)}
         .row-v{font-size:.8rem;color:var(--t2);font-weight:500;font-family:var(--mn);letter-spacing:-.15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;padding:7px 0;transition:color .15s;position:relative}
         .row-v:hover{color:var(--t1)}
         .row-v::after{content:"\f0c5";font-family:"Font Awesome 6 Free";font-weight:400;font-size:.55rem;color:var(--t4);margin-left:6px;opacity:0;transition:opacity .15s;vertical-align:middle}
@@ -142,7 +150,7 @@
         .empty i{font-size:1.4rem;opacity:.5}
         .empty span{font-size:.72rem;font-weight:500}
         .row.hl{background:rgba(232,85,61,.05)!important}
-        .row.hl .row-i{color:var(--pr)}
+        .row.hl .row-i{color:var(--pr)!important;text-shadow:0 0 8px rgba(232,85,61,.3)!important}
         .ft{padding:10px 11px;border-top:1px solid var(--bd);flex-shrink:0;display:flex;justify-content:center}
         .ca{padding:6px 13px;border-radius:var(--rf);border:1px solid var(--bd);background:var(--sf2);color:var(--t3);font-size:.68rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:var(--sn);transition:all .18s}
         .ca:hover{border-color:var(--bdh);color:var(--t1);background:var(--sf3);transform:translateY(-1px)}
@@ -177,43 +185,55 @@
         .tfa-body::-webkit-scrollbar-track{background:transparent}
         .tfa-body::-webkit-scrollbar-thumb{background:var(--t4);border-radius:10px}
 
-        /* ═══ TFA ROW — 2 tombol: kode & copy ═══ */
-        .tfa-row{
+        /* ═══ TFA ROW ═══ */
+        .tfa-r{
             display:grid;
             grid-template-columns:34px 1fr 28px;
             padding:0 10px;align-items:center;
             min-height:44px;
             border-bottom:1px solid var(--bd);
-            transition:background .12s,opacity .35s,max-height .4s,padding .4s,min-height .4s;
+            transition:background .12s,opacity .4s,max-height .45s cubic-bezier(.4,0,.2,1),padding .4s,min-height .4s;
             animation:ri .3s cubic-bezier(.22,1,.36,1) both;
             overflow:hidden;
         }
-        .tfa-row:last-child{border-bottom:none}
-        .tfa-row:hover{background:var(--sf2)}
-        .tfa-row-i{font-size:.62rem;color:var(--t4);font-weight:600;font-family:var(--mn);text-align:center;user-select:none}
-        .tfa-row-v{
+        .tfa-r:last-child{border-bottom:none}
+        .tfa-r:hover{background:var(--sf2)}
+        .tfa-ri{
+            font-size:.62rem;color:var(--no-col);font-weight:800;
+            font-family:var(--mn);text-align:center;user-select:none;
+            text-shadow:0 0 6px rgba(192,132,252,.15);
+        }
+        .tfa-rv{
             font-size:1.05rem;font-weight:800;letter-spacing:.16em;
             color:var(--pu);font-family:var(--mn);cursor:pointer;
-            padding:8px 0;transition:color .15s,text-shadow .15s;
+            padding:8px 0;transition:color .15s,text-shadow .15s,opacity .3s;
             text-shadow:0 0 18px rgba(192,132,252,.18);
+            position:relative;
         }
-        .tfa-row-v:hover{color:var(--t1);text-shadow:none}
-        .tfa-row-c{
+        /* Ikon kecil setelah kode saat hover — menunjukkan ini tombol copy */
+        .tfa-rv::after{
+            content:"\f0c5";font-family:"Font Awesome 6 Free";font-weight:400;
+            font-size:.5rem;color:var(--t4);margin-left:6px;opacity:0;
+            transition:opacity .15s;vertical-align:middle;
+        }
+        .tfa-r:hover .tfa-rv::after{opacity:.7}
+        .tfa-rv:hover{color:var(--or);text-shadow:0 0 14px rgba(251,146,60,.25)}
+        .tfa-rc{
             width:24px;height:24px;border:none;background:transparent;
             color:var(--t4);cursor:pointer;
             opacity:0;transition:all .15s;flex-shrink:0;
             border-radius:5px;display:flex;align-items:center;justify-content:center;
             font-size:.6rem;margin-left:auto;
         }
-        .tfa-row:hover .tfa-row-c{opacity:1}
-        .tfa-row-c:hover{color:var(--pr);background:rgba(232,85,61,.1)}
+        .tfa-r:hover .tfa-rc{opacity:1}
+        .tfa-rc:hover{color:var(--gn);background:rgba(52,211,153,.1)}
 
         /* TFA row flash */
-        .tfa-row.flash{background:rgba(232,85,61,.1)!important}
-        .tfa-row.flash .tfa-row-v{color:var(--pr)!important}
+        .tfa-r.flash{background:rgba(232,85,61,.1)!important}
+        .tfa-r.flash .tfa-rv{color:var(--pr)!important}
 
-        /* TFA row — state HILANG setelah copy via tombol */
-        .tfa-row.consumed{
+        /* TFA row — state HILANG setelah klik teks kode */
+        .tfa-r.consumed{
             max-height:0!important;
             min-height:0!important;
             padding-top:0!important;
@@ -241,8 +261,8 @@
             .cr{flex-direction:column;width:100%}.nw,.nw input{width:100%}
             .btns{width:100%}.btns .btn{flex:1;justify-content:center;min-width:0}
             .stats{gap:10px}.topbar{padding:11px 14px}
-            .row-c{opacity:1}.tfa-row-c{opacity:1}
-            .row-v::after{display:none}
+            .row-c{opacity:1}.tfa-rc{opacity:1}
+            .row-v::after{display:none}.tfa-rv::after{display:none}
         }
         @media(max-width:400px){.btn{padding:8px 10px;font-size:.72rem;gap:4px}}
         ::-webkit-scrollbar{width:5px}
@@ -291,7 +311,7 @@
         </div>
     </div>
 
-    <div class="tfa-row">
+    <div class="tfa-toggle-row">
         <span class="tfa-label" id="tfaLabel">2FA / Auth</span>
         <label class="tfa-switch">
             <input type="checkbox" id="tfaToggle" onchange="toggle2FA()">
@@ -312,28 +332,28 @@
             <div class="tbl">
                 <div class="st st-nm"></div>
                 <div class="hd"><div class="hd-l"><div class="hd-i hi-nm"><i class="fa-solid fa-user"></i></div><span class="hd-t">Nama Lengkap</span></div><div style="display:flex;align-items:center;gap:5px"><span class="hd-c" id="cntNames">0</span><button class="lockbtn" data-table="names" onclick="toggleLock(this)" title="Kunci scroll"><i class="fa-solid fa-lock-open"></i></button></div></div>
-                <div class="cols"><span class="col">No</span><span class="col">Nama</span><span class="col"></span></div>
+                <div class="cols"><span class="col no-col">No</span><span class="col">Nama</span><span class="col"></span></div>
                 <div class="bd" id="bodyNames"><div class="empty"><i class="fa-solid fa-users"></i><span>Belum ada data</span></div></div>
                 <div class="ft"><button class="ca nm" onclick="copyAll('names')"><i class="fa-regular fa-copy"></i> Salin Semua</button></div>
             </div>
             <div class="tbl">
                 <div class="st st-us"></div>
                 <div class="hd"><div class="hd-l"><div class="hd-i hi-us"><i class="fa-solid fa-at"></i></div><span class="hd-t">Username</span></div><div style="display:flex;align-items:center;gap:5px"><span class="hd-c" id="cntUser">0</span><button class="lockbtn" data-table="user" onclick="toggleLock(this)" title="Kunci scroll"><i class="fa-solid fa-lock-open"></i></button></div></div>
-                <div class="cols"><span class="col">No</span><span class="col">Username</span><span class="col"></span></div>
+                <div class="cols"><span class="col no-col">No</span><span class="col">Username</span><span class="col"></span></div>
                 <div class="bd" id="bodyUser"><div class="empty"><i class="fa-solid fa-at"></i><span>Belum ada data</span></div></div>
                 <div class="ft"><button class="ca us" onclick="copyAll('user')"><i class="fa-regular fa-copy"></i> Salin Semua</button></div>
             </div>
             <div class="tbl">
                 <div class="st st-ml"></div>
                 <div class="hd"><div class="hd-l"><div class="hd-i hi-ml"><i class="fa-solid fa-envelope"></i></div><span class="hd-t">Email</span></div><div style="display:flex;align-items:center;gap:5px"><span class="hd-c" id="cntMail">0</span><button class="lockbtn" data-table="mail" onclick="toggleLock(this)" title="Kunci scroll"><i class="fa-solid fa-lock-open"></i></button></div></div>
-                <div class="cols"><span class="col">No</span><span class="col">Email</span><span class="col"></span></div>
+                <div class="cols"><span class="col no-col">No</span><span class="col">Email</span><span class="col"></span></div>
                 <div class="bd" id="bodyMail"><div class="empty"><i class="fa-solid fa-envelope"></i><span>Belum ada data</span></div></div>
                 <div class="ft"><button class="ca ml" onclick="copyAll('mail')"><i class="fa-regular fa-copy"></i> Salin Semua</button></div>
             </div>
             <div class="tbl">
                 <div class="st st-ul"></div>
                 <div class="hd"><div class="hd-l"><div class="hd-i hi-ul"><i class="fa-solid fa-link"></i></div><span class="hd-t">URL</span></div><div style="display:flex;align-items:center;gap:5px"><span class="hd-c" id="cntUrl">0</span><button class="lockbtn" data-table="url" onclick="toggleLock(this)" title="Kunci scroll"><i class="fa-solid fa-lock-open"></i></button></div></div>
-                <div class="cols"><span class="col">No</span><span class="col">URL</span><span class="col"></span></div>
+                <div class="cols"><span class="col no-col">No</span><span class="col">URL</span><span class="col"></span></div>
                 <div class="bd" id="bodyUrl"><div class="empty"><i class="fa-solid fa-link"></i><span>Belum ada data</span></div></div>
                 <div class="ft"><button class="ca ul" onclick="copyAll('url')"><i class="fa-regular fa-copy"></i> Salin Semua</button></div>
             </div>
@@ -356,7 +376,7 @@
                 </div>
                 <div class="tfa-input-area">
                     <textarea class="tfa-textarea" id="tfaInput" placeholder="Paste secret key di sini..." oninput="onTFAInput()"></textarea>
-                    <div class="tfa-hint"><i class="fa-solid fa-circle-info"></i> Klik kode = salin &amp; tetap ada. Klik tombol copy = salin &amp; hilang otomatis.</div>
+                    <div class="tfa-hint"><i class="fa-solid fa-circle-info"></i> Klik kode = salin &amp; hilang otomatis. Klik tombol copy = salin &amp; kode tetap ada.</div>
                 </div>
                 <div class="tfa-ft"><button class="tfa-ca ky" onclick="clearTFA()"><i class="fa-solid fa-eraser"></i> Bersihkan</button></div>
             </div>
@@ -368,7 +388,7 @@
                     <span class="tfa-hd-c" id="tfaTimerText">--</span>
                 </div>
                 <div class="tfa-timer"><div class="tfa-timer-bar"><div class="tfa-timer-fill" id="tfaTimerFill" style="width:0%"></div></div></div>
-                <div class="tfa-cols"><span class="col">No</span><span class="col">6-Digit Code</span><span class="col"></span></div>
+                <div class="tfa-cols"><span class="col no-col">No</span><span class="col">6-Digit Code</span><span class="col"></span></div>
                 <div class="tfa-body" id="tfaCodeBody">
                     <div class="empty"><i class="fa-solid fa-hashtag"></i><span>Masukkan key di sebelah kiri</span></div>
                 </div>
@@ -418,7 +438,7 @@ var is2FA = false;
 var totpTimer = null;
 var tfaKeys = [];
 var tfaCodes = [];
-/* Set berisi index kode yang sudah "dikonsumsi" (dihapus via tombol copy) */
+/* Set berisi index kode yang sudah "dikonsumsi" (dihapus via klik teks kode) */
 var tfaConsumed = new Set();
 
 var tableBodies = {
@@ -443,7 +463,6 @@ var emptyIcons = { names: "fa-users", user: "fa-at", mail: "fa-envelope", url: "
 function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
 function rs(l) { var c = "abcdefghijklmnopqrstuvwxyz", r = ""; for (var i = 0; i < (l || 3); i++) r += c[Math.floor(Math.random() * c.length)]; return r; }
 function esc(s) { return s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
-function truncText(s, max) { return s.length <= max ? s : s.substring(0, max) + "..."; }
 
 function flashRow(el) {
     if (!el) return;
@@ -452,7 +471,7 @@ function flashRow(el) {
 }
 
 function closestRow(el) {
-    while (el && !el.classList.contains("row") && !el.classList.contains("tfa-row")) {
+    while (el && !el.classList.contains("row") && !el.classList.contains("tfa-r")) {
         el = el.parentElement;
     }
     return el;
@@ -638,10 +657,10 @@ function renderTFACodes() {
     for (var i = 0; i < tfaKeys.length; i++) {
         var dl = Math.min(i * 0.02, 1);
         var isConsumed = tfaConsumed.has(i);
-        h += '<div class="tfa-row' + (isConsumed ? " consumed" : "") + '" data-tfa-idx="' + i + '" style="animation-delay:' + dl + 's">'
-            + '<span class="tfa-row-i">' + String(i + 1).padStart(2, "0") + '</span>'
-            + '<span class="tfa-row-v" id="tfaCode' + i + '" data-tfa-ci="' + i + '" title="Klik kode = salin &amp; tetap ada">' + (tfaCodes[i] || "------") + '</span>'
-            + '<button class="tfa-row-c" data-tfa-ci="' + i + '" data-tfa-copy-btn="1" aria-label="Salin &amp; hapus" title="Salin &amp; hapus otomatis"><i class="fa-regular fa-copy"></i></button>'
+        h += '<div class="tfa-r' + (isConsumed ? " consumed" : "") + '" data-tfa-idx="' + i + '" style="animation-delay:' + dl + 's">'
+            + '<span class="tfa-ri">' + String(i + 1).padStart(2, "0") + '</span>'
+            + '<span class="tfa-rv" id="tfaCode' + i + '" data-tfa-ci="' + i + '" title="Klik kode = salin &amp; hilang otomatis">' + (tfaCodes[i] || "------") + '</span>'
+            + '<button class="tfa-rc" data-tfa-ci="' + i + '" data-tfa-keep-btn="1" aria-label="Salin &amp; tetap ada" title="Salin &amp; kode tetap ada"><i class="fa-regular fa-copy"></i></button>'
             + '</div>';
     }
     body.innerHTML = h;
@@ -776,113 +795,137 @@ Object.keys(tableBodies).forEach(function(key) {
     });
 });
 
-/* ═══════════════════════════════════════
-   COPY — TFA KODE (2 perilaku berbeda)
-   ═══════════════════════════════════════
-   Klik TEKS KODE  → copy, KODE TETAP ADA
-   Klik TOMBOL COPY → copy, KODE HILANG OTOMATIS
-   ═══════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   COPY — TFA KODE (PERILAKU DIBALIK)
+   ═══════════════════════════════════════════════════════════════════
+   Klik TEKS KODE   → salin + HILANG OTOMATIS (one-time use)
+   Klik TOMBOL COPY → salin + KODE TETAP TAMPIL
+   ═══════════════════════════════════════════════════════════════════ */
 document.getElementById("tfaCodeBody").addEventListener("click", function(e) {
-    /* Cek apakah klik pada TOMBOL COPY (bukan teks) */
-    var copyBtn = e.target.closest("[data-tfa-copy-btn]");
+    /* Cek apakah klik pada TOMBOL COPY (ikon di kanan) */
+    var keepBtn = e.target.closest("[data-tfa-keep-btn]");
+    /* Cek apakah klik pada TEKS KODE */
     var codeEl = e.target.closest("[data-tfa-ci]");
 
-    if (copyBtn) {
-        /* ── TOMBOL COPY ditekan: salin + HILANG ── */
-        var idx = parseInt(copyBtn.getAttribute("data-tfa-ci"));
-        if (tfaCodes[idx] && !tfaConsumed.has(idx)) {
-            copyClip(tfaCodes[idx], false, tfaCodes[idx] + " disalin & dihapus");
-            tfaConsumed.add(idx);
-            /* Animasi hilang: flash dulu, lalu collapse */
-            var rowEl = document.querySelector('.tfa-row[data-tfa-idx="' + idx + '"]');
-            if (rowEl) {
-                flashRow(rowEl);
-                /* Delay 350ms (selesai flash) lalu tambah class consumed */
+    if (keepBtn && !codeEl) {
+        /* ── TOMBOL COPY ditekan: salin + TETAP ADA ── */
+        var idx = parseInt(keepBtn.getAttribute("data-tfa-ci"));
+        if (!isNaN(idx) && tfaCodes[idx]) {
+            copyClip(tfaCodes[idx], false);
+            flashRow(closestRow(keepBtn));
+        }
+        return;
+    }
+
+    if (codeEl && !keepBtn) {
+        /* ── TEKS KODE diklik: salin + HILANG OTOMATIS ── */
+        var idx2 = parseInt(codeEl.getAttribute("data-tfa-ci"));
+        if (!isNaN(idx2) && tfaCodes[idx2] && !tfaConsumed.has(idx2)) {
+            copyClip(tfaCodes[idx2], false);
+            /* Tandai sebagai dikonsumsi */
+            tfaConsumed.add(idx2);
+            /* Animasi hilang */
+            var row = closestRow(codeEl);
+            if (row) {
+                row.classList.add("consumed");
+                /* Hapus dari DOM setelah animasi selesai */
                 setTimeout(function() {
-                    rowEl.classList.add("consumed");
-                }, 350);
+                    if (row && row.parentElement) {
+                        row.parentElement.removeChild(row);
+                    }
+                }, 450);
             }
         }
-    } else if (codeEl) {
-        /* ── TEKS KODE ditekan: salin, KODE TETAP ADA ── */
-        var idx2 = parseInt(codeEl.getAttribute("data-tfa-ci"));
-        if (tfaCodes[idx2]) {
-            copyClip(tfaCodes[idx2], false, tfaCodes[idx2] + " disalin");
-            flashRow(closestRow(codeEl));
-        }
+        return;
     }
 });
 
 /* ═══════════════════════════════════════
-   COPY — SEMUA (bulk)
+   COPY — SALIN SEMUA (IDENTITY)
    ═══════════════════════════════════════ */
 function copyAll(type) {
-    if (!generatedData.length) { showToast("Tidak ada data — Generate dulu!"); return; }
+    if (!generatedData.length) { showToast("Generate dulu datanya!"); return; }
     var lines = [];
-    for (var i = 0; i < generatedData.length; i++) lines.push(getIdVal(generatedData[i], type));
-    var label = type === "names" ? "nama" : type === "user" ? "username" : type === "mail" ? "email" : "URL";
+    for (var i = 0; i < generatedData.length; i++) {
+        lines.push(getIdVal(generatedData[i], type));
+    }
+    var label = { names: "nama", user: "username", mail: "email", url: "URL" }[type] || type;
     copyClip(lines.join("\n"), true, lines.length + " " + label + " disalin!");
 }
 
-function copyClip(text, bulk, customMsg) {
-    var msg = customMsg || truncText(text, 55);
+/* ═══════════════════════════════════════
+   CLIPBOARD & TOAST
+   ═══════════════════════════════════════ */
+function copyClip(text, customMsg, msg) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function() {
-            showToast(msg);
+            showToast(msg || "Disalin ke clipboard!");
+        }).catch(function() {
+            fallbackCopy(text, msg);
         });
     } else {
-        var ta = document.createElement("textarea");
-        ta.value = text;
-        ta.style.position = "fixed";
-        ta.style.opacity = "0";
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand("copy"); showToast(msg); }
-        catch (e) { showToast("Gagal menyalin"); }
-        document.body.removeChild(ta);
+        fallbackCopy(text, msg);
     }
 }
 
-/* ═══════════════════════════════════════
-   TOAST
-   ═══════════════════════════════════════ */
-var tTmr = null;
-function showToast(m) {
+function fallbackCopy(text, msg) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.cssText = "position:fixed;left:-9999px;top:-9999px;opacity:0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); showToast(msg || "Disalin ke clipboard!"); }
+    catch(e) { showToast("Gagal menyalin!"); }
+    document.body.removeChild(ta);
+}
+
+var toastTimer = null;
+function showToast(msg) {
     var t = document.getElementById("toast");
-    t.querySelector("span").textContent = m;
+    t.querySelector("span").textContent = msg;
     t.classList.add("show");
-    clearTimeout(tTmr);
-    tTmr = setTimeout(function() { t.classList.remove("show"); }, 2200);
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { t.classList.remove("show"); }, 2200);
 }
 
 /* ═══════════════════════════════════════
-   LOCK
+   THEME TOGGLE
+   ═══════════════════════════════════════ */
+function toggleTheme() {
+    document.body.classList.toggle("light");
+    var isLight = document.body.classList.contains("light");
+    var icon = document.getElementById("themeIcon");
+    icon.className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
+}
+
+/* ═══════════════════════════════════════
+   LOCK SCROLL
    ═══════════════════════════════════════ */
 function toggleLock(btn) {
-    var tbl = btn.getAttribute("data-table");
-    scrollLock[tbl] = !scrollLock[tbl];
-    btn.classList.toggle("is-locked", scrollLock[tbl]);
-    btn.querySelector("i").className = scrollLock[tbl] ? "fa-solid fa-lock" : "fa-solid fa-lock-open";
-    var any = false;
-    var keys = Object.keys(scrollLock);
-    for (var k = 0; k < keys.length; k++) {
-        if (!scrollLock[keys[k]]) { any = true; break; }
+    var table = btn.getAttribute("data-table");
+    scrollLock[table] = !scrollLock[table];
+    var locked = scrollLock[table];
+    btn.classList.toggle("is-locked", locked);
+    btn.querySelector("i").className = locked ? "fa-solid fa-lock" : "fa-solid fa-lock-open";
+    btn.title = locked ? "Buka kunci scroll" : "Kunci scroll";
+    var bar = document.getElementById("syncBar");
+    var anyLocked = scrollLock.names || scrollLock.user || scrollLock.mail || scrollLock.url;
+    if (anyLocked) {
+        bar.classList.remove("active");
+        bar.querySelector("span").textContent = "Scroll Sync — Partial Lock";
+    } else {
+        bar.classList.add("active");
+        bar.querySelector("span").textContent = "Scroll Sync Active";
     }
-    document.getElementById("syncBar").classList.toggle("active", any);
 }
 
 /* ═══════════════════════════════════════
-   COUNTER & THEME
+   COUNTER
    ═══════════════════════════════════════ */
 function updateCounter() {
     var n = generatedData.length;
-    document.getElementById("counterStat").innerHTML = '<i class="fa-solid fa-circle-check ic-b"></i> ' + n.toLocaleString() + " identitas";
-}
-
-function toggleTheme() {
-    document.body.classList.toggle("light");
-    var icon = document.getElementById("themeIcon");
-    icon.className = document.body.classList.contains("light") ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    var el = document.getElementById("counterStat");
+    el.innerHTML = '<i class="fa-solid fa-circle-check ic-b"></i> ' + n + " Data";
 }
 </script>
 </body>
