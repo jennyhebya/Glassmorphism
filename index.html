@@ -636,7 +636,16 @@ function toggleLock(btn) {
 function updateCounter() { document.getElementById("counterStat").innerHTML = '<i class="fa-solid fa-circle-check ic-b"></i> ' + generatedData.length + " Data"; }
 
 buildThemePicker();
-toggleLightDark();
+isLight = true;
+document.getElementById("themeIcon").className = "fa-solid fa-sun";
+var tv = textVars.light;
+var s = document.documentElement.style;
+s.setProperty("--t1", tv.t1);
+s.setProperty("--t2", tv.t2);
+s.setProperty("--t3", tv.t3);
+s.setProperty("--t4", tv.t4);
+s.setProperty("--no-col", tv.noCol);
+applyBg(currentBg);
 </script>
 </body>
 </html>
