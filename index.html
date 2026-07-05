@@ -11,18 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root{
-            /* Background — diatur oleh tema */
             --bg:#07070b;--bg-s:#0c0c12;
-            /* Surface — diatur oleh tema */
             --sf:rgba(255,255,255,.035);--sf2:rgba(255,255,255,.06);--sf3:rgba(255,255,255,.09);
-            /* Border — diatur oleh tema */
             --bd:rgba(255,255,255,.07);--bdh:rgba(255,255,255,.15);
-            /* Teks — TETAP, gak ikut tema. Hanya berubah dark/light */
             --t1:#f0f0f0;--t2:#b0b0b0;--t3:#707070;--t4:#404040;
             --no-col:#a0a0a0;
-            /* Topbar — diatur oleh tema */
             --topbar-bg:rgba(7,7,11,.8);
-            /* Aksen — tetap sama di semua tema, hanya topbar/bg/surface yang beda */
             --pr:#e8553d;--prd:#c74430;--prg:rgba(232,85,61,.25);
             --ac:#f0a030;--acg:rgba(240,160,48,.15);
             --gn:#34d399;--gng:rgba(52,211,153,.15);
@@ -30,7 +24,6 @@
             --pp:#f472b6;--ppg:rgba(244,114,182,.12);
             --pu:#c084fc;--pug:rgba(192,132,252,.12);
             --or:#fb923c;--org:rgba(251,146,60,.12);
-            /* Ambient — diatur oleh tema */
             --ab1:rgba(232,85,61,.08);--ab2:rgba(240,160,48,.06);
             --mn:'JetBrains Mono',monospace;--sn:'Space Grotesk',sans-serif;
             --r:12px;--rl:16px;--rf:999px;
@@ -252,7 +245,7 @@
     </div>
     <div class="tb-a">
         <div class="tp-wrap">
-            <button class="tp-btn" onclick="toggleThemePanel()" title="Ganti Background">
+            <button class="tp-btn" onclick="toggleThemePanel()" title="Background">
                 <div class="tp-dot"></div>
             </button>
             <div class="tp-panel" id="tpPanel">
@@ -260,7 +253,7 @@
                 <div class="tp-grid" id="tpGrid"></div>
             </div>
         </div>
-        <button class="tb-b" onclick="toggleLightDark()" title="Mode Terang / Gelap" id="themeBtn">
+        <button class="tb-b" onclick="toggleLightDark()" title="Light / Dark" id="themeBtn">
             <i class="fa-solid fa-moon" id="themeIcon"></i>
         </button>
     </div>
@@ -276,7 +269,7 @@
             </div>
         </div>
         <div class="cr" style="margin-bottom:0">
-            <span class="cr-l">Aksi</span>
+            <span class="cr-l">Action</span>
             <div class="btns">
                 <button class="btn btn-g" onclick="generateData()"><i class="fa-solid fa-bolt"></i> Generate</button>
                 <button class="btn btn-s nm" onclick="copyAll('names')"><i class="fa-solid fa-id-card"></i> Names</button>
@@ -337,7 +330,7 @@
 
     <div id="tfaView" class="view-hide">
         <div class="stats">
-            <div class="stat"><i class="fa-solid fa-key ic-p"></i> TOTP 2FA Calculator</div>
+            <div class="stat"><i class="fa-solid fa-key ic-p"></i> TOTP 2FA ALL</div>
             <div class="stat" id="tfaKeyCount"><i class="fa-solid fa-list-ol ic-b"></i> 0 Key</div>
         </div>
         <div class="sync-bar active"><div class="sync-dot"></div><span>Auto-Refresh Setiap 30 Detik</span></div>
@@ -346,7 +339,7 @@
                 <div class="st" style="background:linear-gradient(90deg,var(--pu),#a78bfa);height:3px;flex-shrink:0"></div>
                 <div class="tfa-hd"><div class="tfa-hd-i ky"><i class="fa-solid fa-key"></i></div><span class="tfa-hd-t">Key Auth</span></div>
                 <div class="tfa-input-area">
-                    <textarea class="tfa-textarea" id="tfaInput" placeholder="Paste secret key di sini...&#10;&#10;Satu key per baris. Contoh:&#10;JBSWY3DPEHPK3PXP&#10;GEZDGNBVGY3TQOJQ&#10;HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ" oninput="onTFAInput()"></textarea>
+                    <textarea class="tfa-textarea" id="tfaInput" placeholder="Paste secret key di sini..." oninput="onTFAInput()"></textarea>
                     <div class="tfa-hint"><i class="fa-solid fa-circle-info"></i> Klik kode = salin &amp; hilang otomatis. Klik tombol copy = salin &amp; kode tetap ada.</div>
                 </div>
                 <div class="tfa-ft"><button class="tfa-ca ky" onclick="clearTFA()"><i class="fa-solid fa-eraser"></i> Bersihkan</button></div>
@@ -366,11 +359,6 @@
 <div id="toast" class="toast"><i class="fa-solid fa-circle-check"></i> <span>Copied!</span></div>
 
 <script>
-/* ═══════════════════════════════════════
-   6 TEMA — HANYA mengatur:
-   background, surface, border, ambient glow
-   Teks & aksen TIDAK ikut berubah.
-   ═══════════════════════════════════════ */
 var bgThemes = {
     deepspace: {
         name: "Deep Space",
@@ -413,18 +401,11 @@ var bgThemes = {
 var currentBg = "deepspace";
 var isLight = true;
 
-/* ═══════════════════════════════════════
-   TEKS — TETAP, gak berubah saat ganti tema.
-   Hanya berubah saat toggle dark/light.
-   ═══════════════════════════════════════ */
 var textVars = {
     dark:  { t1:"#f0f0f0", t2:"#b0b0b0", t3:"#707070", t4:"#404040", noCol:"#a0a0a0" },
     light: { t1:"#111111", t2:"#505050", t3:"#808080", t4:"#b8b8b8", noCol:"#686868" }
 };
 
-/* ═══════════════════════════════════════
-   THEME PICKER UI
-   ═══════════════════════════════════════ */
 function buildThemePicker() {
     var grid = document.getElementById("tpGrid"), html = "", keys = Object.keys(bgThemes);
     for (var i = 0; i < keys.length; i++) {
@@ -443,9 +424,6 @@ document.addEventListener("click", function(e) {
     if (!document.querySelector(".tp-wrap").contains(e.target)) document.getElementById("tpPanel").classList.remove("open");
 });
 
-/* ═══════════════════════════════════════
-   APPLY BACKGROUND — TEKS TIDAK DISENTUH
-   ═══════════════════════════════════════ */
 function applyBg(id) {
     var theme = bgThemes[id]; if (!theme) return;
     currentBg = id;
@@ -467,9 +445,6 @@ function applyBg(id) {
     showToast("Background: " + theme.name);
 }
 
-/* ═══════════════════════════════════════
-   TOGGLE LIGHT/DARK — HANYA mengubah teks + background varian
-   ═══════════════════════════════════════ */
 function toggleLightDark() {
     isLight = !isLight;
     document.getElementById("themeIcon").className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
@@ -481,14 +456,10 @@ function toggleLightDark() {
     s.setProperty("--t3", tv.t3);
     s.setProperty("--t4", tv.t4);
     s.setProperty("--no-col", tv.noCol);
-    /* Apply background varian yang sesuai */
     applyBg(currentBg);
     showToast(isLight ? "Mode Terang" : "Mode Gelap");
 }
 
-/* ═══════════════════════════════════════
-   DATA NAMA
-   ═══════════════════════════════════════ */
 var nameData = {
     "English": {
         female: ["Olivia","Amelia","Isla","Kristina","Grace","Emily","Ella","Freya","Chloe","Natasha","Lily","Hannah","Charlotte","Harper","Evelyn","Abigail","Sienna","Poppy","Esme","Willow","Lesley","Taylor","Sheryl","April","Beverly","Caitlin","Florence","Billie","Alexandra","Sophie","Mia","Ava","Isabella","Ruby","Luna","Penelope","Layla","Zoe","Nora","Eleanor","Aria"],
@@ -512,9 +483,6 @@ var nameData = {
     }
 };
 
-/* ═══════════════════════════════════════
-   STATE
-   ═══════════════════════════════════════ */
 var regionArr = Object.keys(nameData);
 var generatedData = [];
 var usedUsernames = new Set();
@@ -531,18 +499,12 @@ var scrollLock = { names: false, user: false, mail: false, url: false };
 var isSyncing = false;
 var emptyIcons = { names: "fa-users", user: "fa-at", mail: "fa-envelope", url: "fa-link" };
 
-/* ═══════════════════════════════════════
-   HELPERS
-   ═══════════════════════════════════════ */
 function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
 function rs(l) { var c = "abcdefghijklmnopqrstuvwxyz", r = ""; for (var i = 0; i < (l || 3); i++) r += c[Math.floor(Math.random() * c.length)]; return r; }
 function esc(s) { return s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 function flashRow(el) { if (!el) return; el.classList.add("flash"); setTimeout(function() { el.classList.remove("flash"); }, 350); }
 function closestRow(el) { while (el && !el.classList.contains("row") && !el.classList.contains("tfa-r")) el = el.parentElement; return el; }
 
-/* ═══════════════════════════════════════
-   TOTP
-   ═══════════════════════════════════════ */
 function b32toBytes(b32) {
     var a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567", bits = 0, val = 0, out = [];
     b32 = b32.toUpperCase().replace(/[^A-Z2-7]/g, "");
@@ -562,9 +524,6 @@ function getTOTP(secret) {
     } catch (e) { return Promise.resolve("------"); }
 }
 
-/* ═══════════════════════════════════════
-   GENERATORS
-   ═══════════════════════════════════════ */
 function genUsername(f, l) {
     var x = f.toLowerCase().replace(/[^a-z]/g, ""), y = l.toLowerCase().replace(/[^a-z]/g, "");
     var p = [function(){return x+y+Math.floor(Math.random()*999)},function(){return x+"."+y+Math.floor(Math.random()*999)},function(){return x+"_"+y+Math.floor(Math.random()*999)},function(){return y+"_"+x+Math.floor(Math.random()*999)},function(){return y+"."+x+Math.floor(Math.random()*999)},function(){return x+y+rs(4)},function(){return x+"."+y+rs(4)},function(){return x+"_"+y+rs(4)},function(){return y+"_"+x+rs(4)},function(){return x+rs(4)+y},function(){return y+x+Math.floor(Math.random()*999)},function(){return y+rs(4)+x},function(){return x+rs(4)+y+Math.floor(Math.random()*999)}];
@@ -573,9 +532,6 @@ function genUsername(f, l) {
 }
 function genEmail(u) { var d = pick(["mail.n2n.io"]), e = u + "@" + d; if (!usedEmails.has(e)) { usedEmails.add(e); return e; } var e2 = u + Math.floor(Math.random() * 99) + "@" + d; usedEmails.add(e2); return e2; }
 
-/* ═══════════════════════════════════════
-   GENERATE & RENDER
-   ═══════════════════════════════════════ */
 function generateData() {
     var count = Math.max(1, Math.min(5000, parseInt(document.getElementById("amount").value) || 10));
     usedUsernames.clear(); usedEmails.clear(); generatedData = [];
@@ -603,9 +559,6 @@ function buildIdentityHTML(data, type) {
     return h;
 }
 
-/* ═══════════════════════════════════════
-   2FA
-   ═══════════════════════════════════════ */
 function toggle2FA() {
     is2FA = document.getElementById("tfaToggle").checked;
     document.getElementById("identityView").classList.toggle("view-hide", is2FA);
@@ -648,16 +601,10 @@ function updateTimerBar() { var e = Math.floor(Date.now() / 1000), s = 30 - (e %
 function clearTFA() { document.getElementById("tfaInput").value = ""; tfaKeys = []; tfaCodes = []; tfaConsumed.clear(); stopTFA(); document.getElementById("tfaKeyCount").innerHTML = '<i class="fa-solid fa-list-ol ic-b"></i> 0 Key'; document.getElementById("tfaCodeBody").innerHTML = '<div class="empty"><i class="fa-solid fa-hashtag"></i><span>Masukkan key di sebelah kiri</span></div>'; document.getElementById("tfaTimerFill").style.width = "0%"; document.getElementById("tfaTimerText").textContent = "--"; }
 function copyAllCodes() { if (!tfaCodes.length || !tfaCodes[0]) { showToast("Tidak ada kode — Masukkan key dulu!"); return; } var lines = []; for (var i = 0; i < tfaCodes.length; i++) { if (!tfaConsumed.has(i)) lines.push(tfaCodes[i]); } if (!lines.length) { showToast("Semua kode sudah dikonsumsi!"); return; } copyClip(lines.join("\n"), true, lines.length + " kode disalin!"); }
 
-/* ═══════════════════════════════════════
-   SCROLL SYNC
-   ═══════════════════════════════════════ */
 function syncScroll(src, st) { if (isSyncing) return; isSyncing = true; var keys = Object.keys(tableBodies); for (var k = 0; k < keys.length; k++) { var key = keys[k]; if (key === src || scrollLock[key]) continue; tableBodies[key].scrollTop = st; } hlRow(src, st); isSyncing = false; }
 function hlRow(src, st) { var idx = Math.floor(st / 38), keys = Object.keys(tableBodies); for (var k = 0; k < keys.length; k++) { var body = tableBodies[keys[k]], prev = body.querySelectorAll(".row.hl"); for (var p = 0; p < prev.length; p++) prev[p].classList.remove("hl"); var t = body.querySelector('.row[data-idx="' + idx + '"]'); if (t) t.classList.add("hl"); } }
 Object.keys(tableBodies).forEach(function(key) { tableBodies[key].addEventListener("scroll", function() { syncScroll(key, this.scrollTop); }); });
 
-/* ═══════════════════════════════════════
-   COPY — IDENTITY
-   ═══════════════════════════════════════ */
 function getIdVal(d, type) { return type === "names" ? d.first + " " + d.last : type === "user" ? d.username : type === "mail" ? d.email : d.url; }
 Object.keys(tableBodies).forEach(function(key) {
     tableBodies[key].addEventListener("click", function(e) {
@@ -667,31 +614,19 @@ Object.keys(tableBodies).forEach(function(key) {
     });
 });
 
-/* ═══════════════════════════════════════
-   COPY — TFA (DIBALIK)
-   ═══════════════════════════════════════ */
 document.getElementById("tfaCodeBody").addEventListener("click", function(e) {
     var keepBtn = e.target.closest("[data-tfa-keep-btn]"), codeEl = e.target.closest("[data-tfa-ci]");
     if (keepBtn && !codeEl) { var idx = parseInt(keepBtn.getAttribute("data-tfa-ci")); if (!isNaN(idx) && tfaCodes[idx]) { copyClip(tfaCodes[idx], false); flashRow(closestRow(keepBtn)); } return; }
     if (codeEl && !keepBtn) { var idx2 = parseInt(codeEl.getAttribute("data-tfa-ci")); if (!isNaN(idx2) && tfaCodes[idx2] && !tfaConsumed.has(idx2)) { copyClip(tfaCodes[idx2], false); tfaConsumed.add(idx2); var row = closestRow(codeEl); if (row) { row.classList.add("consumed"); setTimeout(function() { if (row && row.parentElement) row.parentElement.removeChild(row); }, 450); } } return; }
 });
 
-/* ═══════════════════════════════════════
-   COPY ALL
-   ═══════════════════════════════════════ */
 function copyAll(type) { if (!generatedData.length) { showToast("Generate dulu datanya!"); return; } var lines = []; for (var i = 0; i < generatedData.length; i++) lines.push(getIdVal(generatedData[i], type)); var label = { names: "nama", user: "username", mail: "email", url: "URL" }[type] || type; copyClip(lines.join("\n"), true, lines.length + " " + label + " disalin!"); }
 
-/* ═══════════════════════════════════════
-   CLIPBOARD & TOAST
-   ═══════════════════════════════════════ */
 function copyClip(text, cm, msg) { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(function() { showToast(msg || "Disalin ke clipboard!"); }).catch(function() { fallbackCopy(text, msg); }); } else { fallbackCopy(text, msg); } }
 function fallbackCopy(text, msg) { var ta = document.createElement("textarea"); ta.value = text; ta.style.cssText = "position:fixed;left:-9999px;top:-9999px;opacity:0"; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); showToast(msg || "Disalin ke clipboard!"); } catch(e) { showToast("Gagal menyalin!"); } document.body.removeChild(ta); }
 var toastTimer = null;
 function showToast(msg) { var t = document.getElementById("toast"); t.querySelector("span").textContent = msg; t.classList.add("show"); if (toastTimer) clearTimeout(toastTimer); toastTimer = setTimeout(function() { t.classList.remove("show"); }, 2200); }
 
-/* ═══════════════════════════════════════
-   LOCK & COUNTER
-   ═══════════════════════════════════════ */
 function toggleLock(btn) {
     var table = btn.getAttribute("data-table"); scrollLock[table] = !scrollLock[table]; var locked = scrollLock[table];
     btn.classList.toggle("is-locked", locked); btn.querySelector("i").className = locked ? "fa-solid fa-lock" : "fa-solid fa-lock-open"; btn.title = locked ? "Buka kunci scroll" : "Kunci scroll";
@@ -700,11 +635,7 @@ function toggleLock(btn) {
 }
 function updateCounter() { document.getElementById("counterStat").innerHTML = '<i class="fa-solid fa-circle-check ic-b"></i> ' + generatedData.length + " Data"; }
 
-/* ═══════════════════════════════════════
-   INIT
-   ═══════════════════════════════════════ */
 buildThemePicker();
-/* Supaya saat pertama buka langsung mode terang */
 toggleLightDark();
 </script>
 </body>
