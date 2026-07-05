@@ -10,10 +10,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root {
+        :root{
+            /* Background — diatur oleh tema */
             --bg:#07070b;--bg-s:#0c0c12;
+            /* Surface — diatur oleh tema */
             --sf:rgba(255,255,255,.035);--sf2:rgba(255,255,255,.06);--sf3:rgba(255,255,255,.09);
+            /* Border — diatur oleh tema */
             --bd:rgba(255,255,255,.07);--bdh:rgba(255,255,255,.15);
+            /* Teks — TETAP, gak ikut tema. Hanya berubah dark/light */
+            --t1:#f0f0f0;--t2:#b0b0b0;--t3:#707070;--t4:#404040;
+            --no-col:#a0a0a0;
+            /* Topbar — diatur oleh tema */
+            --topbar-bg:rgba(7,7,11,.8);
+            /* Aksen — tetap sama di semua tema, hanya topbar/bg/surface yang beda */
             --pr:#e8553d;--prd:#c74430;--prg:rgba(232,85,61,.25);
             --ac:#f0a030;--acg:rgba(240,160,48,.15);
             --gn:#34d399;--gng:rgba(52,211,153,.15);
@@ -21,44 +30,52 @@
             --pp:#f472b6;--ppg:rgba(244,114,182,.12);
             --pu:#c084fc;--pug:rgba(192,132,252,.12);
             --or:#fb923c;--org:rgba(251,146,60,.12);
-            --t1:#f0f0ec;--t2:#b8b4ae;--t3:#6e6a65;--t4:#3a3735;
-            --no-col:#9a9590;
+            /* Ambient — diatur oleh tema */
+            --ab1:rgba(232,85,61,.08);--ab2:rgba(240,160,48,.06);
             --mn:'JetBrains Mono',monospace;--sn:'Space Grotesk',sans-serif;
             --r:12px;--rl:16px;--rf:999px;
         }
-        body.light{
-            --bg:#f2ede7;--bg-s:#e8e2db;
-            --sf:rgba(255,255,255,.65);--sf2:rgba(255,255,255,.85);--sf3:rgba(255,255,255,.95);
-            --bd:rgba(0,0,0,.08);--bdh:rgba(0,0,0,.15);
-            --pr:#d04a34;--prd:#b83d2a;--prg:rgba(208,74,52,.18);
-            --acg:rgba(200,140,20,.1);--gng:rgba(16,160,100,.1);--ppg:rgba(220,80,140,.08);--pug:rgba(140,80,220,.08);--org:rgba(230,120,20,.08);
-            --t1:#111110;--t2:#555250;--t3:#8a8580;--t4:#bbb5ae;
-            --no-col:#7a756f;
-        }
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-        body{font-family:var(--sn);background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;transition:background .4s,color .3s}
+        body{font-family:var(--sn);background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;transition:background .5s,color .3s}
 
-        .amb{position:fixed;border-radius:50%;filter:blur(140px);z-index:0;pointer-events:none;opacity:.85}
-        .a1{top:-20%;right:-12%;width:480px;height:480px;background:radial-gradient(circle,rgba(232,85,61,.08),transparent 70%);animation:f1 24s ease-in-out infinite alternate}
-        .a2{bottom:-15%;left:-8%;width:400px;height:400px;background:radial-gradient(circle,rgba(240,160,48,.06),transparent 70%);animation:f2 30s ease-in-out infinite alternate}
+        .amb{position:fixed;border-radius:50%;filter:blur(140px);z-index:0;pointer-events:none;opacity:.85;transition:background 1.2s ease}
+        .a1{top:-20%;right:-12%;width:480px;height:480px;background:radial-gradient(circle,var(--ab1),transparent 70%);animation:f1 24s ease-in-out infinite alternate}
+        .a2{bottom:-15%;left:-8%;width:400px;height:400px;background:radial-gradient(circle,var(--ab2),transparent 70%);animation:f2 30s ease-in-out infinite alternate}
         @keyframes f1{to{transform:translate(-30px,40px) scale(1.1)}}
         @keyframes f2{to{transform:translate(30px,-25px) scale(1.06)}}
         body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.012;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h1v1H0z' fill='%23fff'/%3E%3C/svg%3E");background-size:40px 40px}
 
-        .topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:13px 22px;background:rgba(7,7,11,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);transition:background .3s}
-        body.light .topbar{background:rgba(242,237,231,.82)}
+        .topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:13px 22px;background:var(--topbar-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);transition:background .5s}
         .logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:1.02rem;letter-spacing:-.3px}
-        .logo-i{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--pr),var(--ac));display:flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:800}
+        .logo-i{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--pr),var(--ac));display:flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:800;transition:background .5s}
         .logo-v{font-size:.6rem;font-weight:500;color:var(--t3);margin-left:1px}
-        .tb-a{display:flex;gap:7px}
+        .tb-a{display:flex;gap:7px;align-items:center}
         .tb-b{width:34px;height:34px;border-radius:9px;border:1px solid var(--bd);background:var(--sf);color:var(--t3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:all .2s}
         .tb-b:hover{color:var(--t1);border-color:var(--bdh);background:var(--sf2);transform:translateY(-1px)}
+
+        .tp-wrap{position:relative}
+        .tp-btn{width:34px;height:34px;border-radius:9px;border:1px solid var(--bd);background:var(--sf);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;position:relative;overflow:hidden}
+        .tp-btn:hover{border-color:var(--bdh);transform:translateY(-1px)}
+        .tp-btn .tp-dot{width:18px;height:18px;border-radius:50%;background:conic-gradient(var(--pr),var(--ac),var(--gn),var(--bl),var(--pr));transition:transform .3s}
+        .tp-btn:hover .tp-dot{transform:rotate(90deg)}
+        .tp-panel{position:absolute;top:calc(100% + 10px);right:0;background:var(--sf2);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--bd);border-radius:var(--rl);padding:14px 16px;min-width:300px;opacity:0;pointer-events:none;transform:translateY(-8px) scale(.96);transition:all .25s cubic-bezier(.175,.885,.32,1.275);z-index:200}
+        .tp-panel.open{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
+        .tp-panel::before{content:"";position:absolute;top:-6px;right:16px;width:12px;height:12px;background:var(--sf2);border-left:1px solid var(--bd);border-top:1px solid var(--bd);transform:rotate(45deg)}
+        .tp-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:12px}
+        .tp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+        .tp-card{border-radius:var(--r);border:2px solid var(--bd);padding:10px 8px 8px;cursor:pointer;text-align:center;transition:all .2s;position:relative;overflow:hidden}
+        .tp-card:hover{border-color:var(--bdh);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2)}
+        .tp-card.active{border-color:var(--pr);box-shadow:0 0 0 1px var(--pr),0 4px 16px var(--prg)}
+        .tp-card.active::after{content:"\f00c";font-family:"Font Awesome 6 Free";font-weight:900;position:absolute;top:4px;right:5px;font-size:.5rem;color:#fff;width:14px;height:14px;border-radius:50%;background:var(--pr);display:flex;align-items:center;justify-content:center}
+        .tp-swatch{width:100%;height:32px;border-radius:6px;margin-bottom:6px;position:relative;overflow:hidden}
+        .tp-swatch::after{content:"";position:absolute;inset:0;border-radius:6px;border:1px solid rgba(255,255,255,.06)}
+        .tp-name{font-size:.58rem;font-weight:700;color:var(--t2);line-height:1.2}
 
         .wrap{max-width:1120px;margin:0 auto;padding:30px 22px 80px;position:relative;z-index:1}
 
         .cpanel{background:var(--sf);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--bd);border-radius:var(--rl);padding:22px 26px;margin:0 auto 26px;max-width:660px;position:relative;overflow:hidden;text-align:center;transition:border-color .3s,background .3s}
-        .cpanel::before{content:"";position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--prg),transparent)}
+        .cpanel::before{content:"";position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--prg),transparent);transition:background .5s}
         .cr{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-bottom:16px}
         .cr:last-child{margin-bottom:0}
         .cr-l{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);font-weight:600;width:100%;margin-bottom:2px}
@@ -68,7 +85,7 @@
         .nw input:focus{border-color:var(--pr);box-shadow:0 0 0 3px var(--prg)}
         .btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
         .btn{padding:9px 16px;border-radius:var(--rf);font-size:.8rem;font-weight:600;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:6px;font-family:var(--sn);transition:all .2s}
-        .btn-g{background:linear-gradient(135deg,var(--pr),var(--prd));color:#fff;box-shadow:0 4px 16px var(--prg);padding:10px 24px;font-size:.88rem}
+        .btn-g{background:linear-gradient(135deg,var(--pr),var(--prd));color:#fff;box-shadow:0 4px 16px var(--prg);padding:10px 24px;font-size:.88rem;transition:background .5s,box-shadow .5s,transform .2s}
         .btn-g:hover{transform:translateY(-2px);box-shadow:0 8px 26px var(--prg);filter:brightness(1.08)}
         .btn-g:active{transform:translateY(0)}
         .btn-s{background:transparent;color:var(--t3);border:1px solid transparent}
@@ -98,18 +115,17 @@
         #identityView,#tfaView{transition:opacity .3s,transform .3s}
         .view-hide{display:none!important}
 
-        /* 4 TABEL */
         .ta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
         .tbl{background:var(--sf);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s,background .3s;position:relative;max-height:540px}
         .tbl:hover{border-color:var(--bdh);box-shadow:0 10px 36px -8px rgba(0,0,0,.28);background:var(--sf2)}
-        .st{height:3px;flex-shrink:0}
+        .st{height:3px;flex-shrink:0;transition:background .5s}
         .st-nm{background:linear-gradient(90deg,var(--pp),#e879f9)}
         .st-us{background:linear-gradient(90deg,var(--bl),#38bdf8)}
         .st-ml{background:linear-gradient(90deg,var(--gn),#6ee7b7)}
         .st-ul{background:linear-gradient(90deg,var(--ac),#fbbf24)}
         .hd{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-bottom:1px solid var(--bd);flex-shrink:0;background:var(--sf2)}
         .hd-l{display:flex;align-items:center;gap:7px}
-        .hd-i{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0}
+        .hd-i{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0;transition:background .5s,color .5s}
         .hi-nm{background:var(--ppg);color:var(--pp)}
         .hi-us{background:var(--blg);color:var(--bl)}
         .hi-ml{background:var(--gng);color:var(--gn)}
@@ -122,12 +138,7 @@
         .cols{display:grid;grid-template-columns:34px 1fr 28px;padding:6px 10px;border-bottom:1px solid var(--bd);flex-shrink:0;background:var(--sf)}
         .col{font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--t4);font-weight:700}
         .col:nth-child(3){text-align:right}
-        /* === NO column — lebih terang menyala === */
-        .no-col{
-            color:var(--no-col)!important;
-            text-shadow:0 0 6px rgba(192,132,252,.2);
-            font-weight:800!important;
-        }
+        .no-col{color:var(--no-col)!important;font-weight:800!important;text-shadow:0 0 6px rgba(192,132,252,.2)}
         .bd{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--t4) transparent}
         .bd::-webkit-scrollbar{width:3px}
         .bd::-webkit-scrollbar-track{background:transparent}
@@ -159,13 +170,12 @@
         .ca.ml:hover{color:var(--gn);border-color:rgba(52,211,153,.3)}
         .ca.ul:hover{color:var(--ac);border-color:rgba(240,160,48,.3)}
 
-        /* ═══ TFA VIEW ═══ */
         .tfa-layout{display:grid;grid-template-columns:1fr 1fr;gap:12px;animation:fadeUp .4s cubic-bezier(.22,1,.36,1) both}
         @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
         .tfa-tbl{background:var(--sf);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s;max-height:560px}
         .tfa-tbl:hover{border-color:var(--bdh);box-shadow:0 10px 36px -8px rgba(0,0,0,.28)}
         .tfa-hd{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--bd);background:var(--sf2);flex-shrink:0}
-        .tfa-hd-i{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.76rem;flex-shrink:0}
+        .tfa-hd-i{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.76rem;flex-shrink:0;transition:background .5s,color .5s}
         .tfa-hd-i.ky{background:var(--pug);color:var(--pu)}
         .tfa-hd-i.cd{background:var(--org);color:var(--or)}
         .tfa-hd-t{font-size:.85rem;font-weight:700;letter-spacing:-.2px}
@@ -184,65 +194,20 @@
         .tfa-body::-webkit-scrollbar{width:3px}
         .tfa-body::-webkit-scrollbar-track{background:transparent}
         .tfa-body::-webkit-scrollbar-thumb{background:var(--t4);border-radius:10px}
-
-        /* ═══ TFA ROW ═══ */
-        .tfa-r{
-            display:grid;
-            grid-template-columns:34px 1fr 28px;
-            padding:0 10px;align-items:center;
-            min-height:44px;
-            border-bottom:1px solid var(--bd);
-            transition:background .12s,opacity .4s,max-height .45s cubic-bezier(.4,0,.2,1),padding .4s,min-height .4s;
-            animation:ri .3s cubic-bezier(.22,1,.36,1) both;
-            overflow:hidden;
-        }
+        .tfa-r{display:grid;grid-template-columns:34px 1fr 28px;padding:0 10px;align-items:center;min-height:44px;border-bottom:1px solid var(--bd);transition:background .12s,opacity .4s,max-height .45s cubic-bezier(.4,0,.2,1),padding .4s,min-height .4s;animation:ri .3s cubic-bezier(.22,1,.36,1) both;overflow:hidden}
         .tfa-r:last-child{border-bottom:none}
         .tfa-r:hover{background:var(--sf2)}
-        .tfa-ri{
-            font-size:.62rem;color:var(--no-col);font-weight:800;
-            font-family:var(--mn);text-align:center;user-select:none;
-            text-shadow:0 0 6px rgba(192,132,252,.15);
-        }
-        .tfa-rv{
-            font-size:1.05rem;font-weight:800;letter-spacing:.16em;
-            color:var(--pu);font-family:var(--mn);cursor:pointer;
-            padding:8px 0;transition:color .15s,text-shadow .15s,opacity .3s;
-            text-shadow:0 0 18px rgba(192,132,252,.18);
-            position:relative;
-        }
-        /* Ikon kecil setelah kode saat hover — menunjukkan ini tombol copy */
-        .tfa-rv::after{
-            content:"\f0c5";font-family:"Font Awesome 6 Free";font-weight:400;
-            font-size:.5rem;color:var(--t4);margin-left:6px;opacity:0;
-            transition:opacity .15s;vertical-align:middle;
-        }
+        .tfa-ri{font-size:.62rem;color:var(--no-col);font-weight:800;font-family:var(--mn);text-align:center;user-select:none;text-shadow:0 0 6px rgba(192,132,252,.15)}
+        .tfa-rv{font-size:1.05rem;font-weight:800;letter-spacing:.16em;color:var(--pu);font-family:var(--mn);cursor:pointer;padding:8px 0;transition:color .15s,text-shadow .15s,opacity .3s;text-shadow:0 0 18px rgba(192,132,252,.18);position:relative}
+        .tfa-rv::after{content:"\f0c5";font-family:"Font Awesome 6 Free";font-weight:400;font-size:.5rem;color:var(--t4);margin-left:6px;opacity:0;transition:opacity .15s;vertical-align:middle}
         .tfa-r:hover .tfa-rv::after{opacity:.7}
         .tfa-rv:hover{color:var(--or);text-shadow:0 0 14px rgba(251,146,60,.25)}
-        .tfa-rc{
-            width:24px;height:24px;border:none;background:transparent;
-            color:var(--t4);cursor:pointer;
-            opacity:0;transition:all .15s;flex-shrink:0;
-            border-radius:5px;display:flex;align-items:center;justify-content:center;
-            font-size:.6rem;margin-left:auto;
-        }
+        .tfa-rc{width:24px;height:24px;border:none;background:transparent;color:var(--t4);cursor:pointer;opacity:0;transition:all .15s;flex-shrink:0;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.6rem;margin-left:auto}
         .tfa-r:hover .tfa-rc{opacity:1}
         .tfa-rc:hover{color:var(--gn);background:rgba(52,211,153,.1)}
-
-        /* TFA row flash */
         .tfa-r.flash{background:rgba(232,85,61,.1)!important}
         .tfa-r.flash .tfa-rv{color:var(--pr)!important}
-
-        /* TFA row — state HILANG setelah klik teks kode */
-        .tfa-r.consumed{
-            max-height:0!important;
-            min-height:0!important;
-            padding-top:0!important;
-            padding-bottom:0!important;
-            opacity:0;
-            border-bottom-width:0;
-            pointer-events:none;
-        }
-
+        .tfa-r.consumed{max-height:0!important;min-height:0!important;padding-top:0!important;padding-bottom:0!important;opacity:0;border-bottom-width:0;pointer-events:none}
         .tfa-ft{padding:10px 12px;border-top:1px solid var(--bd);flex-shrink:0;display:flex;justify-content:center}
         .tfa-ca{padding:6px 13px;border-radius:var(--rf);border:1px solid var(--bd);background:var(--sf2);color:var(--t3);font-size:.68rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:var(--sn);transition:all .18s}
         .tfa-ca:hover{border-color:var(--bdh);color:var(--t1);background:var(--sf3);transform:translateY(-1px)}
@@ -263,6 +228,8 @@
             .stats{gap:10px}.topbar{padding:11px 14px}
             .row-c{opacity:1}.tfa-rc{opacity:1}
             .row-v::after{display:none}.tfa-rv::after{display:none}
+            .tp-panel{right:-8px;min-width:260px}
+            .tp-grid{grid-template-columns:repeat(2,1fr)}
         }
         @media(max-width:400px){.btn{padding:8px 10px;font-size:.72rem;gap:4px}}
         ::-webkit-scrollbar{width:5px}
@@ -284,7 +251,16 @@
         NameForge Greysyaa<span class="logo-v">V2</span>
     </div>
     <div class="tb-a">
-        <button class="tb-b" onclick="toggleTheme()" title="Ganti Tema" id="themeBtn">
+        <div class="tp-wrap">
+            <button class="tp-btn" onclick="toggleThemePanel()" title="Ganti Background">
+                <div class="tp-dot"></div>
+            </button>
+            <div class="tp-panel" id="tpPanel">
+                <div class="tp-title">Pilih Background</div>
+                <div class="tp-grid" id="tpGrid"></div>
+            </div>
+        </div>
+        <button class="tb-b" onclick="toggleLightDark()" title="Mode Terang / Gelap" id="themeBtn">
             <i class="fa-solid fa-moon" id="themeIcon"></i>
         </button>
     </div>
@@ -319,7 +295,6 @@
         </label>
     </div>
 
-    <!-- ======== IDENTITY VIEW ======== -->
     <div id="identityView">
         <div class="stats">
             <div class="stat"><i class="fa-solid fa-globe ic-r"></i> 4 Regions</div>
@@ -360,7 +335,6 @@
         </div>
     </div>
 
-    <!-- ======== TFA VIEW ======== -->
     <div id="tfaView" class="view-hide">
         <div class="stats">
             <div class="stat"><i class="fa-solid fa-key ic-p"></i> TOTP 2FA Calculator</div>
@@ -370,28 +344,19 @@
         <div class="tfa-layout">
             <div class="tfa-tbl">
                 <div class="st" style="background:linear-gradient(90deg,var(--pu),#a78bfa);height:3px;flex-shrink:0"></div>
-                <div class="tfa-hd">
-                    <div class="tfa-hd-i ky"><i class="fa-solid fa-key"></i></div>
-                    <span class="tfa-hd-t">Key Auth</span>
-                </div>
+                <div class="tfa-hd"><div class="tfa-hd-i ky"><i class="fa-solid fa-key"></i></div><span class="tfa-hd-t">Key Auth</span></div>
                 <div class="tfa-input-area">
-                    <textarea class="tfa-textarea" id="tfaInput" placeholder="Paste secret key di sini..." oninput="onTFAInput()"></textarea>
+                    <textarea class="tfa-textarea" id="tfaInput" placeholder="Paste secret key di sini...&#10;&#10;Satu key per baris. Contoh:&#10;JBSWY3DPEHPK3PXP&#10;GEZDGNBVGY3TQOJQ&#10;HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ" oninput="onTFAInput()"></textarea>
                     <div class="tfa-hint"><i class="fa-solid fa-circle-info"></i> Klik kode = salin &amp; hilang otomatis. Klik tombol copy = salin &amp; kode tetap ada.</div>
                 </div>
                 <div class="tfa-ft"><button class="tfa-ca ky" onclick="clearTFA()"><i class="fa-solid fa-eraser"></i> Bersihkan</button></div>
             </div>
             <div class="tfa-tbl">
                 <div class="st" style="background:linear-gradient(90deg,var(--or),#fbbf24);height:3px;flex-shrink:0"></div>
-                <div class="tfa-hd">
-                    <div class="tfa-hd-i cd"><i class="fa-solid fa-hashtag"></i></div>
-                    <span class="tfa-hd-t">Kode OTP</span>
-                    <span class="tfa-hd-c" id="tfaTimerText">--</span>
-                </div>
+                <div class="tfa-hd"><div class="tfa-hd-i cd"><i class="fa-solid fa-hashtag"></i></div><span class="tfa-hd-t">Kode OTP</span><span class="tfa-hd-c" id="tfaTimerText">--</span></div>
                 <div class="tfa-timer"><div class="tfa-timer-bar"><div class="tfa-timer-fill" id="tfaTimerFill" style="width:0%"></div></div></div>
                 <div class="tfa-cols"><span class="col no-col">No</span><span class="col">6-Digit Code</span><span class="col"></span></div>
-                <div class="tfa-body" id="tfaCodeBody">
-                    <div class="empty"><i class="fa-solid fa-hashtag"></i><span>Masukkan key di sebelah kiri</span></div>
-                </div>
+                <div class="tfa-body" id="tfaCodeBody"><div class="empty"><i class="fa-solid fa-hashtag"></i><span>Masukkan key di sebelah kiri</span></div></div>
                 <div class="tfa-ft"><button class="tfa-ca cd" onclick="copyAllCodes()"><i class="fa-regular fa-copy"></i> Salin Semua Kode</button></div>
             </div>
         </div>
@@ -402,7 +367,127 @@
 
 <script>
 /* ═══════════════════════════════════════
-   DATA NAMA — 4 REGION
+   6 TEMA — HANYA mengatur:
+   background, surface, border, ambient glow
+   Teks & aksen TIDAK ikut berubah.
+   ═══════════════════════════════════════ */
+var bgThemes = {
+    deepspace: {
+        name: "Deep Space",
+        swDark: "#07070b", swLight: "#eeeaea",
+        dark:  { bg:"#07070b",bgS:"#0c0c12", sf:"rgba(255,255,255,.035)",sf2:"rgba(255,255,255,.06)",sf3:"rgba(255,255,255,.09)", bd:"rgba(255,255,255,.07)",bdh:"rgba(255,255,255,.15)", topbar:"rgba(7,7,11,.8)", ab1:"rgba(232,85,61,.08)",ab2:"rgba(240,160,48,.06)" },
+        light: { bg:"#eeeaea",bgS:"#e2e2e2", sf:"rgba(255,255,255,.55)",sf2:"rgba(255,255,255,.78)",sf3:"rgba(255,255,255,.92)", bd:"rgba(0,0,0,.08)",bdh:"rgba(0,0,0,.15)", topbar:"rgba(238,234,234,.82)", ab1:"rgba(232,85,61,.05)",ab2:"rgba(240,160,48,.03)" }
+    },
+    warmearth: {
+        name: "Warm Earth",
+        swDark: "#14100c", swLight: "#f0e8dc",
+        dark:  { bg:"#14100c",bgS:"#1c1610", sf:"rgba(255,230,200,.04)",sf2:"rgba(255,230,200,.07)",sf3:"rgba(255,230,200,.1)", bd:"rgba(255,200,150,.08)",bdh:"rgba(255,200,150,.18)", topbar:"rgba(20,16,12,.85)", ab1:"rgba(212,163,115,.07)",ab2:"rgba(224,122,95,.05)" },
+        light: { bg:"#f0e8dc",bgS:"#e6dace", sf:"rgba(255,255,255,.55)",sf2:"rgba(255,255,255,.78)",sf3:"rgba(255,255,255,.92)", bd:"rgba(80,50,20,.08)",bdh:"rgba(80,50,20,.15)", topbar:"rgba(240,232,220,.85)", ab1:"rgba(168,120,64,.04)",ab2:"rgba(196,90,58,.03)" }
+    },
+    midnightforest: {
+        name: "Midnight Forest",
+        swDark: "#060e09", swLight: "#e4ece6",
+        dark:  { bg:"#060e09",bgS:"#0a1610", sf:"rgba(180,255,200,.03)",sf2:"rgba(180,255,200,.055)",sf3:"rgba(180,255,200,.08)", bd:"rgba(100,200,130,.07)",bdh:"rgba(100,200,130,.16)", topbar:"rgba(6,14,9,.85)", ab1:"rgba(106,153,78,.07)",ab2:"rgba(126,184,201,.05)" },
+        light: { bg:"#e4ece6",bgS:"#d6e2d8", sf:"rgba(255,255,255,.55)",sf2:"rgba(255,255,255,.78)",sf3:"rgba(255,255,255,.92)", bd:"rgba(30,80,40,.08)",bdh:"rgba(30,80,40,.15)", topbar:"rgba(228,236,230,.85)", ab1:"rgba(58,112,48,.04)",ab2:"rgba(42,104,136,.03)" }
+    },
+    rosequartz: {
+        name: "Rose Quartz",
+        swDark: "#120a0e", swLight: "#f0e6ec",
+        dark:  { bg:"#120a0e",bgS:"#1a1014", sf:"rgba(255,200,220,.035)",sf2:"rgba(255,200,220,.06)",sf3:"rgba(255,200,220,.09)", bd:"rgba(255,150,180,.07)",bdh:"rgba(255,150,180,.16)", topbar:"rgba(18,10,14,.85)", ab1:"rgba(232,99,122,.07)",ab2:"rgba(240,176,192,.05)" },
+        light: { bg:"#f0e6ec",bgS:"#e6d8e2", sf:"rgba(255,255,255,.55)",sf2:"rgba(255,255,255,.78)",sf3:"rgba(255,255,255,.92)", bd:"rgba(120,50,80,.07)",bdh:"rgba(120,50,80,.14)", topbar:"rgba(240,230,236,.85)", ab1:"rgba(192,64,96,.04)",ab2:"rgba(192,128,144,.03)" }
+    },
+    oceandepth: {
+        name: "Ocean Depth",
+        swDark: "#060a10", swLight: "#e6ecf4",
+        dark:  { bg:"#060a10",bgS:"#0a1018", sf:"rgba(150,200,255,.03)",sf2:"rgba(150,200,255,.055)",sf3:"rgba(150,200,255,.08)", bd:"rgba(100,160,220,.07)",bdh:"rgba(100,160,220,.16)", topbar:"rgba(6,10,16,.85)", ab1:"rgba(64,144,208,.07)",ab2:"rgba(96,176,208,.05)" },
+        light: { bg:"#e6ecf4",bgS:"#d8e2f0", sf:"rgba(255,255,255,.55)",sf2:"rgba(255,255,255,.78)",sf3:"rgba(255,255,255,.92)", bd:"rgba(30,60,110,.07)",bdh:"rgba(30,60,110,.14)", topbar:"rgba(230,236,244,.85)", ab1:"rgba(32,96,160,.04)",ab2:"rgba(40,120,160,.03)" }
+    },
+    terminal: {
+        name: "Terminal",
+        swDark: "#0a0e08", swLight: "#e6ece2",
+        dark:  { bg:"#0a0e08",bgS:"#101610", sf:"rgba(100,255,100,.025)",sf2:"rgba(100,255,100,.045)",sf3:"rgba(100,255,100,.07)", bd:"rgba(80,200,80,.08)",bdh:"rgba(80,200,80,.18)", topbar:"rgba(10,14,8,.88)", ab1:"rgba(64,216,112,.06)",ab2:"rgba(208,208,96,.04)" },
+        light: { bg:"#e6ece2",bgS:"#d8e2d4", sf:"rgba(255,255,255,.55)",sf2:"rgba(255,255,255,.78)",sf3:"rgba(255,255,255,.92)", bd:"rgba(30,80,30,.07)",bdh:"rgba(30,80,30,.14)", topbar:"rgba(230,236,226,.85)", ab1:"rgba(26,136,56,.04)",ab2:"rgba(138,138,32,.03)" }
+    }
+};
+
+var currentBg = "deepspace";
+var isLight = true;
+
+/* ═══════════════════════════════════════
+   TEKS — TETAP, gak berubah saat ganti tema.
+   Hanya berubah saat toggle dark/light.
+   ═══════════════════════════════════════ */
+var textVars = {
+    dark:  { t1:"#f0f0f0", t2:"#b0b0b0", t3:"#707070", t4:"#404040", noCol:"#a0a0a0" },
+    light: { t1:"#111111", t2:"#505050", t3:"#808080", t4:"#b8b8b8", noCol:"#686868" }
+};
+
+/* ═══════════════════════════════════════
+   THEME PICKER UI
+   ═══════════════════════════════════════ */
+function buildThemePicker() {
+    var grid = document.getElementById("tpGrid"), html = "", keys = Object.keys(bgThemes);
+    for (var i = 0; i < keys.length; i++) {
+        var id = keys[i], t = bgThemes[id];
+        var isActive = id === currentBg ? " active" : "";
+        var sw = "linear-gradient(135deg," + t.swDark + " 48%," + t.swLight + " 52%)";
+        html += '<div class="tp-card' + isActive + '" data-theme="' + id + '" onclick="applyBg(\'' + id + '\')">'
+            + '<div class="tp-swatch" style="background:' + sw + '"></div>'
+            + '<div class="tp-name">' + t.name + '</div></div>';
+    }
+    grid.innerHTML = html;
+}
+
+function toggleThemePanel() { document.getElementById("tpPanel").classList.toggle("open"); }
+document.addEventListener("click", function(e) {
+    if (!document.querySelector(".tp-wrap").contains(e.target)) document.getElementById("tpPanel").classList.remove("open");
+});
+
+/* ═══════════════════════════════════════
+   APPLY BACKGROUND — TEKS TIDAK DISENTUH
+   ═══════════════════════════════════════ */
+function applyBg(id) {
+    var theme = bgThemes[id]; if (!theme) return;
+    currentBg = id;
+    var v = isLight ? theme.light : theme.dark;
+    var s = document.documentElement.style;
+    s.setProperty("--bg", v.bg);
+    s.setProperty("--bg-s", v.bgS);
+    s.setProperty("--sf", v.sf);
+    s.setProperty("--sf2", v.sf2);
+    s.setProperty("--sf3", v.sf3);
+    s.setProperty("--bd", v.bd);
+    s.setProperty("--bdh", v.bdh);
+    s.setProperty("--topbar-bg", v.topbar);
+    s.setProperty("--ab1", v.ab1);
+    s.setProperty("--ab2", v.ab2);
+    var cards = document.querySelectorAll(".tp-card");
+    for (var i = 0; i < cards.length; i++) cards[i].classList.toggle("active", cards[i].getAttribute("data-theme") === id);
+    document.getElementById("tpPanel").classList.remove("open");
+    showToast("Background: " + theme.name);
+}
+
+/* ═══════════════════════════════════════
+   TOGGLE LIGHT/DARK — HANYA mengubah teks + background varian
+   ═══════════════════════════════════════ */
+function toggleLightDark() {
+    isLight = !isLight;
+    document.getElementById("themeIcon").className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    /* Apply teks */
+    var tv = isLight ? textVars.light : textVars.dark;
+    var s = document.documentElement.style;
+    s.setProperty("--t1", tv.t1);
+    s.setProperty("--t2", tv.t2);
+    s.setProperty("--t3", tv.t3);
+    s.setProperty("--t4", tv.t4);
+    s.setProperty("--no-col", tv.noCol);
+    /* Apply background varian yang sesuai */
+    applyBg(currentBg);
+    showToast(isLight ? "Mode Terang" : "Mode Gelap");
+}
+
+/* ═══════════════════════════════════════
+   DATA NAMA
    ═══════════════════════════════════════ */
 var nameData = {
     "English": {
@@ -438,21 +523,10 @@ var is2FA = false;
 var totpTimer = null;
 var tfaKeys = [];
 var tfaCodes = [];
-/* Set berisi index kode yang sudah "dikonsumsi" (dihapus via klik teks kode) */
 var tfaConsumed = new Set();
 
-var tableBodies = {
-    names: document.getElementById("bodyNames"),
-    user:  document.getElementById("bodyUser"),
-    mail:  document.getElementById("bodyMail"),
-    url:   document.getElementById("bodyUrl")
-};
-var tableCounts = {
-    names: document.getElementById("cntNames"),
-    user:  document.getElementById("cntUser"),
-    mail:  document.getElementById("cntMail"),
-    url:   document.getElementById("cntUrl")
-};
+var tableBodies = { names: document.getElementById("bodyNames"), user: document.getElementById("bodyUser"), mail: document.getElementById("bodyMail"), url: document.getElementById("bodyUrl") };
+var tableCounts = { names: document.getElementById("cntNames"), user: document.getElementById("cntUser"), mail: document.getElementById("cntMail"), url: document.getElementById("cntUrl") };
 var scrollLock = { names: false, user: false, mail: false, url: false };
 var isSyncing = false;
 var emptyIcons = { names: "fa-users", user: "fa-at", mail: "fa-envelope", url: "fa-link" };
@@ -463,44 +537,24 @@ var emptyIcons = { names: "fa-users", user: "fa-at", mail: "fa-envelope", url: "
 function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
 function rs(l) { var c = "abcdefghijklmnopqrstuvwxyz", r = ""; for (var i = 0; i < (l || 3); i++) r += c[Math.floor(Math.random() * c.length)]; return r; }
 function esc(s) { return s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
-
-function flashRow(el) {
-    if (!el) return;
-    el.classList.add("flash");
-    setTimeout(function() { el.classList.remove("flash"); }, 350);
-}
-
-function closestRow(el) {
-    while (el && !el.classList.contains("row") && !el.classList.contains("tfa-r")) {
-        el = el.parentElement;
-    }
-    return el;
-}
+function flashRow(el) { if (!el) return; el.classList.add("flash"); setTimeout(function() { el.classList.remove("flash"); }, 350); }
+function closestRow(el) { while (el && !el.classList.contains("row") && !el.classList.contains("tfa-r")) el = el.parentElement; return el; }
 
 /* ═══════════════════════════════════════
-   TOTP ENGINE
+   TOTP
    ═══════════════════════════════════════ */
 function b32toBytes(b32) {
     var a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567", bits = 0, val = 0, out = [];
     b32 = b32.toUpperCase().replace(/[^A-Z2-7]/g, "");
-    for (var i = 0; i < b32.length; i++) {
-        var v = a.indexOf(b32.charAt(i)); if (v === -1) continue;
-        val = (val << 5) | v; bits += 5;
-        if (bits >= 8) { out.push((val >>> (bits - 8)) & 255); bits -= 8; }
-    }
+    for (var i = 0; i < b32.length; i++) { var v = a.indexOf(b32.charAt(i)); if (v === -1) continue; val = (val << 5) | v; bits += 5; if (bits >= 8) { out.push((val >>> (bits - 8)) & 255); bits -= 8; } }
     return new Uint8Array(out);
 }
-
 function getTOTP(secret) {
     try {
-        var kb = b32toBytes(secret);
-        if (!kb.length) throw 0;
-        var t = Math.floor(Date.now() / 30000);
-        var tb = new ArrayBuffer(8), tv = new DataView(tb);
+        var kb = b32toBytes(secret); if (!kb.length) throw 0;
+        var t = Math.floor(Date.now() / 30000), tb = new ArrayBuffer(8), tv = new DataView(tb);
         tv.setUint32(4, t, false);
-        return window.crypto.subtle.importKey("raw", kb, { name: "HMAC", hash: "SHA-1" }, false, ["sign"]).then(function(k) {
-            return window.crypto.subtle.sign("HMAC", k, tb);
-        }).then(function(sig) {
+        return window.crypto.subtle.importKey("raw", kb, { name: "HMAC", hash: "SHA-1" }, false, ["sign"]).then(function(k) { return window.crypto.subtle.sign("HMAC", k, tb); }).then(function(sig) {
             var h = new Uint8Array(sig), o = h[h.length - 1] & 0xf;
             var bin = ((h[o] & 0x7f) << 24) | ((h[o + 1] & 0xff) << 16) | ((h[o + 2] & 0xff) << 8) | (h[o + 3] & 0xff);
             return (bin % 1000000).toString().padStart(6, '0');
@@ -513,420 +567,145 @@ function getTOTP(secret) {
    ═══════════════════════════════════════ */
 function genUsername(f, l) {
     var x = f.toLowerCase().replace(/[^a-z]/g, ""), y = l.toLowerCase().replace(/[^a-z]/g, "");
-    var p = [
-        function() { return x + y + Math.floor(Math.random() * 999); },
-        function() { return x + "." + y + Math.floor(Math.random() * 999); },
-        function() { return x + "_" + y + Math.floor(Math.random() * 999); },
-        function() { return y + "_" + x + Math.floor(Math.random() * 999); },
-        function() { return y + "." + x + Math.floor(Math.random() * 999); },
-        function() { return x + y + rs(4); },
-        function() { return x + "." + y + rs(4); },
-        function() { return x + "_" + y + rs(4); },
-        function() { return y + "_" + x + rs(4); },
-        function() { return x + rs(4) + y; },
-        function() { return y + x + Math.floor(Math.random() * 999); },
-        function() { return y + rs(4) + x; },
-        function() { return x + rs(4) + y + Math.floor(Math.random() * 999); }
-    ];
-    for (var i = 0; i < 30; i++) {
-        var u = p[Math.floor(Math.random() * p.length)]();
-        if (!usedUsernames.has(u)) { usedUsernames.add(u); return u; }
-    }
-    var fb = x + y + rs(6) + Math.floor(Math.random() * 9999);
-    usedUsernames.add(fb);
-    return fb;
+    var p = [function(){return x+y+Math.floor(Math.random()*999)},function(){return x+"."+y+Math.floor(Math.random()*999)},function(){return x+"_"+y+Math.floor(Math.random()*999)},function(){return y+"_"+x+Math.floor(Math.random()*999)},function(){return y+"."+x+Math.floor(Math.random()*999)},function(){return x+y+rs(4)},function(){return x+"."+y+rs(4)},function(){return x+"_"+y+rs(4)},function(){return y+"_"+x+rs(4)},function(){return x+rs(4)+y},function(){return y+x+Math.floor(Math.random()*999)},function(){return y+rs(4)+x},function(){return x+rs(4)+y+Math.floor(Math.random()*999)}];
+    for (var i = 0; i < 30; i++) { var u = p[Math.floor(Math.random() * p.length)](); if (!usedUsernames.has(u)) { usedUsernames.add(u); return u; } }
+    var fb = x + y + rs(6) + Math.floor(Math.random() * 9999); usedUsernames.add(fb); return fb;
 }
-
-function genEmail(u) {
-    var d = pick(["mail.n2n.io"]);
-    var e = u + "@" + d;
-    if (!usedEmails.has(e)) { usedEmails.add(e); return e; }
-    var e2 = u + Math.floor(Math.random() * 99) + "@" + d;
-    usedEmails.add(e2);
-    return e2;
-}
+function genEmail(u) { var d = pick(["mail.n2n.io"]), e = u + "@" + d; if (!usedEmails.has(e)) { usedEmails.add(e); return e; } var e2 = u + Math.floor(Math.random() * 99) + "@" + d; usedEmails.add(e2); return e2; }
 
 /* ═══════════════════════════════════════
-   GENERATE
+   GENERATE & RENDER
    ═══════════════════════════════════════ */
 function generateData() {
     var count = Math.max(1, Math.min(5000, parseInt(document.getElementById("amount").value) || 10));
-    usedUsernames.clear();
-    usedEmails.clear();
-    generatedData = [];
+    usedUsernames.clear(); usedEmails.clear(); generatedData = [];
     for (var i = 0; i < count; i++) {
-        var region = pick(regionArr), rd = nameData[region];
-        var gender = Math.random() > .5 ? "male" : "female";
-        var first = pick(rd[gender]), last = pick(rd.last);
-        var username = genUsername(first, last);
-        var email = genEmail(username);
-        var url = "https://mail.n2n.io/m/" + username + "@mail.n2n.io";
-        generatedData.push({ first: first, last: last, username: username, email: email, url: url });
+        var region = pick(regionArr), rd = nameData[region], gender = Math.random() > .5 ? "male" : "female";
+        var first = pick(rd[gender]), last = pick(rd.last), username = genUsername(first, last), email = genEmail(username);
+        generatedData.push({ first: first, last: last, username: username, email: email, url: "https://mail.n2n.io/m/" + username + "@mail.n2n.io" });
     }
-    renderIdentity();
-    updateCounter();
+    renderIdentity(); updateCounter();
 }
-
-/* ═══════════════════════════════════════
-   RENDER IDENTITY
-   ═══════════════════════════════════════ */
 function renderIdentity() {
-    var n = generatedData.length;
-    var types = ["names", "user", "mail", "url"];
+    var n = generatedData.length, types = ["names", "user", "mail", "url"];
     for (var t = 0; t < types.length; t++) {
-        var tp = types[t];
-        var html = buildIdentityHTML(generatedData, tp);
+        var tp = types[t], html = buildIdentityHTML(generatedData, tp);
         tableBodies[tp].innerHTML = html || '<div class="empty"><i class="fa-solid ' + emptyIcons[tp] + '"></i><span>Belum ada data</span></div>';
-        tableCounts[tp].textContent = n;
-        tableBodies[tp].scrollTop = 0;
+        tableCounts[tp].textContent = n; tableBodies[tp].scrollTop = 0;
     }
 }
-
 function buildIdentityHTML(data, type) {
-    if (!data.length) return "";
-    var h = "";
+    if (!data.length) return ""; var h = "";
     for (var i = 0; i < data.length; i++) {
-        var d = data[i], v = "";
-        if (type === "names") v = d.first + " " + d.last;
-        else if (type === "user") v = d.username;
-        else if (type === "mail") v = d.email;
-        else if (type === "url") v = d.url;
-        var dl = Math.min(i * 0.012, 1.2);
-        h += '<div class="row" data-idx="' + i + '" style="animation-delay:' + dl + 's">'
-            + '<span class="row-i">' + String(i + 1).padStart(2, "0") + '</span>'
-            + '<span class="row-v" data-ci="' + i + '" data-ct="' + type + '" title="Klik untuk salin">' + esc(v) + '</span>'
-            + '<button class="row-c" data-ci="' + i + '" data-ct="' + type + '" aria-label="Salin"><i class="fa-regular fa-copy"></i></button>'
-            + '</div>';
+        var d = data[i], v = type === "names" ? d.first + " " + d.last : type === "user" ? d.username : type === "mail" ? d.email : d.url;
+        h += '<div class="row" data-idx="' + i + '" style="animation-delay:' + Math.min(i * 0.012, 1.2) + 's"><span class="row-i">' + String(i + 1).padStart(2, "0") + '</span><span class="row-v" data-ci="' + i + '" data-ct="' + type + '" title="Klik untuk salin">' + esc(v) + '</span><button class="row-c" data-ci="' + i + '" data-ct="' + type + '" aria-label="Salin"><i class="fa-regular fa-copy"></i></button></div>';
     }
     return h;
 }
 
 /* ═══════════════════════════════════════
-   TOGGLE 2FA
+   2FA
    ═══════════════════════════════════════ */
 function toggle2FA() {
     is2FA = document.getElementById("tfaToggle").checked;
-    var idView = document.getElementById("identityView");
-    var tfaView = document.getElementById("tfaView");
-    var lbl = document.getElementById("tfaLabel");
-    if (is2FA) {
-        idView.classList.add("view-hide");
-        tfaView.classList.remove("view-hide");
-        lbl.classList.add("on");
-        parseAndRefreshTFA();
-    } else {
-        idView.classList.remove("view-hide");
-        tfaView.classList.add("view-hide");
-        lbl.classList.remove("on");
-        stopTFA();
-    }
+    document.getElementById("identityView").classList.toggle("view-hide", is2FA);
+    document.getElementById("tfaView").classList.toggle("view-hide", !is2FA);
+    document.getElementById("tfaLabel").classList.toggle("on", is2FA);
+    if (is2FA) parseAndRefreshTFA(); else stopTFA();
 }
-
-/* ═══════════════════════════════════════
-   TFA LOGIC
-   ═══════════════════════════════════════ */
-function onTFAInput() {
-    if (!is2FA) return;
-    parseAndRefreshTFA();
-}
-
+function onTFAInput() { if (is2FA) parseAndRefreshTFA(); }
 function parseAndRefreshTFA() {
-    var raw = document.getElementById("tfaInput").value;
-    var lines = raw.split("\n");
-    tfaKeys = [];
-    for (var i = 0; i < lines.length; i++) {
-        var line = lines[i].trim();
-        if (line.length > 0) tfaKeys.push(line);
-    }
-    tfaCodes = [];
-    for (var j = 0; j < tfaKeys.length; j++) tfaCodes.push("------");
-    /* Reset consumed set saat key berubah */
+    var raw = document.getElementById("tfaInput").value, lines = raw.split("\n"); tfaKeys = [];
+    for (var i = 0; i < lines.length; i++) { var l = lines[i].trim(); if (l.length > 0) tfaKeys.push(l); }
+    tfaCodes = []; for (var j = 0; j < tfaKeys.length; j++) tfaCodes.push("------");
     tfaConsumed.clear();
     document.getElementById("tfaKeyCount").innerHTML = '<i class="fa-solid fa-list-ol ic-b"></i> ' + tfaKeys.length + " Key";
-    renderTFACodes();
-    startTFARefresh();
+    renderTFACodes(); startTFARefresh();
 }
-
 function renderTFACodes() {
     var body = document.getElementById("tfaCodeBody");
-    if (!tfaKeys.length) {
-        body.innerHTML = '<div class="empty"><i class="fa-solid fa-hashtag"></i><span>Masukkan key di sebelah kiri</span></div>';
-        return;
-    }
+    if (!tfaKeys.length) { body.innerHTML = '<div class="empty"><i class="fa-solid fa-hashtag"></i><span>Masukkan key di sebelah kiri</span></div>'; return; }
     var h = "";
     for (var i = 0; i < tfaKeys.length; i++) {
-        var dl = Math.min(i * 0.02, 1);
-        var isConsumed = tfaConsumed.has(i);
-        h += '<div class="tfa-r' + (isConsumed ? " consumed" : "") + '" data-tfa-idx="' + i + '" style="animation-delay:' + dl + 's">'
-            + '<span class="tfa-ri">' + String(i + 1).padStart(2, "0") + '</span>'
-            + '<span class="tfa-rv" id="tfaCode' + i + '" data-tfa-ci="' + i + '" title="Klik kode = salin &amp; hilang otomatis">' + (tfaCodes[i] || "------") + '</span>'
-            + '<button class="tfa-rc" data-tfa-ci="' + i + '" data-tfa-keep-btn="1" aria-label="Salin &amp; tetap ada" title="Salin &amp; kode tetap ada"><i class="fa-regular fa-copy"></i></button>'
-            + '</div>';
+        h += '<div class="tfa-r' + (tfaConsumed.has(i) ? " consumed" : "") + '" data-tfa-idx="' + i + '" style="animation-delay:' + Math.min(i * 0.02, 1) + 's"><span class="tfa-ri">' + String(i + 1).padStart(2, "0") + '</span><span class="tfa-rv" id="tfaCode' + i + '" data-tfa-ci="' + i + '" title="Klik kode = salin &amp; hilang otomatis">' + (tfaCodes[i] || "------") + '</span><button class="tfa-rc" data-tfa-ci="' + i + '" data-tfa-keep-btn="1" aria-label="Salin &amp; tetap ada" title="Salin &amp; kode tetap ada"><i class="fa-regular fa-copy"></i></button></div>';
     }
-    body.innerHTML = h;
-    body.scrollTop = 0;
+    body.innerHTML = h; body.scrollTop = 0;
 }
-
 function startTFARefresh() {
-    stopTFA();
-    if (!tfaKeys.length) return;
-
+    stopTFA(); if (!tfaKeys.length) return;
     function doRefresh() {
         var ps = [];
-        for (var i = 0; i < tfaKeys.length; i++) {
-            (function(idx) {
-                ps.push(getTOTP(tfaKeys[idx]).then(function(code) {
-                    tfaCodes[idx] = code;
-                }));
-            })(i);
-        }
+        for (var i = 0; i < tfaKeys.length; i++) { (function(idx) { ps.push(getTOTP(tfaKeys[idx]).then(function(code) { tfaCodes[idx] = code; })); })(i); }
         Promise.all(ps).then(function() {
-            /* Update hanya kode yang belum dikonsumsi */
-            for (var j = 0; j < tfaCodes.length; j++) {
-                if (tfaConsumed.has(j)) continue;
-                var el = document.getElementById("tfaCode" + j);
-                if (el) el.textContent = tfaCodes[j];
-            }
+            for (var j = 0; j < tfaCodes.length; j++) { if (tfaConsumed.has(j)) continue; var el = document.getElementById("tfaCode" + j); if (el) el.textContent = tfaCodes[j]; }
             updateTimerBar();
         });
     }
-    doRefresh();
-    totpTimer = setInterval(doRefresh, 1000);
+    doRefresh(); totpTimer = setInterval(doRefresh, 1000);
 }
-
-function stopTFA() {
-    if (totpTimer) { clearInterval(totpTimer); totpTimer = null; }
-}
-
-function updateTimerBar() {
-    var epoch = Math.floor(Date.now() / 1000);
-    var secLeft = 30 - (epoch % 30);
-    var pct = (secLeft / 30) * 100;
-    var fill = document.getElementById("tfaTimerFill");
-    var txt = document.getElementById("tfaTimerText");
-    if (fill) fill.style.width = pct + "%";
-    if (txt) txt.textContent = secLeft + "s";
-}
-
-function clearTFA() {
-    document.getElementById("tfaInput").value = "";
-    tfaKeys = [];
-    tfaCodes = [];
-    tfaConsumed.clear();
-    stopTFA();
-    document.getElementById("tfaKeyCount").innerHTML = '<i class="fa-solid fa-list-ol ic-b"></i> 0 Key';
-    document.getElementById("tfaCodeBody").innerHTML = '<div class="empty"><i class="fa-solid fa-hashtag"></i><span>Masukkan key di sebelah kiri</span></div>';
-    document.getElementById("tfaTimerFill").style.width = "0%";
-    document.getElementById("tfaTimerText").textContent = "--";
-}
-
-function copyAllCodes() {
-    if (!tfaCodes.length || !tfaCodes[0]) { showToast("Tidak ada kode — Masukkan key dulu!"); return; }
-    /* Kumpulkan hanya kode yang belum dikonsumsi */
-    var lines = [];
-    for (var i = 0; i < tfaCodes.length; i++) {
-        if (!tfaConsumed.has(i)) lines.push(tfaCodes[i]);
-    }
-    if (!lines.length) { showToast("Semua kode sudah dikonsumsi!"); return; }
-    copyClip(lines.join("\n"), true, lines.length + " kode disalin!");
-}
+function stopTFA() { if (totpTimer) { clearInterval(totpTimer); totpTimer = null; } }
+function updateTimerBar() { var e = Math.floor(Date.now() / 1000), s = 30 - (e % 30), f = document.getElementById("tfaTimerFill"), t = document.getElementById("tfaTimerText"); if (f) f.style.width = ((s / 30) * 100) + "%"; if (t) t.textContent = s + "s"; }
+function clearTFA() { document.getElementById("tfaInput").value = ""; tfaKeys = []; tfaCodes = []; tfaConsumed.clear(); stopTFA(); document.getElementById("tfaKeyCount").innerHTML = '<i class="fa-solid fa-list-ol ic-b"></i> 0 Key'; document.getElementById("tfaCodeBody").innerHTML = '<div class="empty"><i class="fa-solid fa-hashtag"></i><span>Masukkan key di sebelah kiri</span></div>'; document.getElementById("tfaTimerFill").style.width = "0%"; document.getElementById("tfaTimerText").textContent = "--"; }
+function copyAllCodes() { if (!tfaCodes.length || !tfaCodes[0]) { showToast("Tidak ada kode — Masukkan key dulu!"); return; } var lines = []; for (var i = 0; i < tfaCodes.length; i++) { if (!tfaConsumed.has(i)) lines.push(tfaCodes[i]); } if (!lines.length) { showToast("Semua kode sudah dikonsumsi!"); return; } copyClip(lines.join("\n"), true, lines.length + " kode disalin!"); }
 
 /* ═══════════════════════════════════════
    SCROLL SYNC
    ═══════════════════════════════════════ */
-function syncScroll(src, st) {
-    if (isSyncing) return;
-    isSyncing = true;
-    var keys = Object.keys(tableBodies);
-    for (var k = 0; k < keys.length; k++) {
-        var key = keys[k];
-        if (key === src || scrollLock[key]) continue;
-        tableBodies[key].scrollTop = st;
-    }
-    hlRow(src, st);
-    isSyncing = false;
-}
-
-function hlRow(src, st) {
-    var idx = Math.floor(st / 38);
-    var keys = Object.keys(tableBodies);
-    for (var k = 0; k < keys.length; k++) {
-        var body = tableBodies[keys[k]];
-        var prev = body.querySelectorAll(".row.hl");
-        for (var p = 0; p < prev.length; p++) prev[p].classList.remove("hl");
-        var t = body.querySelector('.row[data-idx="' + idx + '"]');
-        if (t) t.classList.add("hl");
-    }
-}
-
-Object.keys(tableBodies).forEach(function(key) {
-    tableBodies[key].addEventListener("scroll", function() {
-        syncScroll(key, this.scrollTop);
-    });
-});
+function syncScroll(src, st) { if (isSyncing) return; isSyncing = true; var keys = Object.keys(tableBodies); for (var k = 0; k < keys.length; k++) { var key = keys[k]; if (key === src || scrollLock[key]) continue; tableBodies[key].scrollTop = st; } hlRow(src, st); isSyncing = false; }
+function hlRow(src, st) { var idx = Math.floor(st / 38), keys = Object.keys(tableBodies); for (var k = 0; k < keys.length; k++) { var body = tableBodies[keys[k]], prev = body.querySelectorAll(".row.hl"); for (var p = 0; p < prev.length; p++) prev[p].classList.remove("hl"); var t = body.querySelector('.row[data-idx="' + idx + '"]'); if (t) t.classList.add("hl"); } }
+Object.keys(tableBodies).forEach(function(key) { tableBodies[key].addEventListener("scroll", function() { syncScroll(key, this.scrollTop); }); });
 
 /* ═══════════════════════════════════════
-   COPY — IDENTITY TABLES (satu-satu)
+   COPY — IDENTITY
    ═══════════════════════════════════════ */
-function getIdVal(d, type) {
-    if (type === "names") return d.first + " " + d.last;
-    if (type === "user")  return d.username;
-    if (type === "mail")  return d.email;
-    if (type === "url")   return d.url;
-    return "";
-}
-
+function getIdVal(d, type) { return type === "names" ? d.first + " " + d.last : type === "user" ? d.username : type === "mail" ? d.email : d.url; }
 Object.keys(tableBodies).forEach(function(key) {
     tableBodies[key].addEventListener("click", function(e) {
-        var t = e.target.closest("[data-ci]");
-        if (!t) return;
-        var idx = parseInt(t.getAttribute("data-ci"));
-        var type = t.getAttribute("data-ct");
-        if (generatedData[idx]) {
-            var val = getIdVal(generatedData[idx], type);
-            copyClip(val, false);
-            flashRow(closestRow(t));
-            var otherKeys = Object.keys(tableBodies);
-            for (var k = 0; k < otherKeys.length; k++) {
-                if (otherKeys[k] === key) continue;
-                flashRow(tableBodies[otherKeys[k]].querySelector('.row[data-idx="' + idx + '"]'));
-            }
-        }
+        var t = e.target.closest("[data-ci]"); if (!t) return;
+        var idx = parseInt(t.getAttribute("data-ci")), type = t.getAttribute("data-ct");
+        if (generatedData[idx]) { copyClip(getIdVal(generatedData[idx], type), false); flashRow(closestRow(t)); var ok = Object.keys(tableBodies); for (var k = 0; k < ok.length; k++) { if (ok[k] === key) continue; flashRow(tableBodies[ok[k]].querySelector('.row[data-idx="' + idx + '"]')); } }
     });
 });
 
-/* ═══════════════════════════════════════════════════════════════════
-   COPY — TFA KODE (PERILAKU DIBALIK)
-   ═══════════════════════════════════════════════════════════════════
-   Klik TEKS KODE   → salin + HILANG OTOMATIS (one-time use)
-   Klik TOMBOL COPY → salin + KODE TETAP TAMPIL
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   COPY — TFA (DIBALIK)
+   ═══════════════════════════════════════ */
 document.getElementById("tfaCodeBody").addEventListener("click", function(e) {
-    /* Cek apakah klik pada TOMBOL COPY (ikon di kanan) */
-    var keepBtn = e.target.closest("[data-tfa-keep-btn]");
-    /* Cek apakah klik pada TEKS KODE */
-    var codeEl = e.target.closest("[data-tfa-ci]");
-
-    if (keepBtn && !codeEl) {
-        /* ── TOMBOL COPY ditekan: salin + TETAP ADA ── */
-        var idx = parseInt(keepBtn.getAttribute("data-tfa-ci"));
-        if (!isNaN(idx) && tfaCodes[idx]) {
-            copyClip(tfaCodes[idx], false);
-            flashRow(closestRow(keepBtn));
-        }
-        return;
-    }
-
-    if (codeEl && !keepBtn) {
-        /* ── TEKS KODE diklik: salin + HILANG OTOMATIS ── */
-        var idx2 = parseInt(codeEl.getAttribute("data-tfa-ci"));
-        if (!isNaN(idx2) && tfaCodes[idx2] && !tfaConsumed.has(idx2)) {
-            copyClip(tfaCodes[idx2], false);
-            /* Tandai sebagai dikonsumsi */
-            tfaConsumed.add(idx2);
-            /* Animasi hilang */
-            var row = closestRow(codeEl);
-            if (row) {
-                row.classList.add("consumed");
-                /* Hapus dari DOM setelah animasi selesai */
-                setTimeout(function() {
-                    if (row && row.parentElement) {
-                        row.parentElement.removeChild(row);
-                    }
-                }, 450);
-            }
-        }
-        return;
-    }
+    var keepBtn = e.target.closest("[data-tfa-keep-btn]"), codeEl = e.target.closest("[data-tfa-ci]");
+    if (keepBtn && !codeEl) { var idx = parseInt(keepBtn.getAttribute("data-tfa-ci")); if (!isNaN(idx) && tfaCodes[idx]) { copyClip(tfaCodes[idx], false); flashRow(closestRow(keepBtn)); } return; }
+    if (codeEl && !keepBtn) { var idx2 = parseInt(codeEl.getAttribute("data-tfa-ci")); if (!isNaN(idx2) && tfaCodes[idx2] && !tfaConsumed.has(idx2)) { copyClip(tfaCodes[idx2], false); tfaConsumed.add(idx2); var row = closestRow(codeEl); if (row) { row.classList.add("consumed"); setTimeout(function() { if (row && row.parentElement) row.parentElement.removeChild(row); }, 450); } } return; }
 });
 
 /* ═══════════════════════════════════════
-   COPY — SALIN SEMUA (IDENTITY)
+   COPY ALL
    ═══════════════════════════════════════ */
-function copyAll(type) {
-    if (!generatedData.length) { showToast("Generate dulu datanya!"); return; }
-    var lines = [];
-    for (var i = 0; i < generatedData.length; i++) {
-        lines.push(getIdVal(generatedData[i], type));
-    }
-    var label = { names: "nama", user: "username", mail: "email", url: "URL" }[type] || type;
-    copyClip(lines.join("\n"), true, lines.length + " " + label + " disalin!");
-}
+function copyAll(type) { if (!generatedData.length) { showToast("Generate dulu datanya!"); return; } var lines = []; for (var i = 0; i < generatedData.length; i++) lines.push(getIdVal(generatedData[i], type)); var label = { names: "nama", user: "username", mail: "email", url: "URL" }[type] || type; copyClip(lines.join("\n"), true, lines.length + " " + label + " disalin!"); }
 
 /* ═══════════════════════════════════════
    CLIPBOARD & TOAST
    ═══════════════════════════════════════ */
-function copyClip(text, customMsg, msg) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(function() {
-            showToast(msg || "Disalin ke clipboard!");
-        }).catch(function() {
-            fallbackCopy(text, msg);
-        });
-    } else {
-        fallbackCopy(text, msg);
-    }
-}
-
-function fallbackCopy(text, msg) {
-    var ta = document.createElement("textarea");
-    ta.value = text;
-    ta.style.cssText = "position:fixed;left:-9999px;top:-9999px;opacity:0";
-    document.body.appendChild(ta);
-    ta.select();
-    try { document.execCommand("copy"); showToast(msg || "Disalin ke clipboard!"); }
-    catch(e) { showToast("Gagal menyalin!"); }
-    document.body.removeChild(ta);
-}
-
+function copyClip(text, cm, msg) { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(function() { showToast(msg || "Disalin ke clipboard!"); }).catch(function() { fallbackCopy(text, msg); }); } else { fallbackCopy(text, msg); } }
+function fallbackCopy(text, msg) { var ta = document.createElement("textarea"); ta.value = text; ta.style.cssText = "position:fixed;left:-9999px;top:-9999px;opacity:0"; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); showToast(msg || "Disalin ke clipboard!"); } catch(e) { showToast("Gagal menyalin!"); } document.body.removeChild(ta); }
 var toastTimer = null;
-function showToast(msg) {
-    var t = document.getElementById("toast");
-    t.querySelector("span").textContent = msg;
-    t.classList.add("show");
-    if (toastTimer) clearTimeout(toastTimer);
-    toastTimer = setTimeout(function() { t.classList.remove("show"); }, 2200);
-}
+function showToast(msg) { var t = document.getElementById("toast"); t.querySelector("span").textContent = msg; t.classList.add("show"); if (toastTimer) clearTimeout(toastTimer); toastTimer = setTimeout(function() { t.classList.remove("show"); }, 2200); }
 
 /* ═══════════════════════════════════════
-   THEME TOGGLE
-   ═══════════════════════════════════════ */
-function toggleTheme() {
-    document.body.classList.toggle("light");
-    var isLight = document.body.classList.contains("light");
-    var icon = document.getElementById("themeIcon");
-    icon.className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
-}
-
-/* ═══════════════════════════════════════
-   LOCK SCROLL
+   LOCK & COUNTER
    ═══════════════════════════════════════ */
 function toggleLock(btn) {
-    var table = btn.getAttribute("data-table");
-    scrollLock[table] = !scrollLock[table];
-    var locked = scrollLock[table];
-    btn.classList.toggle("is-locked", locked);
-    btn.querySelector("i").className = locked ? "fa-solid fa-lock" : "fa-solid fa-lock-open";
-    btn.title = locked ? "Buka kunci scroll" : "Kunci scroll";
-    var bar = document.getElementById("syncBar");
-    var anyLocked = scrollLock.names || scrollLock.user || scrollLock.mail || scrollLock.url;
-    if (anyLocked) {
-        bar.classList.remove("active");
-        bar.querySelector("span").textContent = "Scroll Sync — Partial Lock";
-    } else {
-        bar.classList.add("active");
-        bar.querySelector("span").textContent = "Scroll Sync Active";
-    }
+    var table = btn.getAttribute("data-table"); scrollLock[table] = !scrollLock[table]; var locked = scrollLock[table];
+    btn.classList.toggle("is-locked", locked); btn.querySelector("i").className = locked ? "fa-solid fa-lock" : "fa-solid fa-lock-open"; btn.title = locked ? "Buka kunci scroll" : "Kunci scroll";
+    var bar = document.getElementById("syncBar"), any = scrollLock.names || scrollLock.user || scrollLock.mail || scrollLock.url;
+    if (any) { bar.classList.remove("active"); bar.querySelector("span").textContent = "Scroll Sync — Partial Lock"; } else { bar.classList.add("active"); bar.querySelector("span").textContent = "Scroll Sync Active"; }
 }
+function updateCounter() { document.getElementById("counterStat").innerHTML = '<i class="fa-solid fa-circle-check ic-b"></i> ' + generatedData.length + " Data"; }
 
 /* ═══════════════════════════════════════
-   COUNTER
+   INIT
    ═══════════════════════════════════════ */
-function updateCounter() {
-    var n = generatedData.length;
-    var el = document.getElementById("counterStat");
-    el.innerHTML = '<i class="fa-solid fa-circle-check ic-b"></i> ' + n + " Data";
-}
+buildThemePicker();
+/* Supaya saat pertama buka langsung mode terang */
+toggleLightDark();
 </script>
 </body>
 </html>
